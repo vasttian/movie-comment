@@ -1,0 +1,24 @@
+<%- include ../includes/header %>
+<div class="container">
+	<div class="row">
+		<form action="/user/signup" method="POST">
+			<div class="modal-header">注册</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="signupName">用户名</label>
+					<input type="text" id="signupName" class="form-control" name="user[name]">
+				</div>
+				<div class="form-group">
+					<label for="signupPassword">密码</label>
+					<input type="text" id="signupPassword" class="form-control" name="user[password]">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" type="button" data-dismiss="modal">关闭</button>
+				<button class="btn btn-success" type="submit">提交</button>
+			</div>
+		</form>
+	</div>
+</div>
+<%- include ../includes/footer %>		
+

@@ -1,0 +1,55 @@
+<%- include ../includes/header %>
+<div class="container">
+	<div class="row">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3>
+						<%= keyword %>
+					</h3>
+				</div>
+				<div class="panel-body">
+
+					<% if(categories && categories.length>0){ %>
+						<% categories.forEach(function (item, index) { %>
+							<div class="col-md-2">
+								<div class="thumbnail">
+									<a href="/movie/<%= item._id %>">
+										<img src="<%= item.poster %>" alt="<%= item.title %>">
+										<div class="caption">
+											<h3><%=item.title %></h3>
+											<p>
+												<a href="/movie/<%= item._id %>" class="btn btn-primary" role="button">观看预告片</a>
+											</p>
+										</div>
+									</a>
+								</div>
+							</div>
+						<% }) %>
+					<% } %>
+				</div>
+			</div>
+
+			<ul class="pagination">
+				<% for (var i = 0; i<totalPage; i++){ %>
+					<% if(currentPage == (i+1)){%>
+						<li class="active">
+							<span><%=currentPage%></span>
+						</li>
+					<% }else{ %>
+						<li>
+							<a href="/results?page=<%= i %>&<%= query %>"> 
+								<%= i + 1 %> 
+							</a>
+						</li>
+					<% } %>
+
+				<% } %>
+			</ul>
+
+	</div>
+</div>
+
+<%- include ../includes/footer %>
+
+
+

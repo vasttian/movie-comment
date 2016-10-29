@@ -1,0 +1,25 @@
+{
+  "name": "movie",
+  "description": "一个电影评论网站",
+  "main": "app.js",
+  "authors": [
+    "tianyiming"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "tianyiming"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
