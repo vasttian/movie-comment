@@ -3,11 +3,13 @@
   "description": "一个电影评论网站",
   "main": "app.js",
   "authors": [
-    "tianyiming"
+    "tianyiming26@gmail.com"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [
-    "tianyiming"
+    "comment",
+    "film",
+    "movie"
   ],
   "homepage": "",
   "private": true,
@@ -20,6 +22,8 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.7"
+    "moment": "^2.15.2",
+    "bootstrap": "^3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "https://github.com/Eonasdan/bootstrap-datetimepicker.git#^4.17.43"
   }
 }
