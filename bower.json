@@ -11,7 +11,7 @@
     "film",
     "movie"
   ],
-  "homepage": "",
+  "homepage": "https://github.com/wdnlwzd/movie-comment.git",
   "private": true,
   "ignore": [
     "**/.*",
