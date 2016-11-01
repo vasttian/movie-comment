@@ -1,52 +1,77 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title> <%= title %> </title>
-<%- include head %>
+	<meta charset="UTF-8">
+	<title> <%= title %> </title>
+	<%- include head %>
 </head>
 
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="page-header clearfix">
-				<h1><%= title %></h1>
-				<div class="col-md-4">
-					<small>重度科幻迷</small>	
-				</div>
-				<div class="col-md-8">
-					<form method="GET" action="/results">
-						<div class="input-group col-sm-4 pull-right">
-							<input type="text" name="q" class="form-control">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit">搜索</button>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="navbar navbar-default navbar-fixed-bottom">
-		<div class="container">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="/" class="navbar-brand">重度科幻迷</a>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">
+					<img alt="一萌movie" src="/images/MB_video_rec_32px.png">
+				</a>
+				<a class="navbar-brand" href="/"><%= title%></a>
 			</div>
-			<% if(user){ %>
-				<p class="navbar-text navbar-right">
-					<span>欢迎您:<%= user.name %></span>
-					<span>&nbsp;|&nbsp;</span>
-					<a href="/logout" class="navbar-link">登出</a>
-				</p>
-			<% }else{ %>
-				<p class="navbar-text navbar-right">
-					<a href="#" class="navbar-link" data-toggle="modal" data-target="#signupModal">注册</a>
-					<span>&nbsp;|&nbsp;</span>
-					<a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
-				</p>
-			<% } %>
-		</div>
-	</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Link</a></li>
+					<li><a href="#">Link</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">友情链接 <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="https://www.douban.com/" target="_blank">豆瓣</a></li>
+							<li><a href="http://www.51oscar.com/" target="_blank">大众影评网</a></li>
+							<li><a href="http://www.mtime.com/" target="_blank">时光网</a></li>
+							<li><a href="http://www.imdb.cn/" target="_blank">影视资料库</a></li>
+							<li class="divider"></li>
+							<li><a href="http://www.imdb.com/" target="_blank">IMDb</a></li>
+							<li class="divider"></li>
+							<li> <a href="http://blog.sina.com.cn/s/blog_692a8cf30100nxyp.html" target="_blank">国外</a></li>
+							<li><a href="https://www.zhihu.com/question/19939971" target="_blank">更多</a></li>
+						</ul>
+					</li>
+				</ul>
+				<form class="navbar-form navbar-left" method="GET" action="/results" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">搜索</button>
+				</form>
+
+				<ul class="nav navbar-nav navbar-right">
+					<% if(user){ %>
+					<li class = "dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎您:<%= user.name %> <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">个人资料</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="/logout" class="navbar-link">登出</a></li>
+						</ul>
+					</li>
+					<% }else{ %>
+					<li>
+						<a href="/signup" class="navbar-link">注册</a>
+					</li>
+					<li>
+						<a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
+					</li>
+					<% } %>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+
 	<div id="signupModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -94,4 +119,5 @@
 			</div>
 		</div>
 	</div>
-<article>
+	<article>
+<!-- </body> -->

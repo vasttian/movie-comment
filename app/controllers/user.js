@@ -3,10 +3,25 @@ var User = require("../models/user");
 //注册
 exports.showSignup = function (req, res) {
 	res.render("pages/signup", {
-		title: '注册页面'
+		title: '注册一萌'
 	});
 };
 
+exports.checkUserName = function (req, res) {
+	var _user = req.body.user;
+	User.findOne({name:_user.name}, function(err, name) {
+		if (err) {
+			console.log('err');
+		};
+		if (name) {
+			console.log('用户名已存在!');
+			return res.json({"valid":false});
+		} else {
+			console.log('用户名可以注册!');
+			return res.json({"valid":true});
+		}
+	});
+}
 exports.signup = function(req, res){
 	var _user = req.body.user;
 	User.findOne({name:_user.name}, function(err, name) {
@@ -15,7 +30,7 @@ exports.signup = function(req, res){
 		};
 		if (name) {
 			console.log('用户名已存在!');
-			return res.redirect('/signin');
+			return res.json({"status":"error"});
 		}else {
 			var user = new User(_user);
 			user.save(function(err, user) {
@@ -23,7 +38,7 @@ exports.signup = function(req, res){
 					console.log('用户名密码保存失败!');
 				};
 				req.session.user = user;
-				res.redirect('back');
+				return res.json({"status":"ok"});
 			});
 		};
 	});
@@ -32,7 +47,7 @@ exports.signup = function(req, res){
 //登录
 exports.showSignin = function (req, res) {
 	res.render("pages/signin", {
-		title:'登录页面'
+		title:'登录一萌'
 	});
 };
 

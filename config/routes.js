@@ -13,6 +13,7 @@ module.exports = function (app) {
 	app.get('/', Index.index);
 	
 	//用户
+	app.post('/user/checkname', User.checkUserName);
 	app.post('/user/signup', User.signup);
 	app.post('/user/signin', User.signin);
 	app.get('/signup', User.showSignup);
