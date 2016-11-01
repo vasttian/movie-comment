@@ -99,8 +99,7 @@ $(function() {
 				}
 			}
 		}
-	});
-	.on('success.form.bv', function (e) {
+	}).on('success.form.bv', function (e) {
     // Prevent form submission
     e.preventDefault();
     // Get the form instance
