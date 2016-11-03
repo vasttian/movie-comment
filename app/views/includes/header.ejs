@@ -17,7 +17,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/">
-					<img alt="一萌movie" src="/images/MB_video_rec_32px.png">
+					<img alt="一萌movie" class="logo" src="/images/MB_video_rec_32px.png">
 				</a>
 				<a class="navbar-brand" href="/"><%= title%></a>
 			</div>
@@ -50,7 +50,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<% if(user){ %>
 					<li class = "dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎您:<%= user.name %> <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎您:<%= user.nickname %> <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#">个人资料</a></li>
 							<li><a href="#">Another action</a></li>
@@ -59,7 +59,14 @@
 							<li><a href="/logout" class="navbar-link">登出</a></li>
 						</ul>
 					</li>
-					<% }else{ %>
+					<span>
+						<% if (user.avatar.indexOf('default') > -1) { %>
+							<img id="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
+						<% } else { %>
+							<img id="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+          	<% } %>
+					</span>
+					<% } else { %>
 					<li>
 						<a href="/signup" class="navbar-link">注册</a>
 					</li>

@@ -51,10 +51,13 @@ exports.checkUserName = function (req, res) {
   });
 }
 exports.signup = function(req, res){
-  console.log('req.body::',req.body);
+  // console.log('req.body::',req.body);
   var _user = req.body.user;
   if (req.avatar) {
     _user.avatar = req.avatar;
+  }
+  if (!_user.nickname) {
+  	_user.nickname = _user.name;
   }
   User.findOne({name:_user.name}, function(err, name) {
 	if (err) {

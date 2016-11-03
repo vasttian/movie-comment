@@ -1,0 +1,26 @@
+.avatar {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  overflow: hidden;
+  /*color: #246731;*/
+  text-align: center;
+  vertical-align: middle;
+}
+.img-circle {
+  border-radius: 50%;
+}
+#login-avatar {
+  border-radius:40px;
+  border:1px solid #555;
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.logo {
+  margin-top: -4px;
+}
