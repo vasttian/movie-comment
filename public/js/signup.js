@@ -99,26 +99,27 @@ $(function() {
 		}
 	  }
 	}
-  }).on('success.form.bv', function (e) {
-	// Prevent form submission
-	e.preventDefault();
-	// Get the form instance
-	var $form = $(e.target);
-	// Get the BootstrapValidator instance
-	var bv = $form.data('bootstrapValidator');
-	// Use Ajax to submit form data
-	$.post("/user/signup", $form.serialize(), function (data) {
-	  console.log(data)
-	  if (data.status == "ok") {
-		window.location.href = "/index";
-	  }
-	  else if (data.status == "error") {
-		window.location.href = "/signup";
-		alert(data.Message);
-	  }
-	  else {
-		alert("未知错误");
-	  }
-	});
-  });	
+  });
+ //  .on('success.form.bv', function (e) {
+	// // Prevent form submission
+	// e.preventDefault();
+	// // Get the form instance
+	// var $form = $(e.target);
+	// // Get the BootstrapValidator instance
+	// var bv = $form.data('bootstrapValidator');
+	// // Use Ajax to submit form data
+	// $.post("/user/signup", $form.serialize(), function (data) {
+	//   console.log(data)
+	//   if (data.status == "ok") {
+	// 	window.location.href = "/";
+	//   }
+	//   else if (data.status == "error") {
+	// 	window.location.href = "/signup";
+	// 	alert(data.Message);
+	//   }
+	//   else {
+	// 	alert("未知错误");
+	//   }
+	// });
+ //  });	
 });

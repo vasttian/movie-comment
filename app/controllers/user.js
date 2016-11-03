@@ -1,5 +1,6 @@
 var User = require("../models/user");
-
+var fs = require('fs');
+var path = require('path');
 //注册
 exports.showSignup = function (req, res) {
 	res.render("pages/signup", {
@@ -7,7 +8,33 @@ exports.showSignup = function (req, res) {
 	});
 };
 
+//如果用户有上传头像
+exports.saveAvatar = function(req, res, next){
+
+  console.log('req.files::',req.files);//打印文件的信息
+  var postData = req.files.avatar;
+  var filePath = postData.path;
+  var fileName = postData.originalFilename;
+
+  if (fileName) {
+    fs.readFile(filePath, function(err, data) {
+      var timeStamp = Date.now();
+      var type = postData.type.split('/')[1];
+      var avatar = timeStamp + '.' + type;
+      var newPath = path.join(__dirname, '../../','/public/images/avatar/' + avatar);
+
+      fs.writeFile(newPath, data, function(err) {
+        req.avatar = avatar;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+};
+
 exports.checkUserName = function (req, res) {
+	console.log('req.body::',req.body);
 	var _user = req.body.user;
 	User.findOne({name:_user.name}, function(err, name) {
 		if (err) {
@@ -30,7 +57,8 @@ exports.signup = function(req, res){
 		};
 		if (name) {
 			console.log('用户名已存在!');
-			return res.json({"status":"error"});
+			// return res.json({"status":"error"});
+			res.redirect('/');
 		}else {
 			var user = new User(_user);
 			user.save(function(err, user) {
@@ -38,7 +66,8 @@ exports.signup = function(req, res){
 					console.log('用户名密码保存失败!');
 				};
 				req.session.user = user;
-				return res.json({"status":"ok"});
+				// return res.json({"status":"ok"});
+				res.redirect('/');
 			});
 		};
 	});
