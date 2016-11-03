@@ -3,9 +3,9 @@ var fs = require('fs');
 var path = require('path');
 //注册
 exports.showSignup = function (req, res) {
-	res.render("pages/signup", {
-		title: '注册一萌'
-	});
+  res.render("pages/signup", {
+	title: '注册一萌'
+  });
 };
 
 //如果用户有上传头像
@@ -34,80 +34,85 @@ exports.saveAvatar = function(req, res, next){
 };
 
 exports.checkUserName = function (req, res) {
-	console.log('req.body::',req.body);
-	var _user = req.body.user;
-	User.findOne({name:_user.name}, function(err, name) {
-		if (err) {
-			console.log('err');
-		};
-		if (name) {
-			console.log('用户名已存在!');
-			return res.json({"valid":false});
-		} else {
-			console.log('用户名可以注册!');
-			return res.json({"valid":true});
-		}
-	});
+  // console.log('req.body::',req.body);
+  var _user = req.body.user;
+
+  User.findOne({name:_user.name}, function(err, name) {
+	if (err) {
+	  console.log('err');
+	};
+	if (name) {
+	  console.log('用户名已存在!');
+	  return res.json({"valid":false});
+	} else {
+	  console.log('用户名可以注册!');
+	  return res.json({"valid":true});
+	}
+  });
 }
 exports.signup = function(req, res){
-	var _user = req.body.user;
-	User.findOne({name:_user.name}, function(err, name) {
+  console.log('req.body::',req.body);
+  var _user = req.body.user;
+  if (req.avatar) {
+    _user.avatar = req.avatar;
+  }
+  User.findOne({name:_user.name}, function(err, name) {
+	if (err) {
+	  console.log('err');
+	};
+	if (name) {
+	  console.log('用户名已存在!');
+	  // return res.json({"status":"error"});
+	  res.redirect('/use/signup');
+	}else {
+	  var user = new User(_user);
+	  user.save(function(err, user) {
 		if (err) {
-			console.log('err');
+		  console.log('用户名密码保存失败!');
 		};
-		if (name) {
-			console.log('用户名已存在!');
-			// return res.json({"status":"error"});
-			res.redirect('/');
-		}else {
-			var user = new User(_user);
-			user.save(function(err, user) {
-				if (err) {
-					console.log('用户名密码保存失败!');
-				};
-				req.session.user = user;
-				// return res.json({"status":"ok"});
-				res.redirect('/');
-			});
-		};
-	});
+		req.session.user = user;
+		// return res.json({"status":"ok"});
+		res.redirect('/');
+	  });
+	};
+  });
 };
 
 //登录
 exports.showSignin = function (req, res) {
-	res.render("pages/signin", {
-		title:'登录一萌'
-	});
+  res.render("pages/signin", {
+	title:'登录一萌'
+  });
 };
 
 exports.signin = function (req, res) {
-	var _user = req.body.user;
-	var name = _user.name;
-	var pass = _user.password;
-	User.findOne({name: name}, function (err, user) {
-		if (err) {
-			console.log(err);
-		};
-		if (!user) {
-			console.log('用户名不存在!');
-			return res.redirect("/signup");
-		};
-		req.session.user = user;
-		return res.redirect("/");
-		// user.comparePassword(pass, function (err, isMatch) {
-		// 	if (err) {
-		// 		console.log(err);
-		// 	};
-		// 	if (isMatch) {
-		// 		cosole.log('登录成功!');
-		// 		req.session.user = user;
-		// 		return res.redirect("/");
-		// 	}else {
-		// 		console.log('密码错误!');
-		// 		return res.redirect("/signin");
-		// 	}
-		// });
-	});
+  var _user = req.body.user;
+  var name = _user.name;
+  var pass = _user.password;
+  User.findOne({name: name}, function (err, user) {
+	if (err) {
+	  console.log(err);
+	};
+	if (!user) {
+	  console.log('用户名不存在!');
+	  return res.redirect("/signup");
+	};
+	req.session.user = user;
+	return res.redirect("/");
+	// user.comparePassword(pass, function (err, isMatch) {
+	// 	if (err) {
+	// 	  console.log(err);
+	// 	};
+	// 	if (isMatch) {
+	// 	  cosole.log('登录成功!');
+	// 	  req.session.user = user;
+	// 	  return res.redirect("/");
+	// 	}else {
+	// 	  console.log('密码错误!');
+	// 	  return res.redirect("/signin");
+	// 	}
+	// });
+  });
 };
 
 
