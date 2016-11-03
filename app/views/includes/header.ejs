@@ -61,9 +61,9 @@
 					</li>
 					<span>
 						<% if (user.avatar.indexOf('default') > -1) { %>
-							<img id="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
+							<img class="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
 						<% } else { %>
-							<img id="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+							<img class="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
           	<% } %>
 					</span>
 					<% } else { %>

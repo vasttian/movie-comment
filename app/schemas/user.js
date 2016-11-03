@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
   email: String,
   avatar: {
     type: String,
-    default: '/images/avatar/dafault/dafault_male.jpg'
+    default: '/images/avatar/default/default.png'
   },
   // 0 woman
   // 1 man

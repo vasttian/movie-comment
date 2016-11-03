@@ -67,7 +67,7 @@ exports.signup = function(req, res){
 	  console.log('用户名已存在!');
 	  // return res.json({"status":"error"});
 	  res.redirect('/use/signup');
-	}else {
+	} else {
 	  var user = new User(_user);
 	  user.save(function(err, user) {
 		if (err) {
@@ -116,6 +116,26 @@ exports.signin = function (req, res) {
 	// 	}
 	// });
   });
+};
+
+//是否登录
+exports.signinRequired = function(req,res,next){
+  var user = req.session.user;
+  if(!user){
+	console.log("没有登录");
+	return res.redirect("/signin");
+  }
+  next();
+};
+
+//是否有权限
+exports.adminRequired = function(req,res,next){
+  var user = req.session.user;
+  if(user.role <= 10){
+	console.log("没有权限");
+	return res.redirect("/signin");
+  }
+  next();
 };
 
 
