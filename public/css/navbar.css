@@ -5,6 +5,7 @@
 
 body {
   font-size: 16px;
+  /*font-family: "Helvetica Neue", Helvetica, "Microsoft YaHei", 微软雅黑, "Hiragino Sans GB", Arial, sans-serif;*/
 }
 
 li {
@@ -105,4 +106,55 @@ li {
 #library_nav li.active a {
   border-right: 4px solid #29a867;
   color: #29a867;
+}
+
+.library_right {
+  box-sizing: border-box;
+  position: relative;
+  padding-top: 50px;
+  margin-left: 205px;
+  height: 100%;
+  background-color: #ecedf0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /*margin-top: 50px;*/
+}
+
+.library_title {
+  background-color: #fff;
+  padding: 20px 30px 0 30px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -12px;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.library_title .nav-tabs {
+  margin-bottom: -1px;
+}
+
+.library_title .nav-tabs>li>a {
+  font-size: 17px;
+  padding: 13px 20px;
+  margin-right: -1px;
+}
+
+.library_content {
+  padding-top: 88px;
+  /*margin-top: 50px;*/
+  /*border: 1px solid red;*/
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+  color: #1a804b;
+  background-color: #ecedf0;
+  border: 1px solid #e5e5e5;
+  border-bottom-color: transparent;
+  cursor: default;
 }

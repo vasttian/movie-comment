@@ -24,6 +24,7 @@
   "dependencies": {
     "moment": "^2.15.2",
     "bootstrap": "^3.3.7",
-    "eonasdan-bootstrap-datetimepicker": "https://github.com/Eonasdan/bootstrap-datetimepicker.git#^4.17.43"
+    "eonasdan-bootstrap-datetimepicker": "https://github.com/Eonasdan/bootstrap-datetimepicker.git#^4.17.43",
+    "angular": "angularjs#^1.5.8"
   }
 }
