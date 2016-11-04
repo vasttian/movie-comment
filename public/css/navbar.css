@@ -1,3 +1,20 @@
+/*body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin:0;
+    padding:0;
+}*/
+
+body {
+  font-size: 16px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .avatar {
   display: inline-block;
   position: relative;
@@ -9,9 +26,11 @@
   text-align: center;
   vertical-align: middle;
 }
+
 .img-circle {
   border-radius: 50%;
 }
+
 .login-avatar {
   border-radius:40px;
   border:1px solid #555;
@@ -23,4 +42,67 @@
 
 .logo {
   margin-top: -4px;
+  margin-right: 10px;
+  margin-left: 30px;
+  /*border: 1px solid red;*/
+}
+
+.title-brand {
+  margin-right: 16px;
+  /*border: 1px solid yellow;*/
+}
+
+#library_nav {
+  position: fixed;
+  width: 205px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #fff;
+  color: #333;
+  margin-top: 50px;
+  padding-top: 15px;
+  border-right: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
+  margin-left: -15px;
+}
+
+#library_nav li {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+#library_nav li>a {
+  text-decoration: none;
+}
+
+.nav_user img {
+  border: 2px solid rgba(0, 0, 0, .2);
+  height: 85px;
+  width: 85px;
+}
+
+.nav_user {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.nav_user .useremail {
+  color: #999;
+  font-size: 12px;
+}
+
+#library_nav ul {
+  list-style-type: none;
+  text-indent: 20px;
+  padding: 0;
+}
+
+#library_nav li {
+  line-height: 45px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+#library_nav li.active a {
+  border-right: 4px solid #29a867;
+  color: #29a867;
 }

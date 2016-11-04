@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div id="library_nav">
+  	<div class="text-center nav_user">
+
+  	  <a href="#">
+  		<% if (user.avatar.indexOf('default') > -1) { %>
+		  <img class="img-circle" src="<%= user.avatar %>" alt="头像君不见啦!">
+		<% } else { %>
+		  <img class="img-circle" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+      	<% } %>
+      </a>
+      <p ><%= user.nickname %></p>
+      <span class="useremail"><%= user.email %></span>
+
+  	</div>
+
+  	<ul>
+  	  <li>
+  		<a href="#">
+    	  <i class="glyphicon glyphicon-facetime-video"></i>&nbsp; 电影管理
+  		</a>
+	  </li>
+	  <li>
+  		<a href="#">
+    	  <i class="glyphicon glyphicon-user"></i>&nbsp; 用户管理
+  		</a>
+	  </li>
+	  <li>
+  		<a href="#">
+    	  <i class="glyphicon glyphicon-calendar"></i>&nbsp; 活跃查看
+  		</a>
+	  </li>
+	  <li>
+  		<a href="#">
+    	  <i class="glyphicon glyphicon-cog"></i>&nbsp; 账号设置
+  		</a>
+	  </li>
+  	</ul>
+
+  </div>
+</div>
