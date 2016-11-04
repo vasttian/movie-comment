@@ -17,9 +17,9 @@ var UserSchema = new mongoose.Schema({
     type: Number,
     default: 1
   },
-  // 0-5 normal user
-  // 6-10 user admin
-  // 11-15 user admin and movie admin
+  // 0-10 normal user
+  // 11-20 movie admin
+  // 21-30 user admin and movie admin
   // > 30 super admin,this role has the highest power
   role: {
     type: Number,

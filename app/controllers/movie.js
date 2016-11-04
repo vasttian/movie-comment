@@ -44,7 +44,7 @@ exports.news = function(req,res) {
 	  categories: categories,
 	  movie:{}
 	});
-  });	
+  });
 };
 
 //更新操作
@@ -65,8 +65,7 @@ exports.update = function(req,res) {
 };
 
 exports.savePoster = function(req, res, next) {
-  console.log('movie_req------------:',req.body);
-  console.log('req.files:',req.files);//打印文件的信息
+  // console.log('req.files:',req.files);//打印文件的信息
   var posterData = req.files.uploadPoster;
 
   var filePath = posterData.path;//文件的路径
@@ -88,7 +87,8 @@ exports.savePoster = function(req, res, next) {
 };
 
 //后台录入存储
-exports.save = function(req,res) {
+exports.save = function(req, res) {
+  // console.log('movie_req123------------:',req.body);
   var id = req.body.movie._id;
   var movieObj = req.body.movie;
   var _movie;
@@ -119,7 +119,7 @@ exports.save = function(req,res) {
 	_movie = new Movie(movieObj);
 	var categoriesName = movieObj.categoriesName;
 
-	_movie.save(function(err,movie) {
+	_movie.save(function(err, movie) {
 	  if (err) {
 		console.log("新数据保存",err);
 	  }
