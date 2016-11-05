@@ -16,6 +16,10 @@ li {
   text-align: center;
 }
 
+.row .page-title {
+  color:　#1413d3 !important;
+}
+
 .avatar {
   display: inline-block;
   position: relative;
@@ -33,8 +37,8 @@ li {
 }
 
 .login-avatar {
-  border-radius:40px;
-  border:1px solid #555;
+  border-radius: 40px;
+  border: 1px solid #555;
   width: 40px;
   height: 40px;
   margin-top: 5px;
