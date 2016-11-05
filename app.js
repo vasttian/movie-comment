@@ -26,15 +26,15 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
   secret: 'ethan',
-  /*cookie:{
+  cookie:{
   	maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
-  	domain:'/'
-  },*/
+  	// domain:'/'
+  },
   store: new mongoStore({
     url: dbUrl,
     collection: 'sessions'
   }),
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }));
 
