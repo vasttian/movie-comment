@@ -2,15 +2,17 @@
   <div id="library_nav">
   	<div class="text-center nav_user">
 
-  	  <a href="#">
-  		<% if (user.avatar.indexOf('default') > -1) { %>
-		  <img class="img-circle" src="<%= user.avatar %>" alt="头像君不见啦!">
-		<% } else { %>
-		  <img class="img-circle" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
-      	<% } %>
-      </a>
-      <p ><%= user.nickname %></p>
-      <span class="useremail"><%= user.email %></span>
+      <% if (user) { %>
+        <a href="#">
+  		    <% if (user.avatar.indexOf('default') > -1) { %>
+		        <img class="img-circle" src="<%= user.avatar %>" alt="头像君不见啦!">
+		      <% } else { %>
+		        <img class="img-circle" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+      	  <% } %>
+        </a>
+        <p ><%= user.nickname %></p>
+        <span class="useremail"><%= user.email %></span>
+      <% } %>
 
   	</div>
 
