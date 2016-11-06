@@ -2,7 +2,7 @@ var Categories = require("../models/categories");
 
 exports.add = function(req, res){
   res.render("pages/category_admin", {
-	title: "增加电影分类",
+	title: "添加分类",
 	categories: {}
   });	
 };
@@ -25,7 +25,7 @@ exports.list = function(req,res) {
 			console.log(err);
 		}
 		res.render("pages/categorylist", {
-			title:"电影分类页面",
+			title:"电影分类",
 			categories:categories
 		});
 	});	

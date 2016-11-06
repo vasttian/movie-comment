@@ -4,7 +4,7 @@ var path = require('path');
 //注册
 exports.showSignup = function (req, res) {
   res.render("pages/signup", {
-	title: '注册一萌'
+		title: '注册一萌'
   });
 };
 
@@ -85,7 +85,7 @@ exports.signup = function(req, res){
 //登录
 exports.showSignin = function (req, res) {
   res.render("pages/signin", {
-	title:'登录一萌'
+		title:'登录一萌'
   });
 };
 
@@ -119,12 +119,18 @@ exports.signin = function (req, res) {
   });
 };
 
+exports.showAdmin = function (req, res) {
+	res.render("pages/admin-manage", {
+		title: '管理页面'
+	});
+};
+
 //是否登录
-exports.signinRequired = function(req,res,next){
+exports.signinRequired = function(req, res, next) {
   var user = req.session.user;
-  if(!user){
-	console.log("没有登录");
-	return res.redirect("/signin");
+  if (!user) {
+		console.log("没有登录");
+		return res.redirect("/signin");
   }
   next();
 };

@@ -24,6 +24,9 @@ module.exports = function (app) {
   app.get('/logout', User.logout);
   // app.get("/admin/user/list", User.signinRequired, User.adminRequired, User.userlist);
 
+  //管理员
+  app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
+
   //电影
   // app.get('/movie/:id', Movie.detail);
   app.get("/admin/movie/new", User.signinRequired, User.movieAdminRequired, Movie.news);
@@ -35,5 +38,5 @@ module.exports = function (app) {
   //电影类别
   app.get("/admin/movie/category/add", User.signinRequired, User.movieAdminRequired, Category.add);
   app.post("/admin/movie/category", User.signinRequired, User.movieAdminRequired, Category.save);
-  app.get("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired);
+  app.get("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.list);
 };

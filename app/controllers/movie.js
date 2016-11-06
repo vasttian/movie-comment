@@ -40,7 +40,7 @@ var path = require("path");
 exports.news = function(req,res) {
   Categories.find({},function(err,categories) {
 	res.render("pages/admin", {
-	  title:"电影后台录入页",
+	  title:"添加电影",
 	  categories: categories,
 	  movie:{}
 	});
