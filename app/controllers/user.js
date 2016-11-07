@@ -120,9 +120,14 @@ exports.signin = function (req, res) {
 };
 
 exports.showAdmin = function (req, res) {
-	res.render("pages/admin-manage", {
-		title: '管理页面'
-	});
+  res.render("pages/admin-manage", {
+	title: '管理页面'
+  });
+};
+
+exports.sendUser = function (req, res) {
+  var user = req.session.user;
+  res.json({user: user});
 };
 
 //是否登录

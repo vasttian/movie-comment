@@ -1,13 +1,46 @@
 angular.module("myApp",["ngRoute"])
+.factory('adminWelcomeFactory', ['$http', '$q', function ($http, $q) {
+  var service = {};
+  service.callUser = function() {
+  	var defered = $q.defer();
+  	var config = {
+  	  method: 'GET',
+  	  url: '/admin/user'
+  	};
+
+  	$http(config).success(function(data) {
+  	  defered.resolve(data);
+  	}).error(function(error) {
+  	  defered.reject(error);
+  	});
+
+  	return defered.promise;
+  };
+  return service;
+}])
 .controller('movieCtrl', function($scope, $route) {
 
 })
 .controller('userCtrl', function($scope, $route) {
 
 })
-.controller('adminHomeCtrl', function($scope, $route) {
-
-})
+.controller('adminHomeCtrl', ['$scope', '$route', 'adminWelcomeFactory', function($scope, $route, adminWelcomeFactory) {
+  $scope.user = {
+  	nickName: ''
+  };
+  var fillUser = function() {
+  	adminWelcomeFactory.callUser()
+  	.then(function(data) {
+	  // console.log('data123',data.user.nickname);
+	  $scope.user.nickName = data.user.nickname;
+  	}, function(error) {
+	  console.log('adminWelcomeFactory.callUser:',error);
+  	});
+  };
+  $scope.$watch('$viewContentLoaded',function(event) {
+  	fillUser(); 
+  });
+}])
 .controller('activeCtrl', function($scope, $route) {
 
 })
@@ -20,7 +53,7 @@ angular.module("myApp",["ngRoute"])
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
   	.when('/admin', {
-  	  template: '<div class="row library_title"><h2>Hi: <br>&nbsp;&nbsp&nbsp;&nbsp亲爱的管理员，<br>&nbsp;&nbsp&nbsp;&nbsp欢迎您!</h2></div>',
+  	  template: '<div class="row library_title"><h2>Hi: <br>&nbsp;&nbsp&nbsp;&nbsp亲爱的管理员 {{user.nickName}}，<br>&nbsp;&nbsp&nbsp;&nbsp欢迎您!</h2></div>',
   	  controller: 'adminHomeCtrl'
   	})
   	.when('/movie-manage', {

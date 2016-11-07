@@ -26,7 +26,8 @@ module.exports = function (app) {
 
   //管理员
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
-
+  app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
+  
   //电影
   // app.get('/movie/:id', Movie.detail);
   app.get("/admin/movie-manage", User.signinRequired, User.movieAdminRequired, Movie.movieManage);
