@@ -29,6 +29,7 @@ module.exports = function (app) {
 
   //电影
   // app.get('/movie/:id', Movie.detail);
+  app.get("/admin/movie-manage", User.signinRequired, User.movieAdminRequired, Movie.movieManage);
   app.get("/admin/movie/new", User.signinRequired, User.movieAdminRequired, Movie.news);
   // app.get("/admin/movie/update/:id", User.signinRequired, User.adminRequired,  Movie.update);
   app.post("/admin/movie",multipartMiddleware, User.signinRequired, User.movieAdminRequired, Movie.savePoster, Movie.save);

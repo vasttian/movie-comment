@@ -37,7 +37,13 @@ var path = require("path");
 // 	});
 // };
 
-exports.news = function(req,res) {
+exports.movieManage = function (req, res) {
+  console.log('runing movieManage');
+  res.render("includes/movie-manage-right-nav", {
+
+  });
+};
+exports.news = function (req, res) {
   Categories.find({},function(err,categories) {
 	res.render("pages/admin", {
 	  title:"添加电影",

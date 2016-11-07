@@ -10,7 +10,7 @@ exports.showSignup = function (req, res) {
 
 //如果用户有上传头像
 exports.saveAvatar = function(req, res, next){
-  console.log('>>>>>req.body>>>>>>:',req.body);
+  // console.log('>>>>>req.body>>>>>>:',req.body);
 
   // console.log('req.files::',req.files);//打印文件的信息
   var postData = req.files.avatar;
@@ -127,6 +127,7 @@ exports.showAdmin = function (req, res) {
 
 //是否登录
 exports.signinRequired = function(req, res, next) {
+  console.log("验证是否登录");
   var user = req.session.user;
   if (!user) {
 		console.log("没有登录");
@@ -137,6 +138,7 @@ exports.signinRequired = function(req, res, next) {
 
 //是否有对电影进行CRUD的权限
 exports.movieAdminRequired = function(req,res,next){
+  console.log("验证是否有对电影进行CRUD的权限");
   var user = req.session.user;
   if (user.role <= 10) {
 	console.log("对不起,你还没有获得对电影进行CRUD的权限!");
@@ -147,6 +149,7 @@ exports.movieAdminRequired = function(req,res,next){
 
 //是否有对用户进行CRUD的权限
 exports.user_movieAdminRequired = function(req,res,next){
+  console.log("验证是否有对用户进行CRUD的权限");
   var user = req.session.user;
   console.log("user:",user);
   if (user.role <= 20) {
@@ -158,6 +161,7 @@ exports.user_movieAdminRequired = function(req,res,next){
 
 //是否有超级管理员的权限
 exports.superAdminRequired = function(req,res,next){
+  console.log("验证是否有超级管理员的权限");
   var user = req.session.user;
   console.log("user:",user);
   if(user.role <= 30){

@@ -1,7 +1,7 @@
 <%- include ../includes/header %>
 <%- include ../includes/navpanel %>
-	<div class="library_right" ng-app="MySignInApp">
-  	<div class="container-fluid" ng-controller="SignInCtrl" id="admin-module">
+	<div class="library_right" ng-if="showAdminWelcome">
+  	<div class="container-fluid" id="admin-module">
 			<div class="row library_title">
   			<% if (user) { %>
   				<h2>
@@ -12,5 +12,4 @@
   		</div>
   	</div>
   </div>
-  <script src="/js/admin-manage.js"></script>
 <%- include ../includes/footer %>
