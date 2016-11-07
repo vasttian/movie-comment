@@ -27,7 +27,8 @@ app.use(cookieParser());
 app.use(session({
   secret: 'ethan',
   cookie:{
-  	maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
+    // maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
+  	maxAge: 1000 * 60 * 60 * 2 * 1, //默认1天
   	// domain:'/'
   },
   store: new mongoStore({

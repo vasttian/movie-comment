@@ -8,9 +8,9 @@ var multipartMiddleware = multipart();
 module.exports = function (app) {
   //pre handle user
   app.use(function (req, res, next) {
-	var _user = req.session.user;
-	app.locals.user = _user;
-	next();
+	  var _user = req.session.user;
+	  app.locals.user = _user;
+  	next();
   });
   //首页
   app.get('/', Index.index);
