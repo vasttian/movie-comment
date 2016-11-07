@@ -5,6 +5,9 @@ angular.module("myApp",["ngRoute"])
 .controller('userCtrl', function($scope, $route) {
 
 })
+.controller('adminHomeCtrl', function($scope, $route) {
+
+})
 .controller('activeCtrl', function($scope, $route) {
 
 })
@@ -16,6 +19,10 @@ angular.module("myApp",["ngRoute"])
 })
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
+  	.when('/admin', {
+  	  template: '<div class="row library_title"><h2>Hi: <br>&nbsp;&nbsp&nbsp;&nbsp亲爱的管理员，<br>&nbsp;&nbsp&nbsp;&nbsp欢迎您!</h2></div>',
+  	  controller: 'adminHomeCtrl'
+  	})
   	.when('/movie-manage', {
   	  // templateUrl: 'public/admin/movie-index.html',
   	  template: '<div class="row library_title" ng-controller="movieCtrl"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="add-movie">添加电影</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="add-category">添加分类</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="show-movie">查看电影</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="show-category">查看分类</a></li></ul></div></div>',
