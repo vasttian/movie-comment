@@ -1,4 +1,4 @@
-angular.module("myApp",["ngRoute"])
+angular.module("adminApp", ["ngRoute"])
 .factory('adminWelcomeFactory', ['$http', '$q', function ($http, $q) {
   var service = {};
   service.callUser = function() {
@@ -18,12 +18,6 @@ angular.module("myApp",["ngRoute"])
   };
   return service;
 }])
-.controller('movieCtrl', function($scope, $route) {
-
-})
-.controller('userCtrl', function($scope, $route) {
-
-})
 .controller('adminHomeCtrl', ['$scope', '$route', 'adminWelcomeFactory', function($scope, $route, adminWelcomeFactory) {
   $scope.user = {
   	nickName: ''
@@ -41,6 +35,12 @@ angular.module("myApp",["ngRoute"])
   	fillUser(); 
   });
 }])
+.controller('movieCtrl', function($scope, $route) {
+
+})
+.controller('userCtrl', function($scope, $route) {
+
+})
 .controller('activeCtrl', function($scope, $route) {
 
 })
