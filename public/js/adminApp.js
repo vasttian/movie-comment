@@ -25,10 +25,9 @@ angular.module("adminApp", ["ngRoute"])
   var fillUser = function() {
   	adminWelcomeFactory.callUser()
   	.then(function(data) {
-	  // console.log('data123',data.user.nickname);
-	  $scope.user.nickName = data.user.nickname;
+	    $scope.user.nickName = data.user.nickname;
   	}, function(error) {
-	  console.log('adminWelcomeFactory.callUser:',error);
+	    console.log('adminWelcomeFactory.callUser:',error);
   	});
   };
   $scope.$watch('$viewContentLoaded',function(event) {
@@ -73,39 +72,4 @@ angular.module("adminApp", ["ngRoute"])
   	.otherwise({
   	  redirectTo: '/'
   	});
-});
-
-
-$(function() {
- //  $("#movie-manage").click(function() {
-	// $.get('/admin/movie-manage', function(data, status) {
-	//   console.log("runing here!");
-	//   $("#admin-module").html(data);
-	// });
- //  });
-
- //  $("#add-movie").click(function () {
- //  	console.log('2345dd');
-	// 	$.get('/admin/movie/new', function(data, status) {
-	// 		$(".row.library_title").html(data);
-	// 	});
-	// });
-
-	// $("#add-category").click(function () {
-	// 	$.get('/admin/movie/category/add', function(data, status) {
-	// 		$("#move-windows").html(data);
-	// 	});
-	// });
-
-	// $("#show-movie").click(function () {
-	// 	$.get('/admin/movie/list', function(data, status) {
-	// 		$("#move-windows").html(data);
-	// 	});
-	// });
-
-	// $("#show-category").click(function () {
-	// 	$.get('/admin/movie/category/list', function(data, status) {
-	// 		$("#move-windows").html(data);
-	// 	});
-	// });
 });

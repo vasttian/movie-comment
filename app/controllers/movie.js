@@ -45,7 +45,6 @@ exports.movieManage = function (req, res) {
 };
 
 exports.addMovie = function (req, res) {
-	console.log('35452addmovie');
   Categories.find({},function(err, categories) {
 	res.render("pages/add-movie", {
 	  title: "添加电影",
