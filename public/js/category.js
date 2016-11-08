@@ -4,19 +4,18 @@ $(function() {
 	var id = target.data("id");
 	var tr = $(".item-id-"+id);
 	$.ajax({
-		async: true,
-		type: 'DELETE',
-		url: "/admin/movie/category/list?id=" +id,
-		async: true,
-		success: function(req) {
-			//console.log(req);
-			if (tr.length > 0) {
-				tr.remove();
-			}
-		},
-		error: function() {
-			alert("出错");
+	  type: 'DELETE',
+	  url: "/admin/movie/category/list?id=" +id,
+	  async: true,
+	  success: function(req) {
+		//console.log(req);
+		if (tr.length > 0) {
+		  tr.remove();
 		}
+	  },
+	  error: function() {
+		alert("出错");
+	  }
 	})
   });
 });
