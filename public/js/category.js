@@ -1,29 +1,21 @@
-angular.module('categoryApp', [])
-.factory('categoryFactory', ['$http', '$q', function($http, $q) {
-  var service = {};
-  service.callCategory = function() {
-  	var defered = $q.defer();
-  	var config = {
-  	  method: 'POST',
-  	  url: '/admin/movie/category',
-  	  data: '23'
-  	};
-  	$http(config).success(function(data) {
-  	  defered.resolve(data);
-  	}).error(function(error) {
-  	  defered.reject(error);
-  	});
-
-  	return defered.promise;
-  };
-  return service;
-}])
-.controller('categoryCtrl', ['$scope', 'categoryFactory', function($scope, categoryFactory) {
-  $scope.category = {
-  	name: '213'
-  };
-  console.log("234z34hi:",categoryFactory.callCategory.config);
-  $scope.addCategory = function() {
-	console.log("234zhi:",categoryFactory.callCategory.config);
-  };
-}]);
+$(function() {
+  $(".delCategory").click(function(e) {
+	console.log("here");
+	var target = $(e.target);
+	var id = target.data("id");
+	var tr = $(".item-id-"+id);
+	$.ajax({
+		type: 'DELETE',
+		url: "/admin/movie/list?id=" +id,
+		async: true,
+		success:function(req){
+			if(tr.length>0){
+				tr.remove();
+			}
+		},
+		error:function(){
+			alert("出错");
+		}
+	})
+  });
+});

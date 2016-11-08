@@ -1,22 +1,19 @@
-
-  <div class="col-md-4 col-md-offset-1" style="padding-top:70px" ng-controller="categoryCtrl">
+  <div class="col-md-4 col-md-offset-1" style="padding-top:70px">
 	<div class="row">
 	  <form action="/admin/movie/category" method="post" class="form-horizontal">
 		<div class="modal-body">
 		  <div class="form-group">
 			<label for="inputCategories" class="col-sm-3 control-label">分类名称</label>
 			<div class="col-sm-9">
-			  <input type="text" id="inputCategories" class="form-control" ng-model="category.name">
-			  {{category.name}}
+			  <input type="text" id="inputCategories" class="form-control" name="categories[name]" value="<%= categories.name %>">
 			</div>
 		  </div>
 		</div>
 
-	  </form>
 		<div class="modal-footer">
 		  <button class="btn btn-default" type="reset" data-dismiss="modal">重置</button>
-		  <button class="btn btn-success" ng-click="addCategory()">提交</button>
+		  <button class="btn btn-success" type="submit">提交</button>
 		</div>
+	  </form>
 	</div>
   </div>
-

@@ -165,29 +165,30 @@ exports.save = function(req, res) {
   };
 };
 
-// //电影列表
-// exports.list = function(req,res){
-// 	Movie.fetch(function(err,movies){
-// 		if(err){
-// 			console.log(err);
-// 		}
-// 		res.render("pages/list",{
-// 			title:"imooc 列表页",
-// 			movies:movies
-// 		});
-// 	});	
-// };
+//电影列表
+exports.list = function(req, res) {
+	Movie.fetch(function(err,movies) {
+		if (err) {
+			console.log(err);
+		}
+		res.render("pages/list", {
+			title:"imooc 列表页",
+			movies:movies
+		});
+	});	
+};
 
-// //删除
-// exports.del = function(req,res){
-// 	var id=req.query.id;
-// 	if(id){
-// 		Movie.remove({_id:id},function(err,movie){
-// 			if(err){
-// 				console.log(err);
-// 			}else{
-// 				res.json({success:1});
-// 			}
-// 		});
-// 	}
-// };
+//删除
+exports.del = function(req, res) {
+  var id = req.query.id;
+  console.log('234dffd');
+  if(id) {
+	Movie.remove({_id:id}, function(err, movie) {
+	  if (err) {
+		console.log(err);
+	  } else {
+		res.json({success: 1});
+	  }
+	});
+  }
+};

@@ -1,7 +1,5 @@
-//在这里写删除的逻辑
-//$(function(){});是$(document).ready(function(){ })的简写.
-$(function(){
-	$(".del").click(function(e){
+$(function() {
+	$(".del").click(function(e) {
 		var target=$(e.target);
 		var id=target.data("id");
 		var tr=$(".item-id-"+id);

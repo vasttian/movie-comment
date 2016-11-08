@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module("myApp", ["adminApp", "categoryApp"]);
+angular.module("myApp", ["adminApp"]);

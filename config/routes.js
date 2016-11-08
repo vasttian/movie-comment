@@ -32,10 +32,10 @@ module.exports = function (app) {
   // app.get('/movie/:id', Movie.detail);
   app.get("/admin/movie-manage", User.signinRequired, User.movieAdminRequired, Movie.movieManage);
   app.get("/admin/movie/add", User.signinRequired, User.movieAdminRequired, Movie.addMovie);
-  // app.get("/admin/movie/update/:id", User.signinRequired, User.adminRequired,  Movie.update);
+  // app.get("/admin/movie/update/:id", User.signinRequired, User.movieAdminRequired,  Movie.update);
   app.post("/admin/movie",multipartMiddleware, User.signinRequired, User.movieAdminRequired, Movie.savePoster, Movie.save);
-  // app.get("/admin/movie/list",User.signinRequired, User.adminRequired, Movie.list);
-  // app.delete("/admin/movie/list",User.signinRequired, User.adminRequired, Movie.del);
+  // app.get("/admin/movie/list",User.signinRequired, User.movieAdminRequired, Movie.list);
+  app.delete("/admin/movie/list",User.signinRequired, User.movieAdminRequired, Movie.del);
 
   //电影类别
   app.get("/admin/movie/category/add", User.signinRequired, User.movieAdminRequired, Category.add);
