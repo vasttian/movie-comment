@@ -44,8 +44,8 @@ $(function(){
 	});
 
 	$("#add-movie").click(function () {
-		$.get('/admin/movie/new', function(data, status) {
-			$(".row.library_title").html(data);
+		$.get('/admin/movie/add', function(data, status) {
+			$("#move-windows").html(data);
 		});
 	});
 

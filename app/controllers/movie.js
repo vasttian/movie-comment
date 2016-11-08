@@ -43,26 +43,28 @@ exports.movieManage = function (req, res) {
 
   });
 };
-exports.news = function (req, res) {
-  Categories.find({},function(err,categories) {
-	res.render("pages/admin", {
-	  title:"添加电影",
+
+exports.addMovie = function (req, res) {
+	console.log('35452addmovie');
+  Categories.find({},function(err, categories) {
+	res.render("pages/add-movie", {
+	  title: "添加电影",
 	  categories: categories,
-	  movie:{}
+	  movie: {}
 	});
-  });
+  });	
 };
 
 //更新操作
 exports.update = function(req,res) {
 	var id = req.params.id;
 	if (id) {
-		Movie.findById(id,function(err,movie) {
+		Movie.findById(id,function(err, movie) {
 			Categories.find({},function(err,categories) {
 				res.render("pages/admin", {
-					title:"更新操作",
-					movie:movie,
-					categories:categories
+					title: "更新操作",
+					movie: movie,
+					categories: categories
 				});
 			});
 			
