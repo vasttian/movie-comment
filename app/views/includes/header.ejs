@@ -1,9 +1,10 @@
 <!doctype html>
-<html>
+<html ng-app="myApp">
 <head>
 	<meta charset="UTF-8">
 	<title> <%= title %> </title>
 	<%- include head %>
+	
 </head>
 
 <body>
@@ -17,16 +18,16 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/">
-					<img alt="一萌movie" src="/images/MB_video_rec_32px.png">
+					<img alt="一萌movie" class="logo" src="/images/MB_video_rec_32px.png">
 				</a>
-				<a class="navbar-brand" href="/"><%= title%></a>
+				<a class="navbar-brand title-brand" href="/"><%= title%></a>
 			</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
+					<li class="active"><a href="javascript:void(0)">Link</a></li>
+					<li><a href="javascript:void(0)">Link</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">友情链接 <span class="caret"></span></a>
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">友情链接 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="https://www.douban.com/" target="_blank">豆瓣</a></li>
 							<li><a href="http://www.51oscar.com/" target="_blank">大众影评网</a></li>
@@ -48,24 +49,33 @@
 				</form>
 
 				<ul class="nav navbar-nav navbar-right">
-					<% if(user){ %>
-					<li class = "dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">欢迎您:<%= user.name %> <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">个人资料</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="/logout" class="navbar-link">登出</a></li>
-						</ul>
-					</li>
-					<% }else{ %>
-					<li>
-						<a href="/signup" class="navbar-link">注册</a>
-					</li>
-					<li>
-						<a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
-					</li>
+					<% if (user) { %>
+						<li class = "dropdown">
+							<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">欢迎您:<%= user.nickname %> 
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="javascript:void(0)">个人资料</a></li>
+								<li><a href="javascript:void(0)">Another action</a></li>
+								<li><a href="javascript:void(0)">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="/logout" class="navbar-link">登出</a></li>
+							</ul>
+						</li>
+						<span>
+							<% if (user.avatar.indexOf('default') > -1) { %>
+								<img class="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
+							<% } else { %>
+								<img class="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+							<% } %>
+						</span>
+					<% } else { %>
+						<li>
+							<a href="/signup" class="navbar-link">注册</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
+						</li>
 					<% } %>
 				</ul>
 			</div><!-- /.navbar-collapse -->

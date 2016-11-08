@@ -1,4 +1,4 @@
-// var Movie=require("../models/movie");
+var Movie = require("../models/movie");
 // var Categories=require("../models/categories");
 
 exports.index = function(req, res){

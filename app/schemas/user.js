@@ -1,47 +1,47 @@
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-	name: {
-	  type: String,
-	  unique: true
-	},
-	nickname: String,
-	email: String,
-	avatar: {
-	  type: String,
-	  default: '/images/avatar/dafault.jpg'
-	},
-	// 0 woman
-	// 1 man
-	sex: {
-	  type: Number,
-	  default: 1
-	},
-	// 0-5 normal user
-	// 6-10 user admin
-	// 11-15 user admin and movie admin
-	// > 30 super admin,this role has the highest power
-	role: {
-	  type: Number,
-	  default: 0
-	},
-	password: String,
-	tel: String,
-	born: {
-	  type: String
-	  // type: Date,
-      // default: Date.now()
-	},
-	meta: {
-      createdAt: {
-    	type: Date,
-    	default: Date.now()
-      },
-      updateAt: {
-    	type: Date,
-    	default: Date.now()
-      }
-	}
+  name: {
+    type: String,
+    unique: true
+  },
+  nickname: String,
+  email: String,
+  avatar: {
+    type: String,
+    default: '/images/avatar/default/default.png'
+  },
+  // 0 woman
+  // 1 man
+  sex: {
+    type: Number,
+    default: 1
+  },
+  // 0-10 normal user
+  // 11-20 movie admin
+  // 21-30 user admin and movie admin
+  // > 30 super admin,this role has the highest power
+  role: {
+    type: Number,
+    default: 0
+  },
+  password: String,
+  tel: String,
+  born: {
+    type: String
+    // type: Date,
+    // default: Date.now()
+  },
+  meta: {
+    createdAt: {
+  	type: Date,
+  	default: Date.now()
+    },
+    updateAt: {
+  	type: Date,
+  	default: Date.now()
+    }
+  }
 });
 
 //实例方法
