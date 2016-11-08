@@ -25,11 +25,10 @@ app.locals.moment = require('moment');
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
-  secret: 'ethan',
+  secret: 'vasttian',
   cookie:{
     // maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
-  	maxAge: 1000 * 60 * 60 * 2 * 1, //默认1天
-  	// domain:'/'
+  	maxAge: 1000 * 60 * 60,
   },
   store: new mongoStore({
     url: dbUrl,
