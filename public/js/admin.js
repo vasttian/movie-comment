@@ -42,7 +42,6 @@ $(function() {
 	});
 
   $("#add-movie").click(function () {
-  	console.log("234hter");
 	$.get('/admin/movie/add', function(data, status) {
 	  $("#move-windows").html(data);
 	});

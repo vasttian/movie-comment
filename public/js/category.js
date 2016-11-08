@@ -4,16 +4,17 @@ $(function() {
 	var id = target.data("id");
 	var tr = $(".item-id-"+id);
 	$.ajax({
+		async: true,
 		type: 'DELETE',
 		url: "/admin/movie/category/list?id=" +id,
 		async: true,
-		success: function(req){
+		success: function(req) {
 			//console.log(req);
-			if(tr.length>0){
+			if (tr.length > 0) {
 				tr.remove();
 			}
 		},
-		error: function(){
+		error: function() {
 			alert("出错");
 		}
 	})
