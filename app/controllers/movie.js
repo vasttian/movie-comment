@@ -171,9 +171,9 @@ exports.list = function(req, res) {
 		if (err) {
 			console.log(err);
 		}
-		res.render("pages/list", {
-			title:"imooc 列表页",
-			movies:movies
+		res.render("pages/movie-list", {
+			title: "查看电影",
+			movies: movies
 		});
 	});	
 };
