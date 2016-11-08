@@ -19,7 +19,7 @@
 			<td><a target="_blank" href="/movie/<%= item._id %>">查看</a></td>
 			<td><a href="/admin/movie/update/<%= item._id %>">更新</a></td>
 			<td>
-			  <button class="btn btn-danger delCategory" type="button" data-id="<%= item._id %>">删除</button>
+			  <button class="btn btn-danger delCategory" type="button" data-id="<%= item._id %>" title="注意,分类下的所有电影都将被删除!">删除</button>
 			</td>
 		  </tr>
 		<% }) %>
@@ -27,4 +27,29 @@
 	</table>
   </div>
 </div>
+<% /*
+<script>
+$(function() {
+  $(".delCategory").click(function(e) {
+	var target = $(e.target);
+	var id = target.data("id");
+	var tr = $(".item-id-"+id);
+	$.ajax({
+		type: 'DELETE',
+		url: "/admin/movie/category/list?id=" +id,
+		async: true,
+		success: function(req) {
+			//console.log(req);
+			if (tr.length > 0) {
+				tr.remove();
+			}
+		},
+		error: function() {
+			alert("出错");
+		}
+	})
+  });
+});
+</script>
+*/ %>
 

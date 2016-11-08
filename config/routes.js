@@ -41,4 +41,5 @@ module.exports = function (app) {
   app.get("/admin/movie/category/add", User.signinRequired, User.movieAdminRequired, Category.add);
   app.post("/admin/movie/category", User.signinRequired, User.movieAdminRequired, Category.save);
   app.get("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.list);
+  app.delete("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.del);
 };

@@ -1,4 +1,5 @@
 var Categories = require("../models/categories");
+var Movie = require("../models/movie");
 
 exports.add = function(req, res) {
   res.render("pages/add-category", {
@@ -29,4 +30,25 @@ exports.list = function(req,res) {
 	  categories: categories
 	});
   });	
+};
+
+//删除
+exports.del = function(req, res) {
+  var id = req.query.id;
+  console.log("delete-categroy id:", id);
+
+  if(id) {
+  	Movie.remove({categories:id}, function(err, movie) {
+	  if (err) {
+		console.log(err);
+	  }
+	});
+	Categories.remove({_id: id}, function(err, movie) {
+	  if (err) {
+		console.log(err);
+	  } else {
+		res.json({success: 1});
+	  }
+	});
+  }
 };

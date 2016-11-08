@@ -180,8 +180,8 @@ exports.list = function(req, res) {
 
 //删除
 exports.del = function(req, res) {
+	console.log("del-movie");
   var id = req.query.id;
-  console.log('234dffd');
   if(id) {
 	Movie.remove({_id:id}, function(err, movie) {
 	  if (err) {
