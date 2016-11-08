@@ -52,7 +52,7 @@ angular.module("adminApp", ["ngRoute"])
 })
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
-  	.when('/admin', {
+  	.when('/', {
   	  template: '<div class="row library_title"><h2>Hi: <br>&nbsp;&nbsp&nbsp;&nbsp亲爱的管理员 {{user.nickName}}，<br>&nbsp;&nbsp&nbsp;&nbsp欢迎您!</h2></div>',
   	  controller: 'adminHomeCtrl'
   	})
@@ -71,7 +71,7 @@ angular.module("adminApp", ["ngRoute"])
 
   	})
   	.otherwise({
-  	  redirectTo: '/admin'
+  	  redirectTo: '/'
   	});
 });
 
