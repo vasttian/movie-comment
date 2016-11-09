@@ -7,8 +7,8 @@ $(function() {
 	  type: 'DELETE',
 	  url: "/admin/movie/category/list?id=" +id,
 	  async: true,
-	  success: function(req) {
-		//console.log(req);
+	  success: function(data) {
+		//console.log(data);
 		if (tr.length > 0) {
 		  tr.remove();
 		}
@@ -18,7 +18,4 @@ $(function() {
 	  }
 	})
   });
-  // $("#add-category").click(function() {
-  // 	$("#show-category").trigger("click");
-  // });
 });

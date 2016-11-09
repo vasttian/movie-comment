@@ -122,7 +122,7 @@ exports.signin = function (req, res) {
 //展示管理员页面
 exports.showAdmin = function (req, res) {
   res.render("pages/admin-manage", {
-	title: '管理页面'
+	  title: '管理页面'
   });
 };
 
