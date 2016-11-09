@@ -9,7 +9,6 @@ exports.add = function(req, res) {
 };
 
 exports.save = function(req, res) {
-  console.log('reaaaa:',req.body);
   var _category = req.body;
   var category = new Categories(_category);
   category.save(function(err, category) {

@@ -56,19 +56,18 @@ exports.addMovie = function (req, res) {
 
 //更新操作
 exports.update = function(req,res) {
-	var id = req.params.id;
-	if (id) {
-		Movie.findById(id,function(err, movie) {
-			Categories.find({},function(err,categories) {
-				res.render("pages/admin", {
-					title: "更新操作",
-					movie: movie,
-					categories: categories
-				});
-			});
-			
+  var id = req.params.id;
+  if (id) {
+	Movie.findById(id,function(err, movie) {
+	  Categories.find({},function(err,categories) {
+		res.render("pages/admin", {
+		  title: "更新操作",
+		  movie: movie,
+		  categories: categories
 		});
-	};
+	  });
+	});
+  };
 };
 
 exports.savePoster = function(req, res, next) {
@@ -167,20 +166,20 @@ exports.save = function(req, res) {
 
 //电影列表
 exports.list = function(req, res) {
-	Movie.fetch(function(err,movies) {
-		if (err) {
-			console.log(err);
-		}
-		res.render("pages/movie-list", {
-			title: "查看电影",
-			movies: movies
-		});
-	});	
+  Movie.fetch(function(err,movies) {
+	if (err) {
+	  console.log(err);
+	}
+	res.render("pages/movie-list", {
+	  title: "查看电影",
+	  movies: movies
+	});
+  });	
 };
 
 //删除
 exports.del = function(req, res) {
-	console.log("del-movie");
+  console.log("del-movie");
   var id = req.query.id;
   if(id) {
 	Movie.remove({_id:id}, function(err, movie) {
