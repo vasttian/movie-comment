@@ -18,7 +18,7 @@ $(function() {
 	  }
 	})
   });
-  $("#add-category").click(function() {
-  	$("#show-category").trigger("click");
-  });
+  // $("#add-category").click(function() {
+  // 	$("#show-category").trigger("click");
+  // });
 });
