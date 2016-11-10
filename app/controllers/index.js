@@ -1,19 +1,19 @@
 var Movie = require("../models/movie");
-// var Categories=require("../models/categories");
+var Categories=require("../models/categories");
 
 exports.index = function(req, res){
-	// Categories
-	// .find({})
-	// .populate({path:"movies"})
-	// .exec(function(err,categories){
-	// 	if(err){
-	// 		console.log(err);
-	// 	}
+	Categories
+	.find({})
+	.populate({path:"movies"})
+	.exec(function(err,categories){
+		if(err){
+			console.log(err);
+		}
 		res.render("pages/index",{
 			title:"一萌电影",
-			// categories:categories
+			categories:categories
 		});
-	// });
+	});
 };
 
 exports.search = function(req, res){
