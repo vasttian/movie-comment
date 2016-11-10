@@ -29,7 +29,7 @@ module.exports = function (app) {
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
   
   //电影
-  // app.get('/movie/:id', Movie.detail);
+  app.get('/movie/:id', Movie.detail);
   app.get("/admin/movie-manage", User.signinRequired, User.movieAdminRequired, Movie.movieManage);
   app.get("/admin/movie/add", User.signinRequired, User.movieAdminRequired, Movie.addMovie);
   // app.get("/admin/movie/update/:id", User.signinRequired, User.movieAdminRequired,  Movie.update);

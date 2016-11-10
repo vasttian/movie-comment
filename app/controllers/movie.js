@@ -5,37 +5,37 @@ var Categories = require("../models/categories");
 var fs = require("fs");
 var path = require("path");
 
-// exports.detail = function(req,res){//详情页
-// 	var id=req.params.id;
+exports.detail = function(req,res){//详情页
+	var id=req.params.id;
 
-// 	//加统计量
-// 	Movie.update({_id:id},{$inc:{pv:1}},function(err){
-// 		if(err){
-// 			console.log(err);
-// 		};
-// 	});
+	//加统计量
+	Movie.update({_id:id},{$inc:{pv:1}},function(err){
+		if(err){
+			console.log(err);
+		};
+	});
 	
-// 	Movie.findById(id,function(err,movie){
-// 		if(err){
-// 			console.log(err);
-// 		};
+	Movie.findById(id,function(err,movie){
+		if(err){
+			console.log(err);
+		};
 
-// 		Comment
-// 		.find({movie:id})
-// 		.populate("from","name")
-// 		.populate("reply.from reply.to","name")
-// 		.exec(function(err,comment){
-// 			if(err){
-// 				console.log(err);
-// 			};
-// 			res.render("pages/detail",{
-// 				title:"imooc 详情页",
-// 				movie:movie,
-// 				comment:comment
-// 			});
-// 		});	
-// 	});
-// };
+		Comment
+		.find({movie:id})
+		.populate("from","name")
+		.populate("reply.from reply.to","name")
+		.exec(function(err,comment){
+			if(err){
+				console.log(err);
+			};
+			res.render("pages/detail",{
+				title:"imooc 详情页",
+				movie:movie,
+				comment:comment
+			});
+		});	
+	});
+};
 
 exports.movieManage = function (req, res) {
   console.log('runing movieManage');
@@ -124,7 +124,6 @@ exports.save = function(req, res) {
   } else {
 	_movie = new Movie(movieObj);
 	var categoriesName = movieObj.categoriesName;
-
 	_movie.save(function(err, movie) {
 	  if (err) {
 		console.log("新数据保存",err);
