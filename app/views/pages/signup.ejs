@@ -1,101 +1,101 @@
 <%- include ../includes/header %>
 <div class="container container-style">
   <div class="col-md-5 col-md-offset-3">
-		<div class="row">
-	  	<form id="signupForm" class="form-horizontal" action="/user/signup", method="post", enctype="multipart/form-data">
-				<div class="modal-header">
-		  			<h2 style="color:#1170e4">欢迎加入一萌</h2>
-				</div>
-				<div class="modal-body">
-		  		<div class="form-group">
-						<label for="signupName" class="col-sm-3 control-label">用户名</label>
-						<div class="col-sm-9">
-			  			<input type="text" id="signupName" class="form-control" name="user[name]" placeholder="只能由数字下划线或字母组成">
-						</div>
-		  		</div>
-		  		<div class="form-group">
-						<label for="txtEmail" class="col-sm-3 control-label">昵称</label>
-						<div class="col-sm-9">
-			  			<input type="text" id="txtEmail" class="form-control" name="user[nickname]"	placeholder="只能由数字下划线或字母组成">
-						</div>
-		  		</div>
-		  		<div class="form-group">
-						<label for="nickName" class="col-sm-3 control-label">邮箱</label>
-						<div class="col-sm-9">
-			  			<input type="text" id="nickName" class="form-control" name="user[email]">
-						</div>
-		  		</div>
-		  		<div class="form-group">
-						<label for="headPortrait" class="col-sm-3 control-label">选择头像</label>
-						<div class="col-sm-9">
-			  			<input type="file" id="headPortrait" name="avatar">
-						</div>
-		  		</div>
-		  		<div class="form-group">
-						<label class="col-sm-3 control-label">性别</label>
-						<div class="col-sm-9">
-      		  	<div class="checkbox">
-        				<label>
-          		  	<input type="radio" name="user[sex]" value="1" checked>男
-        				</label>
-        				&nbsp;&nbsp;&nbsp;
-        				<label>
-        		  		<input type="radio" name="user[sex]" value="0">女
-        				</label>
-      		  	</div>
-    				</div>
-		  		</div>
-		  		<div class="form-group">
-						<label class="col-sm-3 control-label">选择类型</label>
-						<div class="col-sm-9">
-      		  	<div class="checkbox">
-        				<label>
-        		  		<input type="radio" name="user[role]" value="0" checked>普通用户
-        				</label>
-        				&nbsp;&nbsp;&nbsp;
-        				<label>
-          		  	<input type="radio" name="user[role]" value="32">管理员
-        				</label>
-      		  	</div>
-    				</div>
-		  		</div>
-		  		<div class="form-group">
-						<label for="signupPassword" class="col-sm-3 control-label">密码</label>
-						<div class="col-sm-9">
-			  			<input type="password" id="signupPassword" class="form-control" name="user[password]">
-						</div>
-		  		</div>
-		  		<div class="form-group">
-						<label for="confirmPass" class="col-sm-3 control-label">确认密码</label>
-						<div class="col-sm-9">
-			  			<input type="password" id="confirmPass" class="form-control" name="user[confirmPass]">
-						</div>
-		  		</div>
-		  		<div class="form-group">
-						<label for="phoneNumber" class="col-sm-3 control-label">电话号码</label>
-						<div class="col-sm-9">
-			  			<input type="text" id="phoneNumber" class="form-control" name="user[tel]">
-						</div>
-		  		</div>
-		  		<div class="form-group">
-						<label for="bornDate" class="col-sm-3 control-label">出生日期</label>
-						<div class="col-sm-9">
-			  			<div class = "input-group" id='datetimepicker'>
-								<input type="text" id="bornDate" class="form-control" name="user[born]">
-								<span class="input-group-addon">
-            	  	<span class="glyphicon glyphicon-calendar"></span>  
+	<div class="row">
+	  <form id="signupForm" class="form-horizontal" action="/user/signup", method="post", enctype="multipart/form-data">
+		<div class="modal-header">
+		  <h2 style="color:#1170e4">欢迎加入一萌</h2>
+		</div>
+		<div class="modal-body">
+		  <div class="form-group">
+			<label for="signupName" class="col-sm-3 control-label">用户名</label>
+			<div class="col-sm-9">
+			  <input type="text" id="signupName" class="form-control" name="user[name]" placeholder="只能由数字下划线或字母组成">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="txtEmail" class="col-sm-3 control-label">昵称</label>
+			<div class="col-sm-9">
+			  <input type="text" id="txtEmail" class="form-control" name="user[nickname]"	placeholder="只能由数字下划线或字母组成">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="nickName" class="col-sm-3 control-label">邮箱</label>
+			<div class="col-sm-9">
+			  <input type="text" id="nickName" class="form-control" name="user[email]">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="headPortrait" class="col-sm-3 control-label">选择头像</label>
+			<div class="col-sm-9">
+			  <input type="file" id="headPortrait" name="avatar">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label class="col-sm-3 control-label">性别</label>
+			<div class="col-sm-9">
+      	  	  <div class="checkbox">
+        		<label>
+          	  	  <input type="radio" name="user[sex]" value="1" checked>男
+        		</label>
+        		&nbsp;&nbsp;&nbsp;
+        		<label>
+        		  <input type="radio" name="user[sex]" value="0">女
+        		</label>
+      		  </div>
+    		</div>
+		  </div>
+		  <div class="form-group">
+			<label class="col-sm-3 control-label">选择类型</label>
+			<div class="col-sm-9">
+      	  	  <div class="checkbox">
+        		<label>
+        		  <input type="radio" name="user[role]" value="0" checked>普通用户
+        		</label>
+        		&nbsp;&nbsp;&nbsp;
+        		<label>
+          		  <input type="radio" name="user[role]" value="32">管理员
+        		</label>
+      		  </div>
+    		</div>
+		  </div>
+		  <div class="form-group">
+			<label for="signupPassword" class="col-sm-3 control-label">密码</label>
+			<div class="col-sm-9">
+			  <input type="password" id="signupPassword" class="form-control" name="user[password]">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="confirmPass" class="col-sm-3 control-label">确认密码</label>
+			<div class="col-sm-9">
+			  <input type="password" id="confirmPass" class="form-control" name="user[confirmPass]">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="phoneNumber" class="col-sm-3 control-label">电话号码</label>
+			<div class="col-sm-9">
+			  <input type="text" id="phoneNumber" class="form-control" name="user[tel]">
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="bornDate" class="col-sm-3 control-label">出生日期</label>
+			<div class="col-sm-9">
+			  <div class = "input-group" id='datetimepicker'>
+				<input type="text" id="bornDate" class="form-control" name="user[born]">
+				<span class="input-group-addon">
+            	  <span class="glyphicon glyphicon-calendar"></span>  
               	</span>
               </div>
             </div>
-		  		</div>
-				</div>
-				<div class="modal-footer">
-		  		<button class="btn btn-default" type="reset" data-dismiss="modal">重置</button>
-		  		<button class="btn btn-success" type="submit">提交</button>
-				</div>
-	  	</form>
+		  </div>
 		</div>
+		<div class="modal-footer">
+		  <button class="btn btn-default" type="reset" data-dismiss="modal">重置</button>
+		  <button class="btn btn-success" type="submit">提交</button>
+		</div>
+	  </form>
+	</div>
   </div>
 </div>
 <script src="js/signup.js"></script>
-<%- include ../includes/footer %>		
+<%- include ../includes/footer %>

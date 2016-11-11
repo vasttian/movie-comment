@@ -1,37 +1,37 @@
-  <div class="col-md-4 col-md-offset-1" style="padding-top:70px">
-	<div class="row">
-	  <form class="form-horizontal">
-		<div class="modal-body">
-		  <div class="form-group">
-			<label for="inputCategories" class="col-sm-3 control-label">分类名称</label>
-			<div class="col-sm-9">
-			  <input type="text" id="inputCategories" class="form-control">
-			</div>
-		  </div>
-		</div>
+<div class="col-md-4 col-md-offset-1" style="padding-top:70px">
+  <div class="row">
+    <form class="form-horizontal">
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputCategories" class="col-sm-3 control-label">分类名称</label>
+          <div class="col-sm-9">
+            <input type="text" id="inputCategories" class="form-control">
+          </div>
+        </div>
+      </div>
 
-	  </form>
-		<div class="modal-footer">
-		  <button class="btn btn-default" type="reset" data-dismiss="modal">重置</button>
-		  <button id="addCate" class="btn btn-success">提交</button>
-		</div>
-	</div>
+    </form>
+    <div class="modal-footer">
+      <button class="btn btn-default" type="reset" data-dismiss="modal">重置</button>
+      <button id="addCate" class="btn btn-success">提交</button>
+    </div>
   </div>
- 
-  <script>
+</div>
+
+<script>
   $("#addCate").click(function() {
   	var data = {
-  	  name: $(inputCategories).val()
-  	}
-  	$.ajax({
-  	  type: 'POST',
-  	  url: "/admin/movie/category",
-  	  data: data,
-  	  async: true,
-  	  success: function(req) {
-  	  	console.log(req);
-  	  	$("#show-category").trigger("click");
-  	  }
-  	});
+      name: $(inputCategories).val()
+    }
+    $.ajax({
+      type: 'POST',
+      url: "/admin/movie/category",
+      data: data,
+      async: true,
+      success: function(req) {
+        console.log(req);
+        $("#show-category").trigger("click");
+      }
+    });
   });
-  </script>
+</script>
