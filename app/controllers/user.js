@@ -8,7 +8,7 @@ exports.showSignup = function(req, res) {
   });
 };
 
-//如果用户有上传头像
+//上传头像
 exports.saveAvatar = function(req, res, next) {
   // console.log('>>>>>req.body>>>>>>:',req.body);
 
@@ -34,6 +34,7 @@ exports.saveAvatar = function(req, res, next) {
   }
 };
 
+//检查待注册的用户名是否可用
 exports.checkUserName = function(req, res) {
   // console.log('req.body::',req.body);
   var _user = req.body.user;
@@ -50,7 +51,9 @@ exports.checkUserName = function(req, res) {
 	    return res.json({"valid":true});
 	  }
   });
-}
+};
+
+//注册
 exports.signup = function(req, res) {
   // console.log('>>>>>req.body::',req.body);
   var _user = req.body.user;
@@ -82,13 +85,14 @@ exports.signup = function(req, res) {
   });
 };
 
-//登录
+//登录页面
 exports.showSignin = function(req, res) {
   res.render("pages/signin", {
 		title:'登录一萌'
   });
 };
 
+//登录
 exports.signin = function(req, res) {
   var _user = req.body.user;
   var name = _user.name;
@@ -120,7 +124,7 @@ exports.signin = function(req, res) {
   });
 };
 
-//展示管理员页面
+//管理员页面
 exports.showAdmin = function(req, res) {
   res.render("pages/admin-manage", {
 	  title: '管理页面'

@@ -4,8 +4,10 @@ var _ = require("underscore");
 var Categories = require("../models/categories");
 var fs = require("fs");
 var path = require("path");
+
 //电影详情页
 exports.detail = function(req, res) {
+  console.log('电影详情!');
   var id = req.params.id;
 
   //加入统计量
@@ -39,6 +41,7 @@ exports.detail = function(req, res) {
   });
 };
 
+//电影管理右侧操作栏
 exports.movieManage = function (req, res) {
   console.log('runing movieManage');
   res.render("includes/movie-manage-right-nav", {
@@ -46,6 +49,7 @@ exports.movieManage = function (req, res) {
   });
 };
 
+//添加电影页
 exports.addMovie = function (req, res) {
   Categories.find({}, function(err, categories) {
 	res.render("pages/add-movie", {
@@ -72,8 +76,10 @@ exports.update = function(req, res) {
   };
 };
 
+//上传海报
 exports.savePoster = function(req, res, next) {
   // console.log('req.files:',req.files);//打印文件的信息
+  console.log('存储海报!');
   var posterData = req.files.uploadPoster;
 
   var filePath = posterData.path;//文件的路径
@@ -96,7 +102,6 @@ exports.savePoster = function(req, res, next) {
 
 //后台录入存储
 exports.save = function(req, res) {
-  // console.log('movie_req123------------:',req.body);
   var id = req.body.movie._id;
   var movieObj = req.body.movie;
   var _movie;
@@ -107,6 +112,7 @@ exports.save = function(req, res) {
   }
 
   if (id) {
+  	console.log('更新电影!');
 	Movie.findById(id, function(err,movie) {
 	  if(err) {
 		console.log(err);
@@ -124,6 +130,7 @@ exports.save = function(req, res) {
 	  });
 	});
   } else {
+  	console.log('新增电影!');
 	_movie = new Movie(movieObj);
 	var categoriesName = movieObj.categoriesName;
 	_movie.save(function(err, movie) {
@@ -167,6 +174,7 @@ exports.save = function(req, res) {
 
 //电影列表
 exports.list = function(req, res) {
+  console.log('获取电影列表!');
   Movie.fetch(function(err, movies) {
 	if (err) {
 	  console.log(err);
@@ -194,7 +202,7 @@ exports.ranking = function(req, res) {
 
 //删除
 exports.del = function(req, res) {
-  console.log("del-movie");
+  console.log("删除电影!");
   var id = req.query.id;
   if (id) {
 	Movie.remove({_id:id}, function(err, movie) {

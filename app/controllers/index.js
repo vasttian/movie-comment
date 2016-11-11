@@ -1,6 +1,7 @@
 var Movie = require("../models/movie");
 var Categories=require("../models/categories");
 
+//首页
 exports.index = function(req, res) {
 	Categories
 	.find({})
@@ -16,6 +17,7 @@ exports.index = function(req, res) {
 	});
 };
 
+//搜索
 exports.search = function(req, res) {
 	var catId = req.query.cat;//分类
 	var page = parseInt(req.query.page,10)||0;//页码

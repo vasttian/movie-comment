@@ -1,6 +1,7 @@
 var Categories = require("../models/categories");
 var Movie = require("../models/movie");
 
+//添加分类页
 exports.add = function(req, res) {
   res.render("pages/add-category", {
 	title: "添加分类",
@@ -8,6 +9,7 @@ exports.add = function(req, res) {
   });	
 };
 
+//存储分类
 exports.save = function(req, res) {
   var _category = req.body;
   var category = new Categories(_category);
@@ -33,7 +35,7 @@ exports.list = function(req,res) {
   });	
 };
 
-//删除
+//删除分类
 exports.del = function(req, res) {
   var id = req.query.id;
   console.log("delete-categroy id:", id);
