@@ -173,6 +173,16 @@ li {
   height: 56px;
 }
 
+.th-style {
+  text-align: center;
+  vertical-align:middle;
+}
+
+.td-style {
+  text-align: center;
+  vertical-align:middle;
+}
+
 .th-width70 {
   width: 70px;
 }

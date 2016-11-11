@@ -4,21 +4,21 @@
 	<table class="table table-hover table-bordered">
 	  <thead>
 		<tr class="tr-style">
-		  <th>分类名</th>
-		  <th>录入时间</th>
-		  <th>查看</th>
-		  <th>更新</th>
-		  <th>删除</th>
+		  <th class="th-style">分类名</th>
+		  <th class="th-style">录入时间</th>
+		  <th class="th-style">查看</th>
+		  <th class="th-style">更新</th>
+		  <th class="th-style">删除</th>
 		</tr>
 	  </thead>
 	  <tbody>
 		<% categories.forEach(function (item, index) { %>
 		  <tr class="item-id-<%= item._id %>">
-			<td><%= item.name %></td>
-			<td><%= moment(item.meta.createAt).format("YYYY/MM/DD") %></td>
-			<td><a target="_blank" href="/movie/<%= item._id %>">查看</a></td>
-			<td><a href="/admin/movie/update/<%= item._id %>">更新</a></td>
-			<td>
+			<td class="td-style"><%= item.name %></td>
+			<td class="td-style"><%= moment(item.meta.createAt).format("YYYY/MM/DD") %></td>
+			<td class="td-style"><a target="_blank" href="/movie/<%= item._id %>">查看</a></td>
+			<td class="td-style"><a href="/admin/movie/update/<%= item._id %>">更新</a></td>
+			<td class="td-style">
 			  <button class="btn btn-danger delCategory" type="button" data-id="<%= item._id %>" title="注意,分类下的所有电影都将被删除!">删除</button>
 			</td>
 		  </tr>
