@@ -2,6 +2,7 @@ var User = require("../app/controllers/user");
 var Index = require("../app/controllers/index");
 var Movie = require("../app/controllers/movie");
 var Category = require("../app/controllers/categories");
+var Comment = require("../app/controllers/comment");
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
@@ -42,4 +43,7 @@ module.exports = function (app) {
   app.post("/admin/movie/category", User.signinRequired, User.movieAdminRequired, Category.save);
   app.get("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.list);
   app.delete("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.del);
+
+  //评论
+  app.post("/user/comment", User.signinRequired, Comment.save);
 };

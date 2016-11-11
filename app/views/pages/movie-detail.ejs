@@ -13,7 +13,11 @@
 			  <li calss="media">
 				<div class="pull-left">
 				  <a class="comment" href="#comments" data-cid="<%=item._id%>" data-tid="<%=item.from._id%>">
-					<img class="media-object"  src="http://personal.adquan.com/avatar/111721_full.jpg" style="width:60px; height:60px;"/>
+				  	<% if (user.avatar.indexOf('default') > -1) { %>
+					  <img style="width:60px; height:60px;" src="<%= user.avatar %>" alt="头像君不见啦!">
+				  	<% } else { %>
+					  <img style="width:60px; height:60px;" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+				  	<% } %>
 				  </a>
 				</div>
 				<div class="media-body">
@@ -25,7 +29,11 @@
 					  <div calss="media">
 						<div class="pull-left">
 						  <a class="comment" href="#comments" data-cid="<%=item._id%>" data-tid="<%=reply.from._id%>">
-							<img class="media-object"  src="http://personal.adquan.com/avatar/111721_full.jpg" style="width:60px; height:60px;"/>
+							<% if (user.avatar.indexOf('default') > -1) { %>
+					  		  <img style="width:60px; height:60px;" src="<%= user.avatar %>" alt="头像君不见啦!">
+				  			<% } else { %>
+					  		  <img style="width:60px; height:60px;" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+				  			<% } %>
 						  </a>
 						</div>
 						<div class="media-body">
@@ -64,7 +72,7 @@
 		</div>
 	  </div>
 	</div>
-	<div class="col-md-5" style="padding-top: 120px">
+	<div class="col-md-5" style="padding-top: 70px">
 	  <dl class="dl-horizontal">
 		<dt>电影名字</dt>
 		<dd><%= movie.title %></dd>
@@ -84,5 +92,5 @@
 	</div>
   </div>
 </div>
-<script src="/js/detail.js"></script>
+<script src="/js/movie-detail.js"></script>
 <%- include ../includes/footer %>
