@@ -23,11 +23,12 @@ module.exports = function (app) {
   app.get('/signup', User.showSignup);
   app.get('/signin', User.showSignin);
   app.get('/logout', User.logout);
-  // app.get("/admin/user/list", User.signinRequired, User.adminRequired, User.userlist);
 
   //管理员
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
+  // app.delete('/admin/user/list', User.signinRequired, User.userAdminRequired,  User.del);
+  // app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
   
   //电影
   app.get('/movie/:id', Movie.detail);
@@ -46,4 +47,8 @@ module.exports = function (app) {
 
   //评论
   app.post("/user/comment", User.signinRequired, Comment.save);
+
+  //搜索
+  app.get('/results', Index.search);
+  
 };
