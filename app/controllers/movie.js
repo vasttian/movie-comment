@@ -10,13 +10,13 @@ exports.detail = function(req,res) {//详情页
 
   //加统计量
   Movie.update({_id:id},{$inc:{pv:1}}, function(err) {
-	if(err) {
+	if (err) {
 	  console.log(err);
 	};
   });
 	
   Movie.findById(id,function(err, movie) {
-	if(err) {
+	if (err) {
 	  console.log(err);
 	};
 
@@ -76,7 +76,7 @@ exports.savePoster = function(req, res, next) {
 
   var filePath = posterData.path;//文件的路径
   var originalFilename = posterData.originalFilename;//拿到文件的名字
-  if(originalFilename) {
+  if (originalFilename) {
 	fs.readFile(filePath, function(err,data) {
 	  var timestamp = Date.now();//时间戳
 	  var type = posterData.type.split("/")[1];
@@ -141,7 +141,7 @@ exports.save = function(req, res) {
 			res.redirect("/movie/"+ movie._id);
 		  });
 		});
-	  } else if(categoriesName) {
+	  } else if (categoriesName) {
 		var category = new Categories({
 		  name:categoriesName,
 		  movies:[movie._id]
@@ -180,7 +180,7 @@ exports.list = function(req, res) {
 exports.del = function(req, res) {
   console.log("del-movie");
   var id = req.query.id;
-  if(id) {
+  if (id) {
 	Movie.remove({_id:id}, function(err, movie) {
 	  if (err) {
 		console.log(err);

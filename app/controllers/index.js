@@ -1,22 +1,22 @@
 var Movie = require("../models/movie");
 var Categories=require("../models/categories");
 
-exports.index = function(req, res){
+exports.index = function(req, res) {
 	Categories
 	.find({})
 	.populate({path:"movies"})
-	.exec(function(err,categories){
-		if(err){
+	.exec(function(err,categories) {
+		if (err) {
 			console.log(err);
 		}
-		res.render("pages/index",{
+		res.render("pages/index", {
 			title:"一萌电影",
 			categories:categories
 		});
 	});
 };
 
-exports.search = function(req, res){
+exports.search = function(req, res) {
 	var catId = req.query.cat;//分类
 	var page = parseInt(req.query.page,10)||0;//页码
 	var cuunt =2;//每页展示多少个？
@@ -25,10 +25,10 @@ exports.search = function(req, res){
 
 	var q = req.query.q;//搜索
 
-	if(catId){
+	if (catId) {
 		Categories
 		.findOne({_id:catId})
-		.exec(function(err,categories){
+		.exec(function(err,categories) {
 			allcate=categories.movies;
 		});
 
@@ -39,8 +39,8 @@ exports.search = function(req, res){
 			select:"title poster",
 			options:{limit:cuunt,skip: index}
 		})
-		.exec(function(err,categories){
-			if(err){
+		.exec(function(err,categories) {
+			if (err) {
 				console.log(err);
 			}
 			var category = categories||{};
@@ -55,23 +55,23 @@ exports.search = function(req, res){
 				categories:category.movies
 			});
 		});
-	}else{
+	} else {
 		Movie
 			.find({title:new RegExp(q+".*","i")})
-			.exec(function(err,movies){
+			.exec(function(err,movies) {
 				allcate=movies;
 			});
 		Movie
 			.find({title:new RegExp(q+".*","i")})
 			.limit(cuunt)
 			.skip(index)
-			.exec(function(err,movies){
-				if(err){
+			.exec(function(err,movies) {
+				if (err) {
 					console.log(err);
 				}
 				console.log(movies)
 
-				res.render("pages/results",{
+				res.render("pages/results", {
 					title:"搜索列表页面",
 					keyword: q,//分类名
 					currentPage:(page+1),//当前页
