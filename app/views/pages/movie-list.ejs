@@ -5,6 +5,8 @@
 		<tr>
 		  <th>电影名字</th>
 		  <th>导演</th>
+		  <th>主演</th>
+		  <th>片长</th>
 		  <th>国家</th>
 		  <th>上映时间</th>
 		  <th>录入时间</th>
@@ -19,6 +21,8 @@
 		<tr class="item-id-<%= item._id %>">
 		  <td><%= item.title %></td>
 		  <td><%= item.doctor %></td>
+		  <td><%= item.protagonist %></td>
+		  <td><%= item.movieTime %></td>
 		  <td><%= item.country %></td>
 		  <td><%= item.year %></td>
 		  <td><%= moment(item.meta.createAt).format("YYYY/MM/DD") %></td>

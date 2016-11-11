@@ -49,6 +49,18 @@
 		  </div>
   		</div>
   		<div class="form-group">
+		  <label for="inputProtagonist" class="col-sm-3 control-label">主演</label>
+		  <div class="col-sm-9">
+	  		<input type="text" id="inputProtagonist" class="form-control" name="movie[protagonist]" value="<%= movie.protagonist %>">
+		  </div>
+  		</div>
+  		<div class="form-group">
+		  <label for="inputMovieTime" class="col-sm-3 control-label">片长</label>
+		  <div class="col-sm-9">
+	  		<input type="text" id="inputMovieTime" class="form-control" name="movie[movieTime]" value="<%= movie.movieTime %>">
+		  </div>
+  		</div>
+  		<div class="form-group">
 		  <label for="inputCountry" class="col-sm-3 control-label">国家</label>
 		  <div class="col-sm-9">
 	  		<input type="text" id="inputCountry" class="form-control" name="movie[country]" value="<%= movie.country %>">
@@ -79,7 +91,7 @@
 		  </div>
   		</div>
 		<div class="form-group">
-		  <label for="inputYear" class="col-sm-3 control-label">上映年份</label>
+		  <label for="inputYear" class="col-sm-3 control-label">上映时间</label>
 		  <div class="col-sm-9">
 	  		<input type="text" id="inputYear" class="form-control" name="movie[year]" value="<%= movie.year %>">
 		  </div>
@@ -87,7 +99,7 @@
   		<div class="form-group">
 		  <label for="inputSummary" class="col-sm-3 control-label">简介</label>
 		  <div class="col-sm-9">
-	  		<textarea id="inputSummary" class="form-control" name="movie[summary]"><%= movie.summary %></textarea>
+	  		<textarea rows="6" id="inputSummary" class="form-control" name="movie[summary]"><%= movie.summary %></textarea>
 		  </div>
   		</div>
 	  </div>

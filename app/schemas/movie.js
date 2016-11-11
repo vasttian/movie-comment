@@ -4,12 +4,14 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var MovieSchema = new mongoose.Schema({
   title: String,
   doctor: String,
+  protagonist: String,
+  movieTime: String,
   language: String,
   country: String,
   summary: String,
   flash: String,
   poster: String,
-  year: Number,
+  year: String,
   pv:{
 	  type: Number,
 	  default: 0
