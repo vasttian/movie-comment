@@ -168,6 +168,10 @@ li {
 }
 
 /*table*/
+.tr-style {
+  background-color: #337ab7;
+  height: 56px;
+}
 
 .th-width70 {
   width: 70px;
