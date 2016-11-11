@@ -11,45 +11,51 @@ var MovieSchema = new mongoose.Schema({
   poster: String,
   year: Number,
   pv:{
-	type: Number,
-	default: 0
+	  type: Number,
+	  default: 0
   },
   categories: {
-	type: ObjectId,
-	ref: "Categories"
+	  type: ObjectId,
+	  ref: "Categories"
   },
   meta: {
-	createAt: {
-	  type: Date,
-	  default: Date.now()
+	  createAt: {
+	    type: Date,
+	    default: Date.now()
   	},
   	updateAt: {
-	  type: Date,
-	  default: Date.now()
+	    type: Date,
+	    default: Date.now()
   	}
   }
 });
 
 MovieSchema.pre("save",function (next) {	//每次在存储数据之前都会来调用这个方法（中间件）
   if (this.isNew) {
-	this.meta.createAt = this.meta.updateAt = Date.now();
+	  this.meta.createAt = this.meta.updateAt = Date.now();
   } else {
-	this.meta.updateAt = Date.now();
+	  this.meta.updateAt = Date.now();
   }
   next();
 });
 
 MovieSchema.statics = {		//添加一个静态方法，静态方法从模型上去调用 
   fetch: function(cb) {
-	return this
-	.find({})
-	.sort("meta.updateAt")
-	.exec(cb)
+	  return this
+	    .find({})
+	    .sort("meta.updateAt")
+	    .exec(cb)
   },
-  findById: function(id,cb) {
-	return this
-	.findOne({_id:id})
-	.exec(cb)
+  findById: function(id, cb) {
+	  return this
+	    .findOne({_id:id})
+	    .exec(cb)
+  },
+  ranking: function(cb) {
+    return this
+      .find({})
+      .sort("-pv")
+      .exec(cb)
   }
 }
 

@@ -7,12 +7,13 @@ var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
 module.exports = function (app) {
-  //pre handle user
+  //在所有请求之前把当前登录用户设置为本地变量。
   app.use(function (req, res, next) {
 	  var _user = req.session.user;
 	  app.locals.user = _user; //本地变量
   	next();
   });
+
   //首页
   app.get('/', Index.index);
 	
@@ -32,6 +33,7 @@ module.exports = function (app) {
   // app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
   
   //电影
+  app.get("/movie-pv/ranking", User.signinRequired, Movie.ranking);
   app.get('/movie/:id', Movie.detail);
   app.get("/admin/movie-manage", User.signinRequired, User.movieAdminRequired, Movie.movieManage);
   app.get("/admin/movie/add", User.signinRequired, User.movieAdminRequired, Movie.addMovie);

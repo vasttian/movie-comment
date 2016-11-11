@@ -28,8 +28,8 @@ exports.detail = function(req, res) {
   	  if (err) {
 		console.log(err);
   	  };
-  	  console.log('movie_movie',movie);
-  	  console.log('comment_comment',comment);
+  	  // console.log('movie_movie',movie);
+  	  // console.log('comment_comment',comment);
   	  res.render("pages/movie-detail", {
 		title:"电影详情",
 		movie: movie,
@@ -167,7 +167,7 @@ exports.save = function(req, res) {
 
 //电影列表
 exports.list = function(req, res) {
-  Movie.fetch(function(err,movies) {
+  Movie.fetch(function(err, movies) {
 	if (err) {
 	  console.log(err);
 	}
@@ -176,6 +176,20 @@ exports.list = function(req, res) {
 	  movies: movies
 	});
   });	
+};
+
+//电影排名
+exports.ranking = function(req, res) {
+  console.log('获取电影排名!');
+  Movie.ranking(function(err, movies) {
+	if (err) {
+	  console.log('获取排名失败:', err);
+	}
+	res.render("pages/movie-ranking", {
+	  title: "电影排名",
+	  movies: movies
+	});
+  });
 };
 
 //删除
