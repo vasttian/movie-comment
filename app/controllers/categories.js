@@ -9,13 +9,14 @@ exports.add = function(req, res) {
 };
 
 exports.save = function(req, res) {
-  var _category = req.body.categories;
+  var _category = req.body;
   var category = new Categories(_category);
   category.save(function(err, category) {
 	if (err) {
 	  console.log(err);
 	};
 	res.json({status: true});
+	// res.redirect("/admin/#/movie-manage");
   });
 };
 
