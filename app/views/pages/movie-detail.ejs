@@ -13,14 +13,14 @@
 			  <li calss="media">
 				<div class="pull-left">
 				  <a class="comment" href="#comments" data-cid="<%=item._id%>" data-tid="<%=item.from._id%>">
-				  	<% if (user.avatar.indexOf('default') > -1) { %>
-					  <img style="width:60px; height:60px;" src="<%= user.avatar %>" alt="头像君不见啦!">
+				  	<% if (item.from.avatar.indexOf('default') > -1) { %>
+					  <img style="width:60px; height:60px;" src="<%= item.from.avatar %>" alt="头像君不见啦!" title="点击头像即可回复我!">
 				  	<% } else { %>
-					  <img style="width:60px; height:60px;" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+					  <img style="width:60px; height:60px;" src="/images/avatar/<%= item.from.avatar %>" alt="头像君不见啦!" title="点击头像即可回复我!">
 				  	<% } %>
 				  </a>
 				</div>
-				<div class="media-body">
+				<div class="media-body" style="padding-left: 10px">
 				  <h4 class="media-heading"><%= item.from.name %></h4>
 				  <p><%=item.content%></p>
 				  <br>
@@ -29,14 +29,14 @@
 					  <div calss="media">
 						<div class="pull-left">
 						  <a class="comment" href="#comments" data-cid="<%=item._id%>" data-tid="<%=reply.from._id%>">
-							<% if (user.avatar.indexOf('default') > -1) { %>
-					  		  <img style="width:60px; height:60px;" src="<%= user.avatar %>" alt="头像君不见啦!">
+							<% if (reply.from.avatar.indexOf('default') > -1) { %>
+					  		  <img style="width:60px; height:60px;" src="<%= reply.from.avatar %>" alt="头像君不见啦!" title="点击头像即可回复我!">
 				  			<% } else { %>
-					  		  <img style="width:60px; height:60px;" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+					  		  <img style="width:60px; height:60px;" src="/images/avatar/<%= reply.from.avatar %>" alt="头像君不见啦!" title="点击头像即可回复我!">
 				  			<% } %>
 						  </a>
 						</div>
-						<div class="media-body">
+						<div class="media-body" style="padding-left: 10px">
 						  <h4 class="media-heading">
 							<%= reply.from.name %>
 							  <span class="text-info">回复</span>
@@ -56,15 +56,15 @@
 		  <div id="comments">
 			<form id="commentForm" method="POST" action="/user/comment">
 			  <input type="hidden" name="comment[movie]" value="<%= movie._id %>">
-			  <% if(user){%>
+			  <% if (user) {%>
 				<input type="hidden" name="comment[from]" value="<%= user._id %>">
 			  <% } %>
 			  <div class="form-group">
 				<textarea class="form-control" row="3" name="comment[content]"></textarea>
 			  </div>
-			  <% if(user){%>
+			  <% if (user) {%>
 				<button class="btn btn-primary" type="submit">提交</button>
-			  <% }else{ %>
+			  <% } else { %>
 				<a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录后评论</a>
 			  <% } %>
 			</form>

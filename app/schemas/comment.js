@@ -5,24 +5,24 @@ var ObjectId = Schema.Types.ObjectId;
 var CommentSchema = new Schema({
   from: {
   	type: ObjectId,
-  	ref: 'User'
+  	ref: 'User'  //关联
   },
   movie: {
   	type: ObjectId,
   	ref: 'Movie'
   },
-  reply: [{
-    from: {
+  reply: [{     //回复
+    from: {     //回复人
       type: ObjectId,
       ref: 'User'
   	},
-    to: {
+    to: {       //被回复人
       type: ObjectId,
       ref: 'User'
   	},
     content: String
   }],
-  content: String,
+  content: String,  //回复内容
   meta: {
     createdAt: {
       type: Date,
@@ -37,9 +37,9 @@ var CommentSchema = new Schema({
 
 CommentSchema.pre('save', function(next) {
   if (this.isNew) {
-	this.meta.createdAt = this.meta.updateAt = Date.now();
+	  this.meta.createdAt = this.meta.updateAt = Date.now();
   } else {
-	this.meta.updateAt = Date.now();
+	  this.meta.updateAt = Date.now();
   }
   next();
 });
@@ -47,13 +47,13 @@ CommentSchema.pre('save', function(next) {
 //静态方法
 CommentSchema.statics = {
   fetch : function(cb) {
-	return this
-	.find({})
-	.sort('meta.updateAt')
-	.exec(cb);
+    return this
+    .find({})
+    .sort('meta.updateAt')
+    .exec(cb);
   },
   findById: function(id, cb) {	
-	return this.findOne({_id:id}).exec(cb);
+    return this.findOne({_id:id}).exec(cb);
   }
 };
 

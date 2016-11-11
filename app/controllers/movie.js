@@ -4,36 +4,38 @@ var _ = require("underscore");
 var Categories = require("../models/categories");
 var fs = require("fs");
 var path = require("path");
-
-exports.detail = function(req,res) {//详情页
+//电影详情页
+exports.detail = function(req, res) {
   var id = req.params.id;
 
-  //加统计量
-  Movie.update({_id:id},{$inc:{pv:1}}, function(err) {
+  //加入统计量
+  Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
 	if (err) {
 	  console.log(err);
 	};
   });
 	
-  Movie.findById(id,function(err, movie) {
+  Movie.findById(id, function(err, movie) {
 	if (err) {
 	  console.log(err);
 	};
 
-  Comment
+  	Comment
 	.find({movie: id})
-	.populate("from","name")
-	.populate("reply.from reply.to","name")
+	.populate("from", "name avatar")
+	.populate("reply.from reply.to", "name avatar")
 	.exec(function(err, comment) {
-	  if (err) {
+  	  if (err) {
 		console.log(err);
-	  };
-	  res.render("pages/movie-detail", {
-		title:"imooc 详情页",
-		movie:movie,
-		comment:comment
-	  });
-	});	
+  	  };
+  	  console.log('movie_movie',movie);
+  	  console.log('comment_comment',comment);
+  	  res.render("pages/movie-detail", {
+		title:"电影详情",
+		movie: movie,
+		comment: comment
+  	  });
+  	});	
   });
 };
 

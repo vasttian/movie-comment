@@ -9,7 +9,7 @@ exports.showSignup = function (req, res) {
 };
 
 //如果用户有上传头像
-exports.saveAvatar = function(req, res, next){
+exports.saveAvatar = function(req, res, next) {
   // console.log('>>>>>req.body>>>>>>:',req.body);
 
   // console.log('req.files::',req.files);//打印文件的信息
@@ -39,19 +39,19 @@ exports.checkUserName = function (req, res) {
   var _user = req.body.user;
 
   User.findOne({name:_user.name}, function(err, name) {
-	if (err) {
-	  console.log('err');
-	};
-	if (name) {
-	  console.log('用户名已存在!');
-	  return res.json({"valid":false});
-	} else {
-	  console.log('用户名可以注册!');
-	  return res.json({"valid":true});
-	}
+	  if (err) {
+	    console.log('err');
+	  };
+	  if (name) {
+	    console.log('用户名已存在!');
+	    return res.json({"valid":false});
+	  } else {
+	    console.log('用户名可以注册!');
+	    return res.json({"valid":true});
+	  }
   });
 }
-exports.signup = function(req, res){
+exports.signup = function(req, res) {
   // console.log('>>>>>req.body::',req.body);
   var _user = req.body.user;
   if (req.avatar) {
@@ -102,6 +102,7 @@ exports.signin = function (req, res) {
 	  return res.redirect("/signup");
 	};
 	req.session.user = user;
+  console.log('user',user);
 	return res.redirect("/");
 	// user.comparePassword(pass, function (err, isMatch) {
 	// 	if (err) {
