@@ -5,30 +5,30 @@ var Categories = require("../models/categories");
 var fs = require("fs");
 var path = require("path");
 
-exports.detail = function(req,res){//详情页
-  var id=req.params.id;
+exports.detail = function(req,res) {//详情页
+  var id = req.params.id;
 
   //加统计量
-  Movie.update({_id:id},{$inc:{pv:1}},function(err){
-	if(err){
+  Movie.update({_id:id},{$inc:{pv:1}}, function(err) {
+	if(err) {
 	  console.log(err);
 	};
   });
 	
-  Movie.findById(id,function(err,movie){
-	if(err){
+  Movie.findById(id,function(err, movie) {
+	if(err) {
 	  console.log(err);
 	};
 
   Comment
-	.find({movie:id})
+	.find({movie: id})
 	.populate("from","name")
 	.populate("reply.from reply.to","name")
-	.exec(function(err,comment){
-	  if(err){
+	.exec(function(err,comment) {
+	  if(err) {
 		console.log(err);
 	  };
-	  res.render("pages/detail",{
+	  res.render("pages/detail", {
 		title:"imooc 详情页",
 		movie:movie,
 		comment:comment
@@ -45,7 +45,7 @@ exports.movieManage = function (req, res) {
 };
 
 exports.addMovie = function (req, res) {
-  Categories.find({},function(err, categories) {
+  Categories.find({}, function(err, categories) {
 	res.render("pages/add-movie", {
 	  title: "添加电影",
 	  categories: categories,
@@ -55,11 +55,11 @@ exports.addMovie = function (req, res) {
 };
 
 //更新操作
-exports.update = function(req,res) {
+exports.update = function(req, res) {
   var id = req.params.id;
   if (id) {
-	Movie.findById(id,function(err, movie) {
-	  Categories.find({},function(err,categories) {
+	Movie.findById(id, function(err, movie) {
+	  Categories.find({}, function(err,categories) {
 		res.render("pages/admin", {
 		  title: "更新操作",
 		  movie: movie,
@@ -77,7 +77,7 @@ exports.savePoster = function(req, res, next) {
   var filePath = posterData.path;//文件的路径
   var originalFilename = posterData.originalFilename;//拿到文件的名字
   if(originalFilename) {
-	fs.readFile(filePath,function(err,data) {
+	fs.readFile(filePath, function(err,data) {
 	  var timestamp = Date.now();//时间戳
 	  var type = posterData.type.split("/")[1];
 	  var poster = timestamp+"."+type;

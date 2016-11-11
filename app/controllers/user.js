@@ -61,9 +61,9 @@ exports.signup = function(req, res){
   	_user.nickname = _user.name;
   }
   User.findOne({name:_user.name}, function(err, name) {
-	if (err) {
-	  console.log('err');
-	};
+	  if (err) {
+	    console.log('err');
+	  };
 	if (name) {
 	  console.log('用户名已存在!');
 	  // return res.json({"status":"error"});

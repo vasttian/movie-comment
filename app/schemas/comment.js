@@ -37,7 +37,7 @@ var CommentSchema = new Schema({
 
 CommentSchema.pre('save', function(next) {
   if (this.isNew) {
-	  this.meta.createdAt = this.meta.updateAt = Date.now();
+	this.meta.createdAt = this.meta.updateAt = Date.now();
   } else {
 	this.meta.updateAt = Date.now();
   }
@@ -52,7 +52,7 @@ CommentSchema.statics = {
 	.sort('meta.updateAt')
 	.exec(cb);
   },
-  findById: function(id, cb){	
+  findById: function(id, cb) {	
 	return this.findOne({_id:id}).exec(cb);
   }
 };
