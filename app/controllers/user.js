@@ -2,7 +2,7 @@ var User = require("../models/user");
 var fs = require('fs');
 var path = require('path');
 //注册
-exports.showSignup = function (req, res) {
+exports.showSignup = function(req, res) {
   res.render("pages/signup", {
 		title: '注册一萌'
   });
@@ -34,7 +34,7 @@ exports.saveAvatar = function(req, res, next) {
   }
 };
 
-exports.checkUserName = function (req, res) {
+exports.checkUserName = function(req, res) {
   // console.log('req.body::',req.body);
   var _user = req.body.user;
 
@@ -83,13 +83,13 @@ exports.signup = function(req, res) {
 };
 
 //登录
-exports.showSignin = function (req, res) {
+exports.showSignin = function(req, res) {
   res.render("pages/signin", {
 		title:'登录一萌'
   });
 };
 
-exports.signin = function (req, res) {
+exports.signin = function(req, res) {
   var _user = req.body.user;
   var name = _user.name;
   var pass = _user.password;
@@ -121,17 +121,27 @@ exports.signin = function (req, res) {
 };
 
 //展示管理员页面
-exports.showAdmin = function (req, res) {
+exports.showAdmin = function(req, res) {
   res.render("pages/admin-manage", {
 	  title: '管理页面'
   });
 };
 
 //发送用户信息
-exports.sendUser = function (req, res) {
-  console.log('session:',req.session);
+exports.sendUser = function(req, res) {
+  // console.log('session:',req.session);
   var user = req.session.user;
   res.json({user: user});
+};
+
+//个人资料
+exports.sendPersonalInfo = function(req, res) {
+  var user = req.session.user;
+  console.log('个人资料:',user);
+  res.render("pages/show-personal-info", {
+    title: '个人资料',
+    user: user
+  });
 };
 
 //是否登录
@@ -146,7 +156,7 @@ exports.signinRequired = function(req, res, next) {
 };
 
 //是否有对电影进行CRUD的权限
-exports.movieAdminRequired = function(req,res,next){
+exports.movieAdminRequired = function(req, res, next){
   console.log("验证是否有对电影进行CRUD的权限");
   var user = req.session.user;
   if (user.role <= 10) {
@@ -157,7 +167,7 @@ exports.movieAdminRequired = function(req,res,next){
 };
 
 //是否有对用户进行CRUD的权限
-exports.user_movieAdminRequired = function(req,res,next){
+exports.user_movieAdminRequired = function(req, res, next){
   console.log("验证是否有对用户进行CRUD的权限");
   var user = req.session.user;
   console.log("user:",user);
@@ -169,11 +179,11 @@ exports.user_movieAdminRequired = function(req,res,next){
 };
 
 //是否有超级管理员的权限
-exports.superAdminRequired = function(req,res,next){
+exports.superAdminRequired = function(req, res, next){
   console.log("验证是否有超级管理员的权限");
   var user = req.session.user;
-  console.log("user:",user);
-  if(user.role <= 30){
+  console.log("user:", ser);
+  if(user.role <= 30) {
 	console.log("对不起,你还没有获得超级管理员的权限!");
 	return res.redirect("/signin");
   }
@@ -181,7 +191,7 @@ exports.superAdminRequired = function(req,res,next){
 };
 
 //登出
-exports.logout = function (req, res) {
+exports.logout = function(req, res) {
 	req.session.destroy();
 	res.redirect("/");
 };
