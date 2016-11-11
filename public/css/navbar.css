@@ -166,3 +166,33 @@ li {
   border-bottom-color: transparent;
   cursor: default;
 }
+
+/*table*/
+
+.th-width70 {
+  width: 70px;
+}
+
+.th-width100 {
+  width: 100px;
+}
+
+.th-width150 {
+  width: 150px;
+}
+
+.th-width200 {
+  width: 200px;
+}
+
+.th-width250 {
+  width: 250px;
+}
+
+.th-width300 {
+  width: 300px;
+}
+
+.th-width300 {
+  width: 300px;
+}
