@@ -24,11 +24,11 @@ exports.detail = function(req,res) {//详情页
 	.find({movie: id})
 	.populate("from","name")
 	.populate("reply.from reply.to","name")
-	.exec(function(err,comment) {
-	  if(err) {
+	.exec(function(err, comment) {
+	  if (err) {
 		console.log(err);
 	  };
-	  res.render("pages/detail", {
+	  res.render("pages/movie-detail", {
 		title:"imooc 详情页",
 		movie:movie,
 		comment:comment
@@ -109,13 +109,13 @@ exports.save = function(req, res) {
 	  if(err) {
 		console.log(err);
 	  }
-	  Categories.update({_id:movie.categories},{$pullAll:{"movies":[id]}},function(err) {
+	  Categories.update({_id:movie.categories}, {$pullAll:{"movies":[id]}}, function(err) {
 		_movie = _.extend(movie, movieObj);
 		_movie.save(function(err, movie) {
 		  if(err) {
 			console.log(err);
 		  }
-		  Categories.update({_id:categoryId},{$addToSet:{"movies":id}},function(err) {
+		  Categories.update({_id:categoryId}, {$addToSet:{"movies":id}}, function(err) {
 		  	res.redirect("/movie/"+movie._id);
 		  });
 		});
