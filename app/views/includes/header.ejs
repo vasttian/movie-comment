@@ -57,7 +57,9 @@
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="javascript:void(0)">个人资料</a></li>
 								<li><a href="javascript:void(0)">修改资料</a></li>
-								<li><a href="javascript:void(0)">后台管理</a></li>
+								<% if (user.role > 10) { %>
+									<li><a href="javascript:void(0)">后台管理</a></li>
+								<% } %>
 								<li class="divider"></li>
 								<li><a href="/logout" class="navbar-link">退出账号</a></li>
 							</ul>
