@@ -64,15 +64,15 @@ exports.addMovie = function (req, res) {
 exports.update = function(req, res) {
   var id = req.params.id;
   if (id) {
-	Movie.findById(id, function(err, movie) {
-	  Categories.find({}, function(err,categories) {
-		res.render("pages/admin", {
-		  title: "更新操作",
-		  movie: movie,
-		  categories: categories
+		Movie.findById(id, function(err, movie) {
+	  	Categories.find({}, function(err,categories) {
+				res.render("pages/add-movie", {
+		  		title: "更新电影",
+		  		movie: movie,
+		  		categories: categories
+				});
+	  	});
 		});
-	  });
-	});
   };
 };
 

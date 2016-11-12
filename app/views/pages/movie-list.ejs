@@ -6,7 +6,7 @@
 		  <th class="th-width200">电影名字</th>
 		  <th class="th-width200">导演</th>
 		  <th class="th-width200">主演</th>
-		  <th class="th-width200">制片国家/地区</th>
+		  <th class="th-width250">制片国家/地区</th>
 		  <th class="th-width150">上映日期</th>
 		  <th class="th-width150">录入时间</th>
 		  <th class="th-width100">片长</th>
@@ -28,10 +28,8 @@
 		  <td><%= item.movieTime %></td>
 		  <td><%= item.pv %></td>
 		  <td><a target="_blank" href="/movie/<%= item._id %>">查看</a></td>
-		  <td><a href="/admin/movie/update/<%= item._id %>">更新</a></td>
-		  <td>
-			<button class="btn btn-danger del" type="button" data-id="<%= item._id %>">删除</button>
-		  </td>
+		  <td><button class="btn btn-primary updateMovie" data-id="<%= item._id %>">更新</a></td>
+		  <td><button class="btn btn-danger del" type="button" data-id="<%= item._id %>">删除</button></td>
 		</tr>
 		<% }) %>
 	  </tbody>

@@ -8,7 +8,7 @@ $(function() {
 			url: "/admin/movie/list?id=" +id,
 			async: true,
 			success: function(req) {
-				if (tr.length>0) {
+				if (tr.length > 0) {
 					tr.remove();
 				}
 			},
@@ -41,22 +41,36 @@ $(function() {
 		}
 	});
 
-  $("#add-movie").click(function () {
-	$.get('/admin/movie/add', function(data, status) {
-	  $("#move-windows").html(data);
+	$(".updateMovie").click(function(e) {
+		var target = $(e.target);
+		var id = target.data("id");
+		 $.ajax({
+      type: 'GET',
+      url: "/admin/movie/update/"+id,
+      async: true,
+      success: function(data, status) {
+      	$("#move-windows").html(data);
+				// $("#add-movie").trigger("click");
+      }
+    });
 	});
+
+  $("#add-movie").click(function () {
+		$.get('/admin/movie/add', function(data, status) {
+	  	$("#move-windows").html(data);
+		});
   });
 
   $("#add-category").click(function () {
-	$.get('/admin/movie/category/add', function(data, status) {
-	  $("#move-windows").html(data);
-	});
+		$.get('/admin/movie/category/add', function(data, status) {
+	  	$("#move-windows").html(data);
+		});
   });
 
   $("#show-movie").click(function () {
-	$.get('/admin/movie/list', function(data, status) {
-	  $("#move-windows").html(data);
-	});
+		$.get('/admin/movie/list', function(data, status) {
+	  	$("#move-windows").html(data);
+		});
   });
 
   $("#show-category").click(function () {
