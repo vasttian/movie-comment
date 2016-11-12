@@ -3,6 +3,7 @@ var Index = require("../app/controllers/index");
 var Movie = require("../app/controllers/movie");
 var Category = require("../app/controllers/categories");
 var Comment = require("../app/controllers/comment");
+var InvitationCode = require("../app/controllers/invitation-code");
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
@@ -23,6 +24,7 @@ module.exports = function (app) {
   app.get('/logout', User.logout);
   app.get('/user/personal/info', User.signinRequired, User.sendPersonalInfo);
   app.post('/user/checkname', User.checkUserName);
+  app.post('/invitation-code/checkinvitationcode', InvitationCode.checkInvitationCode);
   app.post('/user/signup', multipartMiddleware, User.saveAvatar, User.signup);
   app.post('/user/signin', User.signin);
 

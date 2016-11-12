@@ -39,19 +39,21 @@ exports.checkUserName = function(req, res) {
   // console.log('req.body::',req.body);
   var _user = req.body.user;
 
-  User.findOne({name:_user.name}, function(err, name) {
-	  if (err) {
-	    console.log('err');
-	  };
-	  if (name) {
-	    console.log('用户名已存在!');
-	    return res.json({"valid":false});
-	  } else {
-	    console.log('用户名可以注册!');
-	    return res.json({"valid":true});
-	  }
+  // console.log("_user.name",_user.name);
+  User.findOne({name: _user.name}, function(err, name) {
+    if (err) {
+      console.log('err');
+    };
+    if (name) {
+      console.log('用户名已存在!');
+      return res.json({"valid":false});
+    } else {
+      console.log('用户名可以注册!');
+      return res.json({"valid":true});
+    }
   });
 };
+
 
 //注册
 exports.signup = function(req, res) {
@@ -60,6 +62,17 @@ exports.signup = function(req, res) {
   if (req.avatar) {
     _user.avatar = req.avatar;
   }
+  console.log('---user:',_user);
+  if (_user.invitationCode == 'movieadmin') {
+    _user.role = 20;
+  } else if (_user.invitationCode == 'useradminmovieadmin') {
+    _user.role = 30;
+  } else if (_user.invitationCode == 'superadmin') {
+    _user.role = 32;
+  } else {
+    _user.role = 0;
+  }
+
   if (!_user.nickname) {
   	_user.nickname = _user.name;
   }

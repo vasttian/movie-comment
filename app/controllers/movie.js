@@ -1,7 +1,7 @@
 var Movie = require("../models/movie");
 var Comment = require("../models/comment");
-var _ = require("underscore");
 var Categories = require("../models/categories");
+var _ = require("underscore");
 var fs = require("fs");
 var path = require("path");
 

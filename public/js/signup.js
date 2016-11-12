@@ -16,7 +16,7 @@ $(function() {
 		message: '用户名还没有验证',
 		validators: {
 		  notEmpty: {
-			message: '用户名不能为空'
+				message: '用户名不能为空'
 		  },
 		  regexp: {
 		    regexp: /^[a-zA-Z0-9_\.]+$/,
@@ -33,8 +33,23 @@ $(function() {
 	        message: '用户名已存在，请重新输入',
 	        delay:  2000,//2秒发送一次请求
 	        type: 'POST'
-	      },
+	      }
 	    }
+	  },
+	  'user[invitationCode]': {
+	  	message: '邀请码还没有验证',
+	  	validators: {
+	  		notEmpty: {
+	  			message: '邀请码不能为空'
+	  		},
+	  		threshold: 3,
+	  		remote: {
+	  			url: '/invitation-code/checkinvitationcode',
+	  			message: '邀请码不正确',
+	  			delay:  2000,//2秒发送一次请求
+	        type: 'POST'
+	  		}
+	  	}
 	  },
 	  'user[email]': {
 		message: 'email还没有验证',

@@ -32,7 +32,7 @@ var MovieSchema = new mongoose.Schema({
   }
 });
 
-MovieSchema.pre("save",function (next) {	//每次在存储数据之前都会来调用这个方法（中间件）
+MovieSchema.pre("save",function (next) {	//中间件
   if (this.isNew) {
 	  this.meta.createAt = this.meta.updateAt = Date.now();
   } else {
@@ -41,7 +41,7 @@ MovieSchema.pre("save",function (next) {	//每次在存储数据之前都会来�
   next();
 });
 
-MovieSchema.statics = {		//添加一个静态方法，静态方法从模型上去调用 
+MovieSchema.statics = {		//添加静态方法，静态方法在模型上调用 
   fetch: function(cb) {
 	  return this
 	    .find({})
