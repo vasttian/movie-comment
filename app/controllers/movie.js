@@ -195,7 +195,8 @@ exports.pvRanking = function(req, res) {
 	}
 	res.render("pages/movie-ranking", {
 	  title: "点击排行",
-	  movies: movies
+	  movies: movies,
+	  ranking: "pvRanking"
 	});
   });
 };
@@ -209,7 +210,8 @@ exports.movieTimeRanking = function(req, res) {
 	}
 	res.render("pages/movie-ranking", {
 	  title: "片长排行",
-	  movies: movies
+	  movies: movies,
+	  ranking: "movieTimeRanking"
 	});
   });
 };
@@ -223,7 +225,8 @@ exports.dateRanking = function(req, res) {
 	}
 	res.render("pages/movie-ranking", {
 	  title: "上映排行",
-	  movies: movies
+	  movies: movies,
+	  ranking: "dateRanking"
 	});
   });
 };

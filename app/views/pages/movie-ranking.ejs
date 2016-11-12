@@ -4,9 +4,22 @@
   <div class="row">
   	<div>
   	  <ul class="nav nav-tabs" role="tablist">
-  		<li role="presentation" class="active"><a href="/movie-pv/ranking">点击量排行</a></li>
-  		<li role="presentation"><a href="/movie-time/ranking">片长排行</a></li>
-  		<li role="presentation"><a href="/movie-time/ranking">上映日期排行</a></li>
+  	  	<% if (ranking == 'pvRanking') { %>
+  				<li role="presentation" class="active"><a href="/movie-pv/ranking">点击量排行</a></li>
+  			<% } else { %>
+  				<li role="presentation"><a href="/movie-pv/ranking">点击量排行</a></li>
+  			<% } %>
+  	  	<% if (ranking == 'movieTimeRanking') { %>
+	  			<li role="presentation" class="active"><a href="/movie-time/ranking">片长排行</a></li>
+  			<% } else { %>
+	  			<li role="presentation"><a href="/movie-time/ranking">片长排行</a></li>
+  			<% } %>
+  	  	<% if (ranking == 'dateRanking') { %>
+  				<li role="presentation" class="active"><a href="/movie-date/ranking">上映日期排行</a></li>
+  			<% } else { %>
+  				<li role="presentation"><a href="/movie-date/ranking">上映日期排行</a></li>
+  			<% } %>
+
 	  </ul>
   	</div>
 	<table class="table table-hover table-bordered">
