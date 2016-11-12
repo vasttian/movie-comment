@@ -33,7 +33,9 @@ module.exports = function (app) {
   // app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
   
   //电影
-  app.get("/movie-pv/ranking", User.signinRequired, Movie.ranking);
+  app.get("/movie-pv/ranking", User.signinRequired, Movie.pvRanking);
+  app.get("/movie-time/ranking", User.signinRequired, Movie.movieTimeRanking);
+  app.get("/movie-date/ranking", User.signinRequired, Movie.dateRanking);
   app.get('/movie/:id', Movie.detail);
   app.get("/admin/movie-manage", User.signinRequired, User.movieAdminRequired, Movie.movieManage);
   app.get("/admin/movie/add", User.signinRequired, User.movieAdminRequired, Movie.addMovie);

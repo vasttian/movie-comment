@@ -55,13 +55,7 @@
 		  		</div>
   			</div>
   			<div class="form-group">
-		  		<label for="inputMovieTime" class="col-sm-3 control-label">片长</label>
-		  		<div class="col-sm-9">
-	  				<input type="text" id="inputMovieTime" class="form-control" name="movie[movieTime]" value="<%= movie.movieTime %>">
-		  		</div>
-  			</div>
-  			<div class="form-group">
-		  		<label for="inputCountry" class="col-sm-3 control-label">国家</label>
+		  		<label for="inputCountry" class="col-sm-3 control-label">制片国家/地区</label>
 		  		<div class="col-sm-9">
 	  				<input type="text" id="inputCountry" class="form-control" name="movie[country]" value="<%= movie.country %>">
 		  		</div>
@@ -91,9 +85,15 @@
 		  		</div>
   			</div>
 				<div class="form-group">
-		  		<label for="inputYear" class="col-sm-3 control-label">上映时间</label>
+		  		<label for="inputDate" class="col-sm-3 control-label">上映日期</label>
 		  		<div class="col-sm-9">
-	  				<input type="text" id="inputYear" class="form-control" name="movie[year]" value="<%= movie.year %>">
+	  				<input type="text" id="inputDate" class="form-control" name="movie[date]" value="<%= movie.date %>">
+		  		</div>
+  			</div>
+  			<div class="form-group">
+		  		<label for="inputMovieTime" class="col-sm-3 control-label">片长</label>
+		  		<div class="col-sm-9">
+	  				<input type="text" id="inputMovieTime" class="form-control" name="movie[movieTime]" value="<%= movie.movieTime %>">
 		  		</div>
   			</div>
   			<div class="form-group">

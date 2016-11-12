@@ -34,7 +34,7 @@ $(function() {
 					$("#inputDoctor").val(data.directors[0].name);
 					$("#inputCountry").val(data.countries[0]);
 					$("#inputPoster").val(data.images.large);
-					$("#inputYear").val(data.year);
+					$("#inputDate").val(data.year);
 					$("#inputSummary").val(data.summary);
 				}
 			});

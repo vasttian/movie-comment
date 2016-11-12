@@ -11,7 +11,7 @@ var MovieSchema = new mongoose.Schema({
   summary: String,
   flash: String,
   poster: String,
-  year: String,
+  date: String,
   pv:{
 	  type: Number,
 	  default: 0
@@ -53,10 +53,22 @@ MovieSchema.statics = {		//添加一个静态方法，静态方法从模型上�
 	    .findOne({_id:id})
 	    .exec(cb)
   },
-  ranking: function(cb) {
+  pvRanking: function(cb) {
     return this
       .find({})
       .sort("-pv")
+      .exec(cb)
+  }, 
+  movieTimeRanking: function(cb) {
+    return this
+      .find({})
+      .sort("movieTime")
+      .exec(cb)
+  },
+  dateRanking: function(cb) {
+    return this
+      .find({})
+      .sort("date")
       .exec(cb)
   }
 }

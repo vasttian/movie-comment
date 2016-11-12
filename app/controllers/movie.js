@@ -186,15 +186,43 @@ exports.list = function(req, res) {
   });	
 };
 
-//电影排名
-exports.ranking = function(req, res) {
-  console.log('获取电影排名!');
-  Movie.ranking(function(err, movies) {
+//电影点击率排行榜
+exports.pvRanking = function(req, res) {
+  console.log('获取电影点击率排行榜!');
+  Movie.pvRanking(function(err, movies) {
 	if (err) {
-	  console.log('获取排名失败:', err);
+	  console.log('获取电影点击率排行榜失败:', err);
 	}
 	res.render("pages/movie-ranking", {
-	  title: "电影排名",
+	  title: "点击排行",
+	  movies: movies
+	});
+  });
+};
+
+//电影片长排行榜
+exports.movieTimeRanking = function(req, res) {
+  console.log('获取电影片长排行榜!');
+  Movie.movieTimeRanking(function(err, movies) {
+	if (err) {
+	  console.log('获取电影片长排行榜失败:', err);
+	}
+	res.render("pages/movie-ranking", {
+	  title: "片长排行",
+	  movies: movies
+	});
+  });
+};
+
+//电影上映日期排行榜
+exports.dateRanking = function(req, res) {
+  console.log('获取电影上映日期排行榜!');
+  Movie.dateRanking(function(err, movies) {
+	if (err) {
+	  console.log('获取电影上映日期排行榜失败:', err);
+	}
+	res.render("pages/movie-ranking", {
+	  title: "上映排行",
 	  movies: movies
 	});
   });

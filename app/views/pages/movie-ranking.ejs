@@ -5,8 +5,8 @@
   	<div>
   	  <ul class="nav nav-tabs" role="tablist">
   		<li role="presentation" class="active"><a href="/movie-pv/ranking">点击量排行</a></li>
-  		<li role="presentation"><a href="#">片长</a></li>
-  		<li role="presentation"><a href="#">上映时间</a></li>
+  		<li role="presentation"><a href="/movie-time/ranking">片长排行</a></li>
+  		<li role="presentation"><a href="/movie-time/ranking">上映日期排行</a></li>
 	  </ul>
   	</div>
 	<table class="table table-hover table-bordered">
@@ -15,10 +15,10 @@
 		  <th class="th-width250 th-style">电影名字</th>
 		  <th class="th-width250 th-style">导演</th>
 		  <th class="th-width250 th-style">主演</th>
-		  <th class="th-width150 th-style">片长</th>
-		  <th class="th-width200 th-style">国家</th>
-		  <th class="th-width200 th-style">上映时间</th>
+		  <th class="th-width250 th-style">制片国家/地区</th>
+		  <th class="th-width200 th-style">上映日期</th>
 		  <th class="th-width200 th-style">录入时间</th>
+		  <th class="th-width150 th-style">片长</th>
 		  <th class="th-width150 th-style">pv</th>
 		  <th class="th-width100 th-style">查看</th>
 		</tr>
@@ -29,10 +29,10 @@
 		  <td class="td-style"><%= item.title %></td>
 		  <td class="td-style"><%= item.doctor %></td>
 		  <td class="td-style"><%= item.protagonist %></td>
-		  <td class="td-style"><%= item.movieTime %></td>
 		  <td class="td-style"><%= item.country %></td>
-		  <td class="td-style"><%= item.year %></td>
+		  <td class="td-style"><%= item.date %></td>
 		  <td class="td-style"><%= moment(item.meta.createAt).format("YYYY/MM/DD") %></td>
+		  <td class="td-style"><%= item.movieTime %></td>
 		  <td class="td-style"><%= item.pv %></td>
 		  <td class="td-style"><a target="_blank" href="/movie/<%= item._id %>">查看</a></td>
 		</tr>
