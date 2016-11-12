@@ -65,7 +65,7 @@ exports.update = function(req, res) {
   var id = req.params.id;
   if (id) {
 		Movie.findById(id, function(err, movie) {
-	  	Categories.find({}, function(err,categories) {
+	  	Categories.find({}, function(err, categories) {
 				res.render("pages/add-movie", {
 		  		title: "更新电影",
 		  		movie: movie,
