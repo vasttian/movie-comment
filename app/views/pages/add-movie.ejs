@@ -23,7 +23,7 @@
   			<div class="form-group">
 		  		<label class="col-sm-3 control-label">分类选择</label>
 		  		<div class="col-sm-9">
-	  				<% categories.forEach(function(cat,index){%>
+	  				<% categories.forEach(function(cat, index) { %>
 			  		<label class="radio-inline">
 		  				<% if (movie._id) { %>
 				  		<input type="radio" <%=cat._id.toString() == movie.categories.toString()? "checked" :"" %> name="movie[categories]" value="<%=cat._id%>">
@@ -93,7 +93,10 @@
   			<div class="form-group">
 		  		<label for="inputMovieTime" class="col-sm-3 control-label">片长</label>
 		  		<div class="col-sm-9">
-	  				<input type="text" id="inputMovieTime" class="form-control" name="movie[movieTime]" value="<%= movie.movieTime %>">
+		  			<div class="input-group">
+	  					<input type="text" id="inputMovieTime" class="form-control" name="movie[movieTime]" value="<%= movie.movieTime %>">
+	  					<span class="input-group-addon">分钟</span>
+	  				</div>
 		  		</div>
   			</div>
   			<div class="form-group">

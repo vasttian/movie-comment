@@ -5,14 +5,17 @@ var MovieSchema = new mongoose.Schema({
   title: String,
   doctor: String,
   protagonist: String,
-  movieTime: String,
+  movieTime: {
+    type: Number,
+    default: 0
+  },
   language: String,
   country: String,
   summary: String,
   flash: String,
   poster: String,
   date: String,
-  pv:{
+  pv: {
 	  type: Number,
 	  default: 0
   },
