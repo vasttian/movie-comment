@@ -85,18 +85,18 @@ exports.savePoster = function(req, res, next) {
   var filePath = posterData.path;//文件的路径
   var originalFilename = posterData.originalFilename;//拿到文件的名字
   if (originalFilename) {
-	fs.readFile(filePath, function(err,data) {
-	  var timestamp = Date.now();//时间戳
-	  var type = posterData.type.split("/")[1];
-	  var poster = timestamp+"."+type;
-	  var newPath = path.join(__dirname,"../../","public/images/poster/"+poster);//设置新的存储的路径。
-	  fs.writeFile(newPath,data,function(err) {
-		req.poster = poster;
-		next();
-	  });
-	});
+		fs.readFile(filePath, function(err, data) {
+	  	var timestamp = Date.now();//时间戳
+	  	var type = posterData.type.split("/")[1];
+		  var poster = timestamp+"."+type;
+		  var newPath = path.join(__dirname,"../../","public/images/poster/"+poster);//设置新的存储的路径。
+	 		fs.writeFile(newPath,data,function(err) {
+				req.poster = poster;
+				next();
+		  });
+		});
   } else {
-	next();
+		next();
   }	
 };
 

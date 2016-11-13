@@ -19,71 +19,73 @@ exports.index = function(req, res) {
 
 //搜索
 exports.search = function(req, res) {
-	var catId = req.query.cat;//分类
-	var page = parseInt(req.query.page,10)||0;//页码
-	var cuunt =2;//每页展示多少个？
-	var index = page * cuunt;//跨多少条查询？
-	var allcate;
+	var categoryId = req.query.cat;	//点击分类
+	var searchWord = req.query.searchWord;	//搜索传入
 
-	var q = req.query.q;//搜索
+	var page = parseInt(req.query.page, 10) || 1; //页码
+	var count = 2;	//每页展示数量
+	var skipNum = (page-1) * count; //跳过数量
+	var totalMovies;
 
-	if (catId) {
+	//分类
+	if (categoryId) {
 		Categories
-		.findOne({_id:catId})
-		.exec(function(err,categories) {
-			allcate=categories.movies;
+		.findOne({_id: categoryId})
+		.exec(function(err, categories) {
+			totalMovies = categories.movies;
 		});
 
 		Categories
-		.findOne({_id:catId})
+		.findOne({_id: categoryId})
 		.populate({
-			path:"movies",
-			select:"title poster",
-			options:{limit:cuunt,skip: index}
+			path: "movies",
+			select: "title poster",
+			options: {
+				limit: count,
+				skip: skipNum
+			}
 		})
-		.exec(function(err,categories) {
+		.exec(function(err, categories) {
 			if (err) {
 				console.log(err);
 			}
-			var category = categories||{};
-			var movies = allcate||[];
+			var category = categories || {};
+			var movies = totalMovies || [];
 
-			res.render("pages/results",{
-				title:"结果列表页面",
-				keyword:category.name,//分类名
-				currentPage:(page+1),//当前页
-				query:"cat="+catId,
-				totalPage:Math.ceil(movies.length/cuunt),//共有多少页
-				categories:category.movies
+			res.render("pages/movie-results", {
+				title: "当前分类",
+				keyword: category.name, //分类名
+				currentPage: page, //当前页
+				query: "cat=" + categoryId, //把当前分类的ID传回，便于翻页时再次传入
+				totalPage: Math.ceil(movies.length / count),//共有多少页
+				movies: category.movies
 			});
 		});
-	} else {
+	} else {	//搜索
 		Movie
-			.find({title:new RegExp(q+".*","i")})
-			.exec(function(err,movies) {
-				allcate=movies;
-			});
+		.find({title: new RegExp(searchWord + ".*","i")})
+		.exec(function(err, movies) {
+			totalMovies = movies;
+		});
 		Movie
-			.find({title:new RegExp(q+".*","i")})
-			.limit(cuunt)
-			.skip(index)
-			.exec(function(err,movies) {
-				if (err) {
-					console.log(err);
-				}
-				console.log(movies)
+		.find({title: new RegExp(searchWord + ".*","i")})
+		.limit(count)
+		.skip(skipNum)
+		.exec(function(err, movies) {
+			if (err) {
+				console.log(err);
+			}
+			console.log(movies)
 
-				res.render("pages/results", {
-					title:"搜索列表页面",
-					keyword: q,//分类名
-					currentPage:(page+1),//当前页
-					query:"q="+q,
-					totalPage:Math.ceil(allcate.length/cuunt),//共有多少页
-					categories:movies
-				});
-
+			res.render("pages/movie-results", {
+				title: "搜索结果",
+				keyword: searchWord,//搜索关键字
+				currentPage: page,	//当前页
+				query: "searchWord = " + searchWord,
+				totalPage: Math.ceil(totalMovies.length / count),//共有多少页
+				movies: movies
 			});
 
-
+		});
 	}	
 };
