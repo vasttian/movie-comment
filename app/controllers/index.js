@@ -34,7 +34,7 @@ exports.search = function(req, res) {
 		.exec(function(err, categories) {
 			totalMovies = categories.movies;
 		});
-
+		console.log("totalMovies",totalMovies);
 		Categories
 		.findOne({_id: categoryId})
 		.populate({
@@ -89,3 +89,4 @@ exports.search = function(req, res) {
 		});
 	}	
 };
+	

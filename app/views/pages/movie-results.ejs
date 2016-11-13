@@ -31,15 +31,15 @@
 		</div>
 
 		<ul class="pagination">
-	  <% for (var i = 0; i < totalPage; i++) { %>
-			<% if (currentPage == (i+1)) { %>
+	  <% for (var i = 1; i <= totalPage; i++) { %>
+			<% if (currentPage == i) { %>
 		  <li class="active">
 				<span><%= currentPage %></span>
 		  </li>
 			<% } else { %>
 		  <li>
 				<a href="/results?page=<%= i %>&<%= query %>"> 
-			  <%= i + 1 %> 
+			  <%= i %> 
 				</a>
 		  </li>
 			<% } %>
