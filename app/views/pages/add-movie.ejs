@@ -26,7 +26,11 @@
 	  				<% categories.forEach(function(cat, index) { %>
 			  		<label class="radio-inline">
 		  				<% if (movie._id) { %>
-				  		<input type="radio" <%=cat._id.toString() == movie.categories.toString()? "checked" :"" %> name="movie[categories]" value="<%=cat._id%>">
+		  				<% if (movie.categories) { %>
+					  		<input type="radio" <%=cat._id.toString() == movie.categories.toString()? "checked" :"" %> name="movie[categories]" value="<%=cat._id%>">
+		  				<% } else { %>
+					  		<input type="radio" name="movie[categories]" value="<%=cat._id%>">
+		  				<% } %>
 			  	  	<%=cat.name%>
 		  				<% } else { %>
 				  		<input type="radio" name="movie[categories]" value="<%=cat._id%>">

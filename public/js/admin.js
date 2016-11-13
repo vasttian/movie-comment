@@ -50,12 +50,26 @@ $(function() {
 				crossDomain: true,
 				jsonp: "callback",
 				success: function(data) {
-					console.log(data);
+					// console.log(data);
+					// https://developers.douban.com/wiki/?title=movie_v2#get_book
+					$("#inputCategories").val(data.genres[0]);
 					$("#inputTitle").val(data.title);
 					$("#inputDoctor").val(data.directors[0].name);
+					$("#inputProtagonist").val(data.casts[0].name);
 					$("#inputCountry").val(data.countries[0]);
+					if (data.languages) {
+						$("#inputLanguage").val(data.languages[0]);
+					}
 					$("#inputPoster").val(data.images.large);
-					$("#inputDate").val(data.year);
+					if (data.trailer_urls) {
+						$("#inputFlash").val(data.trailer_urls[0]);
+					}
+					if (data.pubdates) {
+						$("#inputDate").val(data.pubdates[0]);
+					}
+					if (data.durations) {
+						$("#inputMovieTime").val(data.durations);
+					}
 					$("#inputSummary").val(data.summary);
 				}
 			});

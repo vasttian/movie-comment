@@ -52,11 +52,11 @@ exports.movieManage = function (req, res) {
 //添加电影页
 exports.addMovie = function (req, res) {
   Categories.find({}, function(err, categories) {
-	res.render("pages/add-movie", {
-	  title: "添加电影",
-	  categories: categories,
-	  movie: {}
-	});
+		res.render("pages/add-movie", {
+	  	title: "添加电影",
+	  	categories: categories,
+	  	movie: {}
+		});
   });	
 };
 
