@@ -175,12 +175,12 @@ li {
 
 .th-style {
   text-align: center;
-  vertical-align:middle;
+  vertical-align: middle !important;
 }
 
 .td-style {
   text-align: center;
-  vertical-align:middle;
+  vertical-align: middle !important;
 }
 
 .th-width70 {
