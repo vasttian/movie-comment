@@ -1,4 +1,5 @@
 $(function() {
+
 	$(".del").click(function(e) {
 		var target = $(e.target);
 		var id = target.data("id");
@@ -74,8 +75,8 @@ $(function() {
   });
 
   $("#show-category").click(function () {
-	$.get('/admin/movie/category/list', function(data, status) {
-	  $("#move-windows").html(data);
-	});
+		$.get('/admin/movie/category/list', function(data, status) {
+	  	$("#move-windows").html(data);
+		});
   });
 });

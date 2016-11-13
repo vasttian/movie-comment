@@ -47,32 +47,32 @@ MovieSchema.pre("save",function (next) {	//中间件
 MovieSchema.statics = {		//添加静态方法，静态方法在模型上调用 
   fetch: function(cb) {
 	  return this
-	    .find({})
-	    .sort("meta.updateAt")
-	    .exec(cb)
+	  .find({})
+	  .sort("meta.updateAt")
+	  .exec(cb)
   },
   findById: function(id, cb) {
 	  return this
-	    .findOne({_id:id})
-	    .exec(cb)
+	  .findOne({_id: id})
+	  .exec(cb)
   },
   pvRanking: function(cb) {
     return this
-      .find({})
-      .sort("-pv")
-      .exec(cb)
+    .find({})
+    .sort("-pv")
+    .exec(cb)
   }, 
   movieTimeRanking: function(cb) {
     return this
-      .find({})
-      .sort("movieTime")
-      .exec(cb)
+    .find({})
+    .sort("movieTime")
+    .exec(cb)
   },
   dateRanking: function(cb) {
     return this
-      .find({})
-      .sort("date")
-      .exec(cb)
+    .find({})
+    .sort("date")
+    .exec(cb)
   }
 }
 
