@@ -1,5 +1,24 @@
 $(function() {
 
+	$('#addMovieForm').bootstrapValidator({
+		message: '这个值没有被验证',
+		feedbackIcons: {
+	  	valid: 'glyphicon glyphicon-ok',
+	  	invalid: 'glyphicon glyphicon-remove',
+	  	validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {
+	  	'movie[title]': {
+				message: '电影名字还没有验证',
+				validators: {
+		 			notEmpty: {
+						message: '电影名字不能为空'
+		  		}
+				}
+			}
+		}
+	});
+
 	$(".del").click(function(e) {
 		var target = $(e.target);
 		var id = target.data("id");
@@ -24,13 +43,14 @@ $(function() {
 		var id = douban.val();
 		if (id) {
 			$.ajax({
-				url:"https://api.douban.com/v2/movie/subject/" + id,
-				cache:true,
-				type:"get",
-				dataType:"jsonp",
-				crossDomain:true,
-				jsonp:"callback",
+				url: "https://api.douban.com/v2/movie/subject/" + id,
+				cache: true,
+				type: "get",
+				dataType: "jsonp",
+				crossDomain: true,
+				jsonp: "callback",
 				success: function(data) {
+					console.log(data);
 					$("#inputTitle").val(data.title);
 					$("#inputDoctor").val(data.directors[0].name);
 					$("#inputCountry").val(data.countries[0]);

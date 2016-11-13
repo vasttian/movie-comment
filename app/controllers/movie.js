@@ -108,67 +108,68 @@ exports.save = function(req, res) {
   var categoryId = movieObj.categories;
 
   if (req.poster) {
-	movieObj.poster = req.poster; 
+		movieObj.poster = req.poster; 
   }
 
   if (id) {
   	console.log('更新电影!');
-	Movie.findById(id, function(err,movie) {
-	  if(err) {
-		console.log(err);
-	  }
-	  Categories.update({_id:movie.categories}, {$pullAll:{"movies":[id]}}, function(err) {
-		_movie = _.extend(movie, movieObj);
-		_movie.save(function(err, movie) {
+		Movie.findById(id, function(err,movie) {
 		  if(err) {
-			console.log(err);
-		  }
-		  Categories.update({_id:categoryId}, {$addToSet:{"movies":id}}, function(err) {
-		  	res.redirect("/movie/"+movie._id);
-		  });
+				console.log(err);
+	 		}
+	  	Categories.update({_id:movie.categories}, {$pullAll:{"movies":[id]}}, function(err) {
+				_movie = _.extend(movie, movieObj);
+				_movie.save(function(err, movie) {
+				  if(err) {
+						console.log(err);
+				  }
+				  Categories.update({_id:categoryId}, {$addToSet:{"movies":id}}, function(err) {
+			 		 	res.redirect("/movie/"+movie._id);
+			 		});
+				});
+	  	});
 		});
-	  });
-	});
   } else {
   	console.log('新增电影!');
-	_movie = new Movie(movieObj);
-	var categoriesName = movieObj.categoriesName;
-	_movie.save(function(err, movie) {
-	  if (err) {
-		console.log("新数据保存",err);
-	  }
-	  if (categoryId) {
-		Categories.findById(categoryId,function(err,categories) {
-		  if (err) {
-			console,log(err);
-		  };
-		  categories.movies.push(movie._id);
-		  categories.save(function(err,categories) {
-			if (err) {
-			  console,log(err);
-			};
-			res.redirect("/movie/"+ movie._id);
-		  });
+		_movie = new Movie(movieObj);
+		var categoriesName = movieObj.categoriesName;
+		_movie.save(function(err, movie) {
+	 		if (err) {
+				console.log("新增电影失败",err);
+		  }
+	 		if (categoryId) {
+				Categories.findById(categoryId,function(err,categories) {
+		  		if (err) {
+						console,log(err);
+		  		};
+		  		categories.movies.push(movie._id);
+		  		categories.save(function(err,categories) {
+						if (err) {
+			  			console,log(err);
+						};
+						res.redirect("/movie/"+ movie._id);
+		  		});
+				});
+	  	} else if (categoriesName) {
+				var category = new Categories({
+		 		 	name:categoriesName,
+		  		movies:[movie._id]
+				});
+				category.save(function(err,category) {
+				  if (err) {
+						console.log(err);
+			  	};
+			  	movie.categories = category._id;
+			  	movie.save(function(err,movie) {
+						if (err) {
+					  	console.log(err);
+						};
+						res.redirect("/movie/"+ movie._id);
+			  	});
+				});
+	  	};
+	  	res.redirect("/movie/"+ movie._id);
 		});
-	  } else if (categoriesName) {
-		var category = new Categories({
-		  name:categoriesName,
-		  movies:[movie._id]
-		});
-		category.save(function(err,category) {
-		  if (err) {
-			console.log(err);
-		  };
-		  movie.categories = category._id;
-		  movie.save(function(err,movie) {
-			if (err) {
-			  console.log(err);
-			};
-			res.redirect("/movie/"+ movie._id);
-		  });
-		});
-	  };	
-	});
   };
 };
 
