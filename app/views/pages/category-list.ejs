@@ -16,7 +16,7 @@
 		  <tr class="item-id-<%= item._id %>">
 			<td class="td-style"><%= item.name %></td>
 			<td class="td-style"><%= moment(item.meta.createAt).format("YYYY/MM/DD") %></td>
-			<td class="td-style"><a target="_blank" href="/movie/<%= item._id %>">查看</a></td>
+			<td class="td-style"><a target="_blank" href="/results?cat=<%= item._id%>&page=0">查看</a></td>
 			<td class="td-style"><a href="/admin/movie/update/<%= item._id %>">更新</a></td>
 			<td class="td-style">
 			  <button class="btn btn-danger delCategory" type="button" data-id="<%= item._id %>" title="注意,分类下的所有电影都将被删除!">删除</button>
