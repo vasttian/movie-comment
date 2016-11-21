@@ -113,7 +113,7 @@ exports.save = function(req, res) {
 
   if (id) {
   	console.log('更新电影!');
-		Movie.findById(id, function(err,movie) {
+		Movie.findById(id, function(err, movie) {
 		  if(err) {
 				console.log(err);
 	 		}
@@ -160,7 +160,7 @@ exports.save = function(req, res) {
 						console.log(err);
 			  	};
 			  	movie.categories = category._id;
-			  	movie.save(function(err,movie) {
+			  	movie.save(function(err, movie) {
 						if (err) {
 					  	console.log(err);
 						};

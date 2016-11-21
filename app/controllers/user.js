@@ -110,7 +110,7 @@ exports.signin = function(req, res) {
   var _user = req.body.user;
   var name = _user.name;
   var pass = _user.password;
-  User.findOne({name: name}, function (err, user) {
+  User.findOne({name: name}, function(err, user) {
 	if (err) {
 	  console.log(err);
 	};
@@ -119,7 +119,7 @@ exports.signin = function(req, res) {
 	  return res.redirect("/signup");
 	};
 	req.session.user = user;
-  console.log('user',user);
+  console.log('user', user);
 	return res.redirect("/");
 	// user.comparePassword(pass, function (err, isMatch) {
 	// 	if (err) {
@@ -154,7 +154,7 @@ exports.sendUser = function(req, res) {
 //个人资料
 exports.sendPersonalInfo = function(req, res) {
   var user = req.session.user;
-  console.log('个人资料:',user);
+  console.log('个人资料:', user);
   res.render("pages/show-personal-info", {
     title: '个人资料',
     user: user
@@ -187,7 +187,7 @@ exports.movieAdminRequired = function(req, res, next){
 exports.user_movieAdminRequired = function(req, res, next){
   console.log("验证是否有对用户进行CRUD的权限");
   var user = req.session.user;
-  console.log("user:",user);
+  console.log("user:", user);
   if (user.role <= 20) {
 	console.log("对不起,你还没有获得对用户进行CRUD的权限!");
 	return res.redirect("/signin");
