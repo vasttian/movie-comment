@@ -138,14 +138,14 @@ exports.save = function(req, res) {
 				console.log("新增电影失败",err);
 		  }
 	 		if (categoryId) {
-				Categories.findById(categoryId,function(err,categories) {
+				Categories.findById(categoryId,function(err, categories) {
 		  		if (err) {
-						console,log(err);
+						console.log(err);
 		  		};
 		  		categories.movies.push(movie._id);
-		  		categories.save(function(err,categories) {
+		  		categories.save(function(err, categories) {
 						if (err) {
-			  			console,log(err);
+			  			console.log(err);
 						};
 						res.redirect("/movie/"+ movie._id);
 		  		});
@@ -155,7 +155,7 @@ exports.save = function(req, res) {
 		 		 	name:categoriesName,
 		  		movies:[movie._id]
 				});
-				category.save(function(err,category) {
+				category.save(function(err, category) {
 				  if (err) {
 						console.log(err);
 			  	};
@@ -168,7 +168,7 @@ exports.save = function(req, res) {
 			  	});
 				});
 	  	};
-	  	res.redirect("/movie/"+ movie._id);
+	  	// res.redirect("/movie/"+ movie._id);
 		});
   };
 };
