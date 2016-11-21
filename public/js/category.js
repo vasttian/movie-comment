@@ -18,4 +18,19 @@ $(function() {
 			}
 		});
 	});
+
+	$(".updateCategory").click(function(e) {
+		var target = $(e.target);
+		var id = target.data("id");
+    console.log('idididid:',id);
+		 $.ajax({
+      type: 'GET',
+      url: "/admin/category/update/"+id,
+      async: true,
+      success: function(data, status) {
+      	console.log('datadata:',data);
+      	$("#move-windows").html(data);
+      }
+    });
+	});
 });

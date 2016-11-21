@@ -42,16 +42,30 @@ exports.del = function(req, res) {
 
   if(id) {
   	Movie.remove({categories:id}, function(err, movie) {
-	  if (err) {
-		console.log(err);
-	  }
-	});
-	Categories.remove({_id: id}, function(err, movie) {
-	  if (err) {
-		console.log(err);
-	  } else {
-		res.json({success: 1});
-	  }
-	});
+	  	if (err) {
+				console.log(err);
+	  	}
+		});
+		Categories.remove({_id: id}, function(err, movie) {
+	  	if (err) {
+				console.log(err);
+	  	} else {
+				res.json({success: 1});
+	  	}
+		});
   }
+};
+
+//更新操作
+exports.update = function(req, res) {
+  var id = req.params.id;
+  if (id) {
+		Categories.findById(id, function(err, categories) {
+			// console.log("categories",categories);
+			res.render("pages/add-category", {
+		  	title: "更新分类",
+		  	categories: categories
+			});
+	  });
+  };
 };

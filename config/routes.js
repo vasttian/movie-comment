@@ -49,6 +49,7 @@ module.exports = function (app) {
   //电影类别
   app.get("/admin/movie/category/add", User.signinRequired, User.movieAdminRequired, Category.add);
   app.get("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.list);
+  app.get("/admin/category/update/:id", User.signinRequired, User.movieAdminRequired,  Category.update);
   app.post("/admin/movie/category", User.signinRequired, User.movieAdminRequired, Category.save);
   app.delete("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.del);
 
