@@ -57,7 +57,7 @@ angular.module("adminApp", ["ngRoute"])
   })
   .when('/movie-manage', {
     // templateUrl: 'public/admin/movie-index.html',
-    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="add-movie">添加电影</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="add-category">添加分类</a></li><li ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)" id="show-movie">查看电影</a></li><li ng-click="libState=3;" ng-class="{active:libState==3}" role="presentation"><a href="javascript:void(0)" id="show-category">查看分类</a></li></ul></div></div><div id="move-windows"></div><script src="/js/admin.js"></script>',
+    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="add-movie">添加电影</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="add-category">添加分类</a></li><li ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)" id="show-movie">查看电影</a></li><li ng-click="libState=3;" ng-class="{active:libState==3}" role="presentation"><a href="javascript:void(0)" id="show-category">查看分类</a></li></ul></div></div><div id="move-windows"></div><script src="/js/move-windows.js"></script>',
     controller: 'movieCtrl'
   })
   .when('/user-manage', {
