@@ -21,17 +21,22 @@ var CategoriesSchema = new mongoose.Schema({
 });
 
 CategoriesSchema.statics = {//静态方法
-  fetch: function(cb) {
-	return this
-	.find({})
-	.sort("meta.updateAt")
-	.exec(cb)
-  },
-  findById: function(id, cb) {
-	return this
-	.findOne({_id: id})
-	.exec(cb)
-  }
+	fetch: function(cb) {
+		return this
+		.find({})
+		.sort("meta.updateAt")
+		.exec(cb)
+	},
+	findById: function(id, cb) {
+		return this
+		.findOne({_id: id})
+		.exec(cb)
+	},
+	findByName: function(name, cb) {
+		return this
+		.findOne({name: name})
+		.exec(cb)
+	}
 }
 
 CategoriesSchema.pre("save", function (next) {//中间件

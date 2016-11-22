@@ -1,4 +1,6 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
+var SALT_STRNGTH = 10;
 
 var UserSchema = new mongoose.Schema({
   name: {
@@ -44,15 +46,39 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
+UserSchema.pre('save', function(next){
+  var user = this;
+  if (this.isNew) {
+    this.meta.createdAt = this.meta.updateAt = Date.now();
+  } else {
+    this.meta.updateAt = Date.now();
+  }
+
+  //随机salt及密码加密
+  bcrypt.genSalt(SALT_STRNGTH, function(err, salt){
+    if (err) {
+      return next(err);
+    }
+    bcrypt.hash(user.password, salt, null, function(err, hash) {
+      if (err) {
+        return next(err);
+      }
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+
 //实例方法
 UserSchema.methods = {
-  comparePass: function(pass, cb) {
-	bcrypt.compare(pass, this.password, function(err, isMatch) {
-	  if (err) {
-		return cb(err);
-	  }
-	  cb(null, isMatch);
-	});
+  comparePassword: function(pass, cb) {
+	  bcrypt.compare(pass, this.password, function(err, isMatch) {
+	    if (err) {
+		    return cb(err);
+	    }
+	    cb(null, isMatch);
+	  });
   }
 };
 

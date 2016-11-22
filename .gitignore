@@ -1,2 +1,5 @@
 /node_modules/*
 /.idea/*
+/public/images/poster/*
+/public/images/avatar/*
+!/public/images/avatar/default/

@@ -49,15 +49,22 @@
 			<label class="col-sm-3 control-label">选择类型</label>
 			<div class="col-sm-9">
       	  	  <div class="checkbox">
-        		<label>
-        		  <input type="radio" name="user[role]" value="0" checked>普通用户
+        		<label ng-click="roleStatus='normal';">
+        		  <input type="radio" name="user[role]" checked>普通用户
         		</label>
         		&nbsp;&nbsp;&nbsp;
-        		<label>
-          		  <input type="radio" name="user[role]" value="32">管理员
+        		<label ng-click="roleStatus='admin';">
+          		  <input type="radio" name="user[role]">管理员
         		</label>
       		  </div>
     		</div>
+		  </div>
+		  <% /*<div class="form-group" ng-if="roleStatus=='admin'"> */ %>
+		  <div class="form-group" ng-show="roleStatus=='admin'">
+			<label for="invitationCode" class="col-sm-3 control-label">邀请码</label>
+				<div class="col-sm-9">
+			  	<input type="text" id="invitationCode" class="form-control" name="user[invitationCode]" placeholder="如果您还没有邀请码,请联系tianyiming26@gmail.com">
+				</div>
 		  </div>
 		  <div class="form-group">
 			<label for="signupPassword" class="col-sm-3 control-label">密码</label>
@@ -97,5 +104,5 @@
 	</div>
   </div>
 </div>
-<script src="js/signup.js"></script>
+<script src="/js/signup.js"></script>
 <%- include ../includes/footer %>
