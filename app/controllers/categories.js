@@ -1,5 +1,6 @@
 var Categories = require("../models/categories");
 var Movie = require("../models/movie");
+var _ = require("underscore");
 
 //添加分类页
 exports.add = function(req, res) {
@@ -11,15 +12,33 @@ exports.add = function(req, res) {
 
 //存储分类
 exports.save = function(req, res) {
+	var id = req.body._id;
   var _category = req.body;
   var category = new Categories(_category);
-  category.save(function(err, category) {
-	if (err) {
-	  console.log(err);
-	};
-	res.json({status: true});
-	// res.redirect("/admin/#/movie-manage");
-  });
+  // console.log("category::",category);
+  if (id) {
+  	console.log('更新分类!');
+  	Categories.findById(id, function(err, categories) {
+  		if(err) {
+				console.log(err);
+	 		};
+	 		var _categories = _.extend(categories, _category);
+	 		_categories.save(function(err, category) {
+	 			if (err) {
+		  		console.log(err);
+				};
+				res.json({status: true});
+	 		});
+  	});
+  } else {
+	  category.save(function(err, category) {
+		if (err) {
+		  console.log(err);
+		};
+		res.json({status: true});
+		// res.redirect("/admin/#/movie-manage");
+	  });
+  }
 };
 
 //分类列表
