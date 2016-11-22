@@ -151,22 +151,42 @@ exports.save = function(req, res) {
 		  		});
 				});
 	  	} else if (categoriesName) {
-				var category = new Categories({
-		 		 	name:categoriesName,
-		  		movies:[movie._id]
-				});
-				category.save(function(err, category) {
-				  if (err) {
-						console.log(err);
-			  	};
-			  	movie.categories = category._id;
-			  	movie.save(function(err, movie) {
-						if (err) {
-					  	console.log(err);
-						};
-						res.redirect("/movie/"+ movie._id);
-			  	});
-				});
+	  		Categories.findByName(categoriesName, function(err, categoriesValue) {
+	  			if (err) {
+	  				console.log("err:",err);
+	  			};
+	  			console.log("categoriesValue:",categoriesValue);
+		  		//如果填写的分类名称，已经有了。这种情况会在豆瓣自动填充数据的时候出现
+	  			if (categoriesValue) {
+  					categoriesValue.movies.push(movie._id);
+  					categoriesValue.save(function(err, categoriesNewValue) {
+	  					movie.categories = categoriesNewValue._id;
+	  					movie.save(function(err, movie) {
+	  						if (err) {
+	  							console.log(err);
+	  						};
+	  						res.redirect("/movie/"+ movie._id);
+	  					});
+  					});
+	  			} else {
+	  				var category = new Categories({
+	  					name: categoriesName,
+	  					movies: [movie._id]
+	  				});
+	  				category.save(function(err, category) {
+	  					if (err) {
+	  						console.log(err);
+	  					};
+	  					movie.categories = category._id;
+	  					movie.save(function(err, movie) {
+	  						if (err) {
+	  							console.log(err);
+	  						};
+	  						res.redirect("/movie/"+ movie._id);
+	  					});
+	  				});
+	  			}
+	  		});
 	  	};
 	  	// res.redirect("/movie/"+ movie._id);
 		});
