@@ -121,19 +121,19 @@ exports.signin = function(req, res) {
     req.session.user = user;
     console.log('user', user);
     return res.redirect("/");
-	// user.comparePassword(pass, function (err, isMatch) {
-	// 	if (err) {
-	// 	  console.log(err);
-	// 	};
-	// 	if (isMatch) {
-	// 	  cosole.log('登录成功!');
-	// 	  req.session.user = user;
-	// 	  return res.redirect("/");
-	// 	}else {
-	// 	  console.log('密码错误!');
-	// 	  return res.redirect("/signin");
-	// 	}
-	// });
+  	user.comparePassword(pass, function (err, isMatch) {
+  		if (err) {
+  		  console.log(err);
+  		};
+  		if (isMatch) {
+  		  cosole.log('登录成功!');
+  		  req.session.user = user;
+  		  return res.redirect("/");
+  		}else {
+  		  console.log('密码错误!');
+  		  return res.redirect("/signin");
+  		}
+  	});
   });
 };
 
