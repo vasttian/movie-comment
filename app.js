@@ -28,7 +28,7 @@ app.use(session({
   secret: 'vasttian',
   cookie:{
     // maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
-  	maxAge: 1000 * 60 * 60,
+  	maxAge: 1000 * 60 * 60 * 7,
   },
   store: new mongoStore({
     url: dbUrl,
