@@ -31,6 +31,7 @@ exports.save = function(req, res) {
 	 		});
   	});
   } else {
+  	console.log('新增分类!');
 	  category.save(function(err, category) {
 		if (err) {
 		  console.log(err);
@@ -44,13 +45,13 @@ exports.save = function(req, res) {
 //分类列表
 exports.list = function(req,res) {
   Categories.fetch(function(err, categories) {
-	if (err) {
-	  console.log(err);
-	}
-	res.render("pages/category-list", {
-	  title: "电影分类",
-	  categories: categories
-	});
+		if (err) {
+		  console.log(err);
+		}
+		res.render("pages/category-list", {
+		  title: "电影分类",
+		  categories: categories
+		});
   });	
 };
 

@@ -7,35 +7,35 @@ var path = require("path");
 
 //电影详情页
 exports.detail = function(req, res) {
-  console.log('电影详情!');
-  var id = req.params.id;
+	console.log('电影详情!');
+	var id = req.params.id;
 
   //加入统计量
   Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
-	if (err) {
-	  console.log(err);
-	};
+  	if (err) {
+  		console.log(err);
+  	};
   });
-	
+  
   Movie.findById(id, function(err, movie) {
-	if (err) {
-	  console.log(err);
-	};
+  	if (err) {
+  		console.log(err);
+  	};
 
   	Comment
-	.find({movie: id})
-	.populate("from", "name avatar")
-	.populate("reply.from reply.to", "name avatar")
-	.exec(function(err, comment) {
-  	  if (err) {
-		console.log(err);
-  	  };
+  	.find({movie: id})
+  	.populate("from", "name avatar")
+  	.populate("reply.from reply.to", "name avatar")
+  	.exec(function(err, comment) {
+  		if (err) {
+  			console.log(err);
+  		};
   	  // console.log('movie_movie',movie);
   	  // console.log('comment_comment',comment);
   	  res.render("pages/movie-detail", {
-		title:"电影详情",
-		movie: movie,
-		comment: comment
+  	  	title:"电影详情",
+  	  	movie: movie,
+  	  	comment: comment
   	  });
   	});	
   });
@@ -175,74 +175,74 @@ exports.save = function(req, res) {
 
 //电影列表
 exports.list = function(req, res) {
-  console.log('获取电影列表!');
-  Movie.fetch(function(err, movies) {
-	if (err) {
-	  console.log(err);
-	}
-	res.render("pages/movie-list", {
-	  title: "查看电影",
-	  movies: movies
-	});
-  });	
+	console.log('获取电影列表!');
+	Movie.fetch(function(err, movies) {
+		if (err) {
+			console.log(err);
+		}
+		res.render("pages/movie-list", {
+			title: "查看电影",
+			movies: movies
+		});
+	});	
 };
 
 //电影点击率排行榜
 exports.pvRanking = function(req, res) {
-  console.log('获取电影点击率排行榜!');
-  Movie.pvRanking(function(err, movies) {
-	if (err) {
-	  console.log('获取电影点击率排行榜失败:', err);
-	}
-	res.render("pages/movie-ranking", {
-	  title: "点击排行",
-	  movies: movies,
-	  ranking: "pvRanking"
+	console.log('获取电影点击率排行榜!');
+	Movie.pvRanking(function(err, movies) {
+		if (err) {
+			console.log('获取电影点击率排行榜失败:', err);
+		}
+		res.render("pages/movie-ranking", {
+			title: "点击排行",
+			movies: movies,
+			ranking: "pvRanking"
+		});
 	});
-  });
 };
 
 //电影片长排行榜
 exports.movieTimeRanking = function(req, res) {
-  console.log('获取电影片长排行榜!');
-  Movie.movieTimeRanking(function(err, movies) {
-	if (err) {
-	  console.log('获取电影片长排行榜失败:', err);
-	}
-	res.render("pages/movie-ranking", {
-	  title: "片长排行",
-	  movies: movies,
-	  ranking: "movieTimeRanking"
+	console.log('获取电影片长排行榜!');
+	Movie.movieTimeRanking(function(err, movies) {
+		if (err) {
+			console.log('获取电影片长排行榜失败:', err);
+		}
+		res.render("pages/movie-ranking", {
+			title: "片长排行",
+			movies: movies,
+			ranking: "movieTimeRanking"
+		});
 	});
-  });
 };
 
 //电影上映日期排行榜
 exports.dateRanking = function(req, res) {
-  console.log('获取电影上映日期排行榜!');
-  Movie.dateRanking(function(err, movies) {
-	if (err) {
-	  console.log('获取电影上映日期排行榜失败:', err);
-	}
-	res.render("pages/movie-ranking", {
-	  title: "上映排行",
-	  movies: movies,
-	  ranking: "dateRanking"
+	console.log('获取电影上映日期排行榜!');
+	Movie.dateRanking(function(err, movies) {
+		if (err) {
+			console.log('获取电影上映日期排行榜失败:', err);
+		}
+		res.render("pages/movie-ranking", {
+			title: "上映排行",
+			movies: movies,
+			ranking: "dateRanking"
+		});
 	});
-  });
 };
 
 //删除
 exports.del = function(req, res) {
-  console.log("删除电影!");
-  var id = req.query.id;
-  if (id) {
-	Movie.remove({_id:id}, function(err, movie) {
-	  if (err) {
-		console.log(err);
-	  } else {
-		res.json({success: 1});
-	  }
-	});
-  }
+	console.log("删除电影!");
+	var id = req.query.id;
+	if (id) {
+		Movie.remove({_id:id}, function(err, movie) {
+			if (err) {
+				console.log(err);
+			} else {
+				res.json({success: 1});
+			}
+		});
+	}
 };

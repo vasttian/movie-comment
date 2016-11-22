@@ -4,7 +4,7 @@ var path = require('path');
 //注册
 exports.showSignup = function(req, res) {
   res.render("pages/signup", {
-		title: '注册一萌'
+    title: '注册一萌'
   });
 };
 
@@ -77,31 +77,31 @@ exports.signup = function(req, res) {
   	_user.nickname = _user.name;
   }
   User.findOne({name:_user.name}, function(err, name) {
-	  if (err) {
-	    console.log('err');
-	  };
-	if (name) {
-	  console.log('用户名已存在!');
-	  // return res.json({"status":"error"});
-	  res.redirect('/use/signup');
-	} else {
-	  var user = new User(_user);
-	  user.save(function(err, user) {
-		if (err) {
-		  console.log('用户名密码保存失败!');
-		};
-		req.session.user = user;
-		// return res.json({"status":"ok"});
-		res.redirect('/');
-	  });
-	};
+    if (err) {
+      console.log('err');
+    };
+    if (name) {
+      console.log('用户名已存在!');
+	    // return res.json({"status":"error"});
+	    res.redirect('/use/signup');
+	  } else {
+      var user = new User(_user);
+      user.save(function(err, user) {
+        if (err) {
+          console.log('用户名密码保存失败!');
+        };
+        req.session.user = user;
+		    // return res.json({"status":"ok"});
+		    res.redirect('/');
+      });
+    };
   });
 };
 
 //登录页面
 exports.showSignin = function(req, res) {
   res.render("pages/signin", {
-		title:'登录一萌'
+    title:'登录一萌'
   });
 };
 
@@ -111,16 +111,16 @@ exports.signin = function(req, res) {
   var name = _user.name;
   var pass = _user.password;
   User.findOne({name: name}, function(err, user) {
-	if (err) {
-	  console.log(err);
-	};
-	if (!user) {
-	  console.log('用户名不存在!');
-	  return res.redirect("/signup");
-	};
-	req.session.user = user;
-  console.log('user', user);
-	return res.redirect("/");
+    if (err) {
+      console.log(err);
+    };
+    if (!user) {
+      console.log('用户名不存在!');
+      return res.redirect("/signup");
+    };
+    req.session.user = user;
+    console.log('user', user);
+    return res.redirect("/");
 	// user.comparePassword(pass, function (err, isMatch) {
 	// 	if (err) {
 	// 	  console.log(err);
@@ -140,8 +140,8 @@ exports.signin = function(req, res) {
 //管理员页面
 exports.showAdmin = function(req, res) {
   res.render("pages/admin-manage", {
-	  title: '管理页面'
-  });
+   title: '管理页面'
+ });
 };
 
 //发送用户信息
@@ -166,8 +166,8 @@ exports.signinRequired = function(req, res, next) {
   console.log("验证是否登录");
   var user = req.session.user;
   if (!user) {
-		console.log("没有登录");
-		return res.redirect("/signin");
+    console.log("没有登录");
+    return res.redirect("/signin");
   }
   next();
 };
@@ -177,10 +177,10 @@ exports.movieAdminRequired = function(req, res, next){
   console.log("验证是否有对电影进行CRUD的权限");
   var user = req.session.user;
   if (user.role <= 10) {
-	  console.log("对不起,你还没有获得对电影进行CRUD的权限!");
-	  return res.redirect("/signin");
-  }
-  next();
+   console.log("对不起,你还没有获得对电影进行CRUD的权限!");
+   return res.redirect("/signin");
+ }
+ next();
 };
 
 //是否有对用户进行CRUD的权限
@@ -189,10 +189,10 @@ exports.user_movieAdminRequired = function(req, res, next){
   var user = req.session.user;
   console.log("user:", user);
   if (user.role <= 20) {
-	console.log("对不起,你还没有获得对用户进行CRUD的权限!");
-	return res.redirect("/signin");
-  }
-  next();
+   console.log("对不起,你还没有获得对用户进行CRUD的权限!");
+   return res.redirect("/signin");
+ }
+ next();
 };
 
 //是否有超级管理员的权限
@@ -201,10 +201,10 @@ exports.superAdminRequired = function(req, res, next){
   var user = req.session.user;
   console.log("user:", ser);
   if(user.role <= 30) {
-	console.log("对不起,你还没有获得超级管理员的权限!");
-	return res.redirect("/signin");
-  }
-  next();
+   console.log("对不起,你还没有获得超级管理员的权限!");
+   return res.redirect("/signin");
+ }
+ next();
 };
 
 //登出
