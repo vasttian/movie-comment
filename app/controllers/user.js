@@ -118,15 +118,13 @@ exports.signin = function(req, res) {
       console.log('用户名不存在!');
       return res.redirect("/signup");
     };
-    req.session.user = user;
     console.log('user', user);
-    return res.redirect("/");
   	user.comparePassword(pass, function (err, isMatch) {
   		if (err) {
   		  console.log(err);
   		};
   		if (isMatch) {
-  		  cosole.log('登录成功!');
+  		  console.log('登录成功!');
   		  req.session.user = user;
   		  return res.redirect("/");
   		}else {
