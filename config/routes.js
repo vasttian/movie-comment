@@ -24,7 +24,9 @@ module.exports = function (app) {
   app.get('/logout', User.logout);
   app.get('/user/personal/info', User.signinRequired, User.sendPersonalInfo);
   app.get('/update/user/personal/info', User.signinRequired, User.showPersonalInfo);
+  app.post('/update/user/personal/info', User.signinRequired, multipartMiddleware, User.saveAvatar, User.updatePersonalInfo);
   app.post('/user/checkname', User.checkUserName);
+  app.post('/check/originpassword', User.signinRequired, User.checkOriginPassword);
   app.post('/invitation-code/checkinvitationcode', InvitationCode.checkInvitationCode);
   app.post('/user/signup', multipartMiddleware, User.saveAvatar, User.signup);
   app.post('/user/signin', User.signin);

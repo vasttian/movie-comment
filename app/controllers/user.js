@@ -1,4 +1,5 @@
 var User = require("../models/user");
+var _ = require("underscore");
 var fs = require('fs');
 var path = require('path');
 //注册
@@ -54,6 +55,30 @@ exports.checkUserName = function(req, res) {
   });
 };
 
+//检验原密码
+exports.checkOriginPassword = function(req, res) {
+  var _user = req.session.user;
+  var _name = _user.name;
+  var password = req.body.user.originPassword;
+  console.log("_user::", _user);
+  User.findById(_user._id, function(err, user) {
+    if (err) {
+      console.log("检验原密码时查找用户错误:",err);
+    };
+    user.comparePassword(password, function (err, isMatch) {
+      if (err) {
+        console.log('err');
+      };
+      if (!isMatch) {
+        console.log('原密码错误!');
+        return res.json({"valid": false});
+      } else {
+        console.log('原密码正确!');
+        return res.json({"valid": true});
+      };
+    });
+  });
+};
 
 //注册
 exports.signup = function(req, res) {
@@ -62,7 +87,7 @@ exports.signup = function(req, res) {
   if (req.avatar) {
     _user.avatar = req.avatar;
   }
-  console.log('---user:',_user);
+  console.log('---user:', _user);
   if (_user.invitationCode == 'movieadmin') {
     _user.role = 20;
   } else if (_user.invitationCode == 'useradminmovieadmin') {
@@ -119,19 +144,21 @@ exports.signin = function(req, res) {
       return res.redirect("/signup");
     };
     console.log('user', user);
-  	user.comparePassword(pass, function (err, isMatch) {
-  		if (err) {
-  		  console.log(err);
-  		};
-  		if (isMatch) {
-  		  console.log('登录成功!');
-  		  req.session.user = user;
-  		  return res.redirect("/");
-  		}else {
-  		  console.log('密码错误!');
-  		  return res.redirect("/signin");
-  		}
-  	});
+    req.session.user = user;
+    return res.redirect("/");
+  	// user.comparePassword(pass, function (err, isMatch) {
+  	// 	if (err) {
+  	// 	  console.log(err);
+  	// 	};
+  	// 	if (isMatch) {
+  	// 	  console.log('登录成功!');
+  	// 	  req.session.user = user;
+  	// 	  return res.redirect("/");
+  	// 	}else {
+  	// 	  console.log('密码错误!');
+  	// 	  return res.redirect("/signin");
+  	// 	}
+  	// });
   });
 };
 
@@ -169,6 +196,27 @@ exports.showPersonalInfo = function(req, res) {
   });
 };
 
+//修改资料
+exports.updatePersonalInfo = function(req, res) {
+  var userObj = req.body.user;
+  console.log("修改资料");
+  if (req.avatar) {
+    userObj.avatar = req.avatar;
+  }
+  console.log("userObj:", userObj);
+  var id = userObj._id;
+  User.findById(id, function(err, user) {
+    var _user =  _.extend(user, userObj);
+    console.log("_user::", _user);
+    _user.save(function(err, user) {
+      if (err) {
+        console.log('修改资料失败:', err);
+      }
+      req.session.user = user;
+      res.redirect('/');
+    });
+  });
+};
 
 //是否登录
 exports.signinRequired = function(req, res, next) {

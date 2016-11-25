@@ -21,7 +21,6 @@ exports.detail = function(req, res) {
   	if (err) {
   		console.log(err);
   	};
-
   	Comment
   	.find({movie: id})
   	.populate("from", "name avatar")

@@ -46,7 +46,7 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
-UserSchema.pre('save', function(next){
+UserSchema.pre('save', function(next) {
   var user = this;
   if (this.isNew) {
     this.meta.createdAt = this.meta.updateAt = Date.now();
@@ -55,7 +55,7 @@ UserSchema.pre('save', function(next){
   }
 
   //随机salt及密码加密
-  bcrypt.genSalt(SALT_STRNGTH, function(err, salt){
+  bcrypt.genSalt(SALT_STRNGTH, function(err, salt) {
     if (err) {
       return next(err);
     }
@@ -73,7 +73,9 @@ UserSchema.pre('save', function(next){
 //实例方法
 UserSchema.methods = {
   comparePassword: function(pass, cb) {
-	  bcrypt.compare(pass, this.password, function(err, isMatch) {
+      console.log("pass:",pass);
+      console.log("this.password:",this.password);
+    bcrypt.compare(pass, this.password, function(err, isMatch) {
 	    if (err) {
 		    return cb(err);
 	    }

@@ -13,21 +13,21 @@ $(function() {
 		},
 		fields: {
 	  	'user[name]': {
-			message: '用户名还没有验证',
-			validators: {
-		  	notEmpty: {
-					message: '用户名不能为空'
-		  	},
-		  	regexp: {
-		    	regexp: /^[a-zA-Z0-9_\.]+$/,
-		    	message: '只能由数字下划线或字母组成'
-		  	},
-		  	stringLength: {
-		    	min: 3,
-		    	max: 16,
-		    	message: '用户名只能是3至16个字符'
-		  	},
-		  	threshold: 3, //3个字符以上才发送ajax请求
+				message: '用户名还没有验证',
+				validators: {
+			  	notEmpty: {
+						message: '用户名不能为空'
+			  	},
+			  	regexp: {
+			    	regexp: /^[a-zA-Z0-9_\.]+$/,
+			    	message: '只能由数字下划线或字母组成'
+			  	},
+			  	stringLength: {
+			    	min: 3,
+			    	max: 16,
+			    	message: '用户名只能是3至16个字符'
+			  	},
+			  	threshold: 3, //3个字符以上才发送ajax请求
 	      	remote: {	// result:{"valid",true or false} 
 	        	url: '/user/checkname',
 	        	message: '用户名已存在，请重新输入',

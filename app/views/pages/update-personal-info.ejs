@@ -6,7 +6,10 @@
         <h3>修改资料</h3>
       </div>
       <div class="panel-body">
-        <form class="form-horizontal" role="form" id="updateInfoForm">
+        <form class="form-horizontal" role="form" id="updateInfoForm" action="/update/user/personal/info", method="post", enctype="multipart/form-data">
+          <% if(user._id){%>
+          <input type="hidden" name="user[_id]" value="<%= user._id %>">
+          <% }%>
           <div class="text-center nav_user">
             <% if (user) { %>
             <div id="userAvatar">
@@ -25,7 +28,7 @@
           <br>
           <div class="form-group">
             <div class="col-sm-2 col-sm-offset-5 file">
-              <input type="file" name="imageUpload" id="upload_user_icon">选择图片
+              <input type="file" name="avatar" id="upload_user_icon">选择图片
             </div>
           </div>
           <br>
@@ -72,6 +75,24 @@
                   <span class="glyphicon glyphicon-calendar"></span>  
                 </span>
               </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="signupPassword" class="col-sm-3 control-label">原密码</label>
+            <div class="col-sm-7">
+              <input type="password" id="signupPassword" class="form-control" name="user[originPassword]">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="signupPassword" class="col-sm-3 control-label">新密码</label>
+            <div class="col-sm-7">
+              <input type="password" id="signupPassword" class="form-control" name="user[newPassword]">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirmPass" class="col-sm-3 control-label">确认密码</label>
+            <div class="col-sm-7">
+              <input type="password" id="confirmPass" class="form-control" name="user[confirmPass]">
             </div>
           </div>
           <div class="form-group">
