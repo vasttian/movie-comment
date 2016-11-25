@@ -6,7 +6,7 @@
         <h3>修改资料</h3>
       </div>
       <div class="panel-body">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" id="updateInfoForm">
           <div class="text-center nav_user">
             <% if (user) { %>
             <div id="userAvatar">
@@ -22,32 +22,34 @@
             <span class="useremail"><%= user.email %></span>
             <% } %>
           </div>
+          <br>
           <div class="form-group">
             <div class="col-sm-2 col-sm-offset-5 file">
               <input type="file" name="imageUpload" id="upload_user_icon">选择图片
             </div>
           </div>
+          <br>
           <div class="form-group">
-            <label class="col-sm-2 control-label">用户名</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><%= user.name %></p>
+            <label class="col-sm-3 control-label">用户名</label>
+            <div class="col-sm-7">
+              <input type="text" id="signupName" class="form-control" name="user[name]" value="<%= user.name %>" disabled="disabled">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">昵称</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><%= user.nickname %></p>
+            <label for="nickname" class="col-sm-3 control-label">昵称</label>
+            <div class="col-sm-7">
+              <input type="text" id="nickname" class="form-control" name="user[nickname]" value="<%= user.nickname %>" placeholder="只能由数字下划线或字母组成">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">邮箱</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><%= user.email %></p>
+            <label for="txtEmail" class="col-sm-3 control-label">邮箱</label>
+            <div class="col-sm-7">
+              <input type="text" id="txtEmail" class="form-control" name="user[email]" value="<%= user.email %>" disabled="disabled">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">邮箱</label>
-            <div class="col-sm-10">
+            <label class="col-sm-3 control-label">性别</label>
+            <div class="col-sm-7">
               <% if (user.sex == 0) { %>
               <p class="form-control-static">女</p>
               <% } else { %>
@@ -56,15 +58,27 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">电话</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><%= user.tel %></p>
+            <label class="col-sm-3 control-label">电话号码</label>
+            <div class="col-sm-7">
+              <input type="text" id="phoneNumber" class="form-control" name="user[tel]" value="<%= user.tel %>">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">出生日期</label>
-            <div class="col-sm-10">
-              <p class="form-control-static"><%= user.born %></p>
+            <label for="bornDate" class="col-sm-3 control-label">出生日期</label>
+            <div class="col-sm-7">
+              <div class="input-group" id='datetimepicker'>
+                <input type="text" id="bornDate" class="form-control" name="user[born]" value="<%= user.born %>">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>  
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-3">
+              <button class="btn btn-default" type="reset">重置</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-success" type="submit">提交</button>
             </div>
           </div>
         </form>
@@ -72,31 +86,5 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $(function() {
-    $('[type=file]').change(function(e) {
-      var file = e.target.files[0];
-      preview1(file);
-    })
-  })
-  function preview1(file) {
-    var img = new Image(), url = img.src = URL.createObjectURL(file);
-    var $img = $(img);
-    img.onload = function() {
-      URL.revokeObjectURL(url);
-      $('#userAvatar').empty().append($img);
-      $img.addClass("img-circle");
-    }
-  }
-  function preview2(file) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      var $img = $('<img>').attr("src", e.target.result);
-      $('#userAvatar').empty().append($img);
-      $img.addClass("img-circle");
-    }
-    reader.readAsDataURL(file)
-  }
-   
-</script>
+<script src="/js/update-info.js"></script>
 <%- include ../includes/footer %>
