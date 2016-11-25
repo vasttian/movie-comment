@@ -23,6 +23,7 @@ module.exports = function (app) {
   app.get('/signin', User.showSignin);
   app.get('/logout', User.logout);
   app.get('/user/personal/info', User.signinRequired, User.sendPersonalInfo);
+  app.get('/update/user/personal/info', User.signinRequired, User.showPersonalInfo);
   app.post('/user/checkname', User.checkUserName);
   app.post('/invitation-code/checkinvitationcode', InvitationCode.checkInvitationCode);
   app.post('/user/signup', multipartMiddleware, User.saveAvatar, User.signup);

@@ -1,0 +1,102 @@
+<%- include ../includes/header %>
+<div class = "container container-style">
+  <div class="col-md-9 col-md-offset-2">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>修改资料</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" role="form">
+          <div class="text-center nav_user">
+            <% if (user) { %>
+            <div id="userAvatar">
+              <a href="#">
+                <% if (user.avatar.indexOf('default') > -1) { %>
+                <img class="img-circle" src="<%= user.avatar %>" alt="头像君不见啦!">
+                <% } else { %>
+                <img class="img-circle" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+                <% } %>
+              </a>
+            </div>
+            <p ><%= user.nickname %></p>
+            <span class="useremail"><%= user.email %></span>
+            <% } %>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-2 col-sm-offset-5 file">
+              <input type="file" name="imageUpload" id="upload_user_icon">选择图片
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><%= user.name %></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">昵称</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><%= user.nickname %></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">邮箱</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><%= user.email %></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">邮箱</label>
+            <div class="col-sm-10">
+              <% if (user.sex == 0) { %>
+              <p class="form-control-static">女</p>
+              <% } else { %>
+              <p class="form-control-static">男</p>
+              <% } %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">电话</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><%= user.tel %></p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">出生日期</label>
+            <div class="col-sm-10">
+              <p class="form-control-static"><%= user.born %></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $('[type=file]').change(function(e) {
+      var file = e.target.files[0];
+      preview1(file);
+    })
+  })
+  function preview1(file) {
+    var img = new Image(), url = img.src = URL.createObjectURL(file);
+    var $img = $(img);
+    img.onload = function() {
+      URL.revokeObjectURL(url);
+      $('#userAvatar').empty().append($img);
+      $img.addClass("img-circle");
+    }
+  }
+  function preview2(file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var $img = $('<img>').attr("src", e.target.result);
+      $('#userAvatar').empty().append($img);
+      $img.addClass("img-circle");
+    }
+    reader.readAsDataURL(file)
+  }
+   
+</script>
+<%- include ../includes/footer %>

@@ -159,6 +159,17 @@ exports.sendPersonalInfo = function(req, res) {
   });
 };
 
+//返回待修改资料
+exports.showPersonalInfo = function(req, res) {
+  var user = req.session.user;
+  console.log('修改资料:', user);
+  res.render("pages/update-personal-info", {
+    title: '修改资料',
+    user: user
+  });
+};
+
+
 //是否登录
 exports.signinRequired = function(req, res, next) {
   console.log("验证是否登录");
