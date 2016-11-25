@@ -23,7 +23,7 @@ exports.search = function(req, res) {
 	var searchWord = req.query.searchWord;	//搜索传入
 
 	var page = parseInt(req.query.page, 10) || 1; //页码
-	var count = 2;	//每页展示数量
+	var count = 4;	//每页展示数量
 	var skipNum = (page-1) * count; //跳过数量
 	var totalMovies;
 
