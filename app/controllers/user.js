@@ -114,8 +114,9 @@ exports.signup = function(req, res) {
       user.save(function(err, user) {
         if (err) {
           console.log('用户名密码保存失败!');
-        };
-        req.session.user = user;
+        } else {
+          req.session.user = user;
+        }
 		    // return res.json({"status":"ok"});
 		    res.redirect('/');
       });
@@ -132,7 +133,8 @@ exports.showSignin = function(req, res) {
 
 //登录
 exports.signin = function(req, res) {
-  var _user = req.body.user;
+  console.log("reqerq::",req.body);
+  var _user = req.body;
   var name = _user.name;
   var pass = _user.password;
   User.findOne({name: name}, function(err, user) {
@@ -141,7 +143,8 @@ exports.signin = function(req, res) {
     };
     if (!user) {
       console.log('用户名不存在!');
-      return res.redirect("/signup");
+      // return res.redirect("/signup");
+      return res.json({"status":"error"});
     };
     console.log('user', user);
   	user.comparePassword(pass, function (err, isMatch) {
@@ -151,10 +154,12 @@ exports.signin = function(req, res) {
   		if (isMatch) {
   		  console.log('登录成功!');
   		  req.session.user = user;
-  		  return res.redirect("/");
+        return res.json({"status":"ok"});
+  		  // return res.redirect("/");
   		}else {
   		  console.log('密码错误!');
-  		  return res.redirect("/signin");
+  		  // return res.redirect("/signin");
+        return res.json({"status":"error"});
   		}
   	});
   });

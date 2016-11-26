@@ -79,7 +79,7 @@ $(function() {
 	$(".updateMovie").click(function(e) {
 		var target = $(e.target);
 		var id = target.data("id");
-		 $.ajax({
+		$.ajax({
       type: 'GET',
       url: "/admin/movie/update/"+id,
       async: true,
