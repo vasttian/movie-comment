@@ -59,7 +59,7 @@ exports.checkUserName = function(req, res) {
 exports.checkOriginPassword = function(req, res) {
   var _user = req.session.user;
   var _name = _user.name;
-  var password = req.body.user.originPassword;
+  var password = req.body.user.password;
   console.log("_user::", _user);
   User.findById(_user._id, function(err, user) {
     if (err) {
@@ -144,21 +144,19 @@ exports.signin = function(req, res) {
       return res.redirect("/signup");
     };
     console.log('user', user);
-    req.session.user = user;
-    return res.redirect("/");
-  	// user.comparePassword(pass, function (err, isMatch) {
-  	// 	if (err) {
-  	// 	  console.log(err);
-  	// 	};
-  	// 	if (isMatch) {
-  	// 	  console.log('登录成功!');
-  	// 	  req.session.user = user;
-  	// 	  return res.redirect("/");
-  	// 	}else {
-  	// 	  console.log('密码错误!');
-  	// 	  return res.redirect("/signin");
-  	// 	}
-  	// });
+  	user.comparePassword(pass, function (err, isMatch) {
+  		if (err) {
+  		  console.log(err);
+  		};
+  		if (isMatch) {
+  		  console.log('登录成功!');
+  		  req.session.user = user;
+  		  return res.redirect("/");
+  		}else {
+  		  console.log('密码错误!');
+  		  return res.redirect("/signin");
+  		}
+  	});
   });
 };
 
@@ -203,22 +201,24 @@ exports.updatePersonalInfo = function(req, res) {
   if (req.avatar) {
     userObj.avatar = req.avatar;
   }
-  console.log("userObj:", userObj);
+  // console.log("userObj:", userObj);
   var id = userObj._id;
   User.findById(id, function(err, user) {
     var _user =  _.extend(user, userObj);
-    console.log("_user::", _user);
-    _user.save(function(err, user) {
+    // console.log("_user::", _user);
+    var user = new User(_user);
+    user.save(function(err, user) {
       if (err) {
         console.log('修改资料失败:', err);
+      } else {
+        req.session.user = user;
       }
-      req.session.user = user;
       res.redirect('/');
     });
   });
 };
 
-//修改密码
+//返回修改密码页面
 exports.showUpdatePass = function(req, res) {
   var user = req.session.user;
   res.render("pages/update-password", {
@@ -226,6 +226,27 @@ exports.showUpdatePass = function(req, res) {
     user: user
   });
 };
+
+//修改密码
+exports.updatePass = function(req, res) {
+  var userObj = req.body.user;
+  // console.log("userObj-before:: ",userObj);
+  userObj.password = userObj.newPass;
+  // console.log("userObj-after:: ",userObj);
+  User.findOne({name: userObj.name}, function(err, user) {
+    var _user = _.extend(user, userObj);
+    var user = new User(_user);
+    user.save(function(err, user) {
+      if (err) {
+        console.log('修改密码失败:', err);
+        // res.redirect('/update/user/password');
+      } else {
+        req.session.user = user;
+      }
+      res.redirect('/');
+    });
+  });
+}
 
 //是否登录
 exports.signinRequired = function(req, res, next) {

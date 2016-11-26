@@ -12,7 +12,7 @@ $(function() {
 	  	validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {
-			'user[originPassword]': {
+			'user[password]': {
 	  		message: '原密码还没验证',
 	  		validators: {
 	  			notEmpty: {

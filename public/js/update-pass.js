@@ -8,7 +8,7 @@ $(function() {
 	  	validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {
-			'user[originPassword]': {
+			'user[password]': {
 	  		message: '原密码还没验证',
 	  		validators: {
 	  			notEmpty: {
@@ -49,10 +49,10 @@ $(function() {
 	  		  stringLength: {
 						min: 6,
 						max: 16,
-						message: '密码长度在6至16之间'
+						message: '密码长度在6至16个字符'
 	  		  },
 	  		  identical: {
-						field: 'user[password]',
+						field: 'user[newPass]',
 						message: '两次密码不一致,请重新输入'
 	  		  }
 				}

@@ -116,13 +116,13 @@ exports.save = function(req, res) {
 		  if(err) {
 				console.log(err);
 	 		}
-	  	Categories.update({_id:movie.categories}, {$pullAll:{"movies":[id]}}, function(err) {
+	  	Categories.update({_id: movie.categories}, {$pullAll: {"movies": [id]}}, function(err) {
 				_movie = _.extend(movie, movieObj);
 				_movie.save(function(err, movie) {
 				  if(err) {
 						console.log(err);
 				  }
-				  Categories.update({_id:categoryId}, {$addToSet:{"movies":id}}, function(err) {
+				  Categories.update({_id: categoryId}, {$addToSet:{"movies": id}}, function(err) {
 			 		 	res.redirect("/movie/"+movie._id);
 			 		});
 				});
@@ -137,7 +137,7 @@ exports.save = function(req, res) {
 				console.log("新增电影失败",err);
 		  }
 	 		if (categoryId) {
-				Categories.findById(categoryId,function(err, categories) {
+				Categories.findById(categoryId, function(err, categories) {
 		  		if (err) {
 						console.log(err);
 		  		};
