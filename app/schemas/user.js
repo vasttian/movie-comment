@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var SALT_STRNGTH = 10;
+var SALT_STRNGTH = 10;//加密计算强度(1 - 10)
 
 var UserSchema = new mongoose.Schema({
   name: {

@@ -186,12 +186,12 @@ exports.sendPersonalInfo = function(req, res) {
   });
 };
 
-//返回待修改资料
+//返回待更改资料
 exports.showPersonalInfo = function(req, res) {
   var user = req.session.user;
-  console.log('修改资料:', user);
+  console.log('更改资料:', user);
   res.render("pages/update-personal-info", {
-    title: '修改资料',
+    title: '更改资料',
     user: user
   });
 };
@@ -215,6 +215,15 @@ exports.updatePersonalInfo = function(req, res) {
       req.session.user = user;
       res.redirect('/');
     });
+  });
+};
+
+//修改密码
+exports.showUpdatePass = function(req, res) {
+  var user = req.session.user;
+  res.render("pages/update-password", {
+    title: "修改密码",
+    user: user
   });
 };
 

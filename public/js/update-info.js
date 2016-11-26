@@ -27,40 +27,6 @@ $(function() {
 	  			}
 	  		}
 	  	},
-	  	'user[password]': {
-				message: '密码还没有验证',
-				validators: {
-		  		notEmpty: {
-						message: '密码不能为空'
-		  		},
-		 			stringLength: {
-						min: 6,
-						max: 16,
-						message: '密码长度在6至16个字符'
-		 			},
-		  		different: {
-						field: 'user[nickname]',
-						message: '密码不能和昵称相同'
-		  		}
-				}
-	  	},
-	  	'user[confirmPass]': {
-				message: '密码确认还没有验证',
-				validators: {
-		  		notEmpty: {
-						message: '密码还没有确认'
-	  		  },
-	  		  stringLength: {
-						min: 6,
-						max: 16,
-						message: '密码长度在6至16之间'
-	  		  },
-	  		  identical: {
-						field: 'user[newPassword]',
-						message: '两次密码不一致,请重新输入'
-	  		  }
-				}
-	  	},
 	  	'user[tel]': {
 				message: '电话号码还没有验证',
 				validators: {
