@@ -25,19 +25,18 @@ app.locals.moment = require('moment');
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(session({
-  secret: 'ethan',
-  /*cookie:{
-  	maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
-  	domain:'/'
-  },*/
+  secret: 'vasttian',
+  cookie:{
+    // maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
+  	maxAge: 1000 * 60 * 60 * 7,
+  },
   store: new mongoStore({
     url: dbUrl,
     collection: 'sessions'
   }),
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }));
-
 
 
 //引入路由模块
