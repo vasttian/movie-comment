@@ -8,6 +8,14 @@ $(function() {
 	  	validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {
+			'user[name]': {
+	  		message: '用户名还没验证',
+	  		validators: {
+	  			notEmpty: {
+	  				message: '用户名不能为空'
+	  			}
+	  		}
+	  	},
 			'user[password]': {
 	  		message: '原密码还没验证',
 	  		validators: {
