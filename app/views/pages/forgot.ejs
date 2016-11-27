@@ -6,7 +6,7 @@
         <h3>找回密码</h3>
       </div>
       <div class="panel-body">
-        <form class="form-horizontal" role="form" id="updatePassForm" action="/forgot/password", method="post">
+        <form class="form-horizontal" role="form" id="forgotPassword">
           <div class="form-group" ng-click="appeal = 0;">
             <label for="username" class="col-sm-3 control-label">用户名&nbsp;&nbsp;:</label>
             <div class="col-sm-7">
@@ -35,20 +35,20 @@
           <div class="form-group" ng-click="appeal = 0;">
             <label for="newPassword" class="col-sm-3 control-label">新密码&nbsp;&nbsp;:</label>
             <div class="col-sm-7">
-              <input type="text" id="newPassword" class="col-sm-3 form-control" name="user[password]">
+              <input type="password" id="newPassword" class="col-sm-3 form-control" name="user[password]">
             </div>
           </div>
           <div class="form-group" ng-click="appeal = 0;">
             <label for="confirmPass" class="col-sm-3 control-label">确认密码&nbsp;&nbsp;:</label>
             <div class="col-sm-7">
-              <input type="text" id="confirmPass" class="col-sm-3 form-control" name="user[confirmPass]">
+              <input type="password" id="confirmPass" class="col-sm-3 form-control" name="user[confirmPass]">
             </div>
           </div>
           <div class="form-group" ng-click="appeal = 0;">
             <div class="col-sm-4 col-sm-offset-7">
               <button class="btn btn-default" type="reset">重置</button>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <button class="btn btn-success" type="submit">找回密码</button>
+              <button id="findPassword" class="btn btn-success">找回密码</button>
             </div>
           </div>
           <div class="form-group">
@@ -64,5 +64,24 @@
     </div>
 	</div>
 </div>
+
+<div id="findPasswordErrorTips" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">错误提示:</h4>
+      </div>
+      <div class="modal-body">
+        找回密码失败,密保问题或答案错误!
+        <br>
+        如果您不记得密保问题或答案,请进行申诉找回。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div
+</div>
+
 <script src="/js/forgot.js"></script>
 <%- include ../includes/footer %>

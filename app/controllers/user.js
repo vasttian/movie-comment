@@ -296,10 +296,13 @@ exports.sendForgotPage = function(req, res) {
 
 //找回密码
 exports.setNewPassword = function(req, res) {
-  var userObj = req.body.user;
+  var userObj = req.body;
   User.findOne({name: userObj.name}, function(err, user) {
     if (err) {
       console.log(err);
+    }
+    if (!user) {
+      return res.json({"status": "error"});
     }
     if (user.problem == userObj.problem && user.problemAnswer == userObj.problemAnswer) {
       console.log("密保问题填写正确!");
