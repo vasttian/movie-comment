@@ -165,6 +165,40 @@ exports.signin = function(req, res) {
   });
 };
 
+//快捷登录
+exports.simpleSignin = function(req, res) {
+  // console.log("req.body::",req.body);
+  var _user = req.body.user;
+  var name = _user.name;
+  var pass = _user.password;
+  User.findOne({name: name}, function(err, user) {
+    if (err) {
+      console.log(err);
+    };
+    if (!user) {
+      console.log('用户名不存在!');
+      return res.redirect("/signin");
+      // return res.json({"status":"error"});
+    };
+    // console.log('user', user);
+    user.comparePassword(pass, function (err, isMatch) {
+      if (err) {
+        console.log(err);
+      };
+      if (isMatch) {
+        console.log('登录成功!');
+        req.session.user = user;
+        // return res.json({"status":"ok"});
+        return res.redirect("/");
+      }else {
+        console.log('密码错误!');
+        return res.redirect("/signin");
+        // return res.json({"status":"error"});
+      }
+    });
+  });
+};
+
 //管理员页面
 exports.showAdmin = function(req, res) {
   res.render("pages/admin-manage", {

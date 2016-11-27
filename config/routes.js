@@ -32,6 +32,7 @@ module.exports = function (app) {
   app.post('/invitation-code/checkinvitationcode', InvitationCode.checkInvitationCode);
   app.post('/user/signup', multipartMiddleware, User.saveAvatar, User.signup);
   app.post('/user/signin', User.signin);
+  app.post('/user/simple/signin', User.simpleSignin);
 
   //管理员
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
