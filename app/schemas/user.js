@@ -34,6 +34,8 @@ var UserSchema = new mongoose.Schema({
     // type: Date,
     // default: Date.now()
   },
+  problem: String,
+  problemAnswer: String,
   meta: {
     createdAt: {
   	type: Date,

@@ -47,10 +47,10 @@ $(function() {
 
   $("#findPassword").click(function() {
     var data = {
-      name: $("#userName").val(),
+      name: $("#username").val(),
       problem: $("#problem").val(),
       problemAnswer: $("#problemAnswer").val(),
-      password: $("#userPass").val()
+      password: $("#newPassword").val()
     };
     $.ajax({
       type: 'POST',
