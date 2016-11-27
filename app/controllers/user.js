@@ -287,6 +287,39 @@ exports.updatePass = function(req, res) {
   });
 }
 
+//找回密码页面
+exports.sendForgotPage = function(req, res) {
+  res.render("pages/forgot.ejs", {
+    title: "找回密码"
+  });
+};
+
+//找回密码
+exports.setNewPassword = function(req, res) {
+  var userObj = req.body.user;
+  User.findOne({name: userObj.name}, function(err, user) {
+    if (err) {
+      console.log(err);
+    }
+    if (user.problem == userObj.problem && user.problemAnswer == userObj.problemAnswer) {
+      console.log("密保问题填写正确!");
+      var _user = _.extend(user, userObj);
+      _user.save(function(err, user) {
+        if (err) {
+          console.log("找回密码失败!");
+          return res.json({"status":"error"});
+        } else {
+          req.session.user = user;
+        }
+        // redirect("/");
+        return res.json({"status":"ok"});
+      });
+    } else {
+      return res.json({"status":"error"});
+    }
+  });
+};
+
 //是否登录
 exports.signinRequired = function(req, res, next) {
   console.log("验证是否登录");

@@ -62,7 +62,11 @@ module.exports = function (app) {
   //评论
   app.post("/user/comment", User.signinRequired, Comment.save);
 
+  //找回密码
+  app.get("/forgot/password", User.sendForgotPage);
+  app.post("/forgot/password", User.setNewPassword);
   //搜索
   app.get('/results', Index.search);
-
+  //ECharts
+  
 };

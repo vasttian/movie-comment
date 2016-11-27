@@ -62,30 +62,31 @@ exports.search = function(req, res) {
 			});
 		});
 	} else {	//搜索
+		console.log("new RegExp::",new RegExp(searchWord + ".*", "i"));
 		Movie
-		.find({title: new RegExp(searchWord + ".*","i")})
+		.find({title: new RegExp(searchWord + ".*", "i")})
 		.exec(function(err, movies) {
 			totalMovies = movies;
 		});
 		Movie
-		.find({title: new RegExp(searchWord + ".*","i")})
+		.find({title: new RegExp(searchWord + ".*", "i")})
 		.limit(count)
 		.skip(skipNum)
 		.exec(function(err, movies) {
 			if (err) {
 				console.log(err);
 			}
-			console.log(movies)
-
+			// console.log("movies:", movies);
+			console.log("movies.length = ", movies.length);
+			var moviesLength = totalMovies ? totalMovies.length : count;
 			res.render("pages/movie-results", {
 				title: "搜索结果",
-				keyword: searchWord,//搜索关键字
+				keyword: searchWord ? searchWord: "全部电影",//搜索关键字
 				currentPage: page,	//当前页
-				query: "searchWord = " + searchWord,
-				totalPage: Math.ceil(totalMovies.length / count),//共有多少页
+				query: "searchWord=" + searchWord,
+				totalPage: Math.ceil(moviesLength / count),//共有多少页
 				movies: movies
 			});
-
 		});
 	}	
 };

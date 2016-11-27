@@ -1,0 +1,68 @@
+<%- include ../includes/header %>
+<div class="container container-style">
+  <div class="col-md-9 col-md-offset-2">
+  	<div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3>找回密码</h3>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" role="form" id="updatePassForm" action="/forgot/password", method="post">
+          <div class="form-group" ng-click="appeal = 0;">
+            <label for="username" class="col-sm-3 control-label">用户名&nbsp;&nbsp;:</label>
+            <div class="col-sm-7">
+              <input type="text" id="username" class="col-sm-3 form-control" name="user[name]">
+            </div>
+          </div>
+        	<div class="form-group" ng-click="appeal = 0;">
+        		<label for="problem" class="col-sm-3 control-label dropdown-toggle" data-toggle="dropdown">选择问题 <span class="caret"></span></label>
+        		<div class="col-sm-7">
+        			<input type="text" id="problem" class="form-control" name="user[problem]" value="">
+        		</div>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="https://www.douban.com/" target="_blank">豆瓣</a></li>
+              <li><a href="http://www.youku.com/" target="_blank">优酷</a></li>
+              <li><a href="http://www.mtime.com/" target="_blank">时光网</a></li>
+              <li><a href="https://developers.douban.com/wiki/?title=book_v2" target="_blank">豆瓣开发者</a></li>
+              <li><a href="http://www.51oscar.com/" target="_blank">大众影评网</a></li>
+            </ul>
+        	</div>
+        	<div class="form-group" ng-click="appeal = 0;">
+        		<label for="problemAnswer" class="col-sm-3 control-label">密保答案&nbsp;&nbsp;:</label>
+        		<div class="col-sm-7">
+        			<input type="text" id="problemAnswer" class="col-sm-3 form-control" name="user[problemAnswer]">
+        		</div>
+        	</div>
+          <div class="form-group" ng-click="appeal = 0;">
+            <label for="newPassword" class="col-sm-3 control-label">新密码&nbsp;&nbsp;:</label>
+            <div class="col-sm-7">
+              <input type="text" id="newPassword" class="col-sm-3 form-control" name="user[password]">
+            </div>
+          </div>
+          <div class="form-group" ng-click="appeal = 0;">
+            <label for="confirmPass" class="col-sm-3 control-label">确认密码&nbsp;&nbsp;:</label>
+            <div class="col-sm-7">
+              <input type="text" id="confirmPass" class="col-sm-3 form-control" name="user[confirmPass]">
+            </div>
+          </div>
+          <div class="form-group" ng-click="appeal = 0;">
+            <div class="col-sm-4 col-sm-offset-7">
+              <button class="btn btn-default" type="reset">重置</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-success" type="submit">找回密码</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div ng-click="appeal = 1;">
+              <a class="col-sm-3 control-label">&nbsp;&nbsp;&nbsp;申诉找回&nbsp;&nbsp;&nbsp;</a>
+            </div>
+            <div ng-if="appeal == 1">
+              <label class="col-sm-5 control-label">申诉请联系: tianyiming26@gmail.com</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+	</div>
+</div>
+<script src="/js/forgot.js"></script>
+<%- include ../includes/footer %>
