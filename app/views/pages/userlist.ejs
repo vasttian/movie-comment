@@ -1,30 +1,31 @@
 <%- include ../includes/header %>
-<div class="container">
+<div class="container container-style">
   <div class="row">
 	<table class="table table-hover table-bordered">
 	  <thead>
 		<tr class="tr-style">
+		  <th class="th-style">头像</th>
 		  <th class="th-style">用户名</th>
-		  <th class="th-style">密码</th>
-		  <th class="th-style">录入时间</th>
-		  <th class="th-style">查看</th>
-		  <th class="th-style">更新</th>
-		  <th class="th-style">删除</th>
+		  <th class="th-style">昵称</th>
+		  <th class="th-style">注册时间</th>
+		  <th class="th-style">角色</th>
+		  <th class="th-style">更新权限</th>
+		  <th class="th-style">删除账户</th>
 		</tr>
 	  </thead>
 	  <tbody>
 	  	<% users.forEach(function (item, index) { %>
 	  	<tr class="item-id-<%= item._id %>">
-		  <td class="td-style"><%= item.name %></td>
-		  <td class="td-style"><%= item.password %></td>
-		  <td class="td-style"><%= moment(item.meta.createAt).format("YYYY/MM/DD") %></td>
-		  <td class="td-style"><a target="_blank" href="/movie/<%= item._id %>">查看</a></td>
-		  <td class="td-style"><a href="/admin/movie/update/<%= item._id %>">更新</a></td>
-		  <td class="td-style">
-			<button class="btn btn-danger del" type="button" data-id="<%= item._id %>">删除</button>
-		  </td>
-		</tr>
-		<% }) %>
+		  	<td class="td-style"><%= item.avatar %></td>
+		  	<td class="td-style"><%= item.name %></td>
+		  	<td class="td-style"><%= item.nickname %></td>
+		  	<td class="td-style"><%= moment(item.meta.createAt).format("YYYY/MM/DD") %></td>
+		  	<td class="td-style"><a href="/admin/movie/update/<%= item._id %>">更新</a></td>
+		  	<td class="td-style">
+					<button class="btn btn-danger del" type="button" data-id="<%= item._id %>">删除</button>
+		  	</td>
+			</tr>
+			<% }) %>
 	  </tbody>
 	</table>
   </div>

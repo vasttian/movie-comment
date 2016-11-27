@@ -325,6 +325,13 @@ exports.setNewPassword = function(req, res) {
   });
 };
 
+//用户列表
+exports.list = function(req, res) {
+  User.find({role: 2}, function(err, user) {
+  // console.log("user:",user);
+  });
+};
+
 //是否登录
 exports.signinRequired = function(req, res, next) {
   console.log("验证是否登录");
