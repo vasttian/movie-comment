@@ -8,37 +8,43 @@
       <div class="panel-body">
         <form class="form-horizontal" role="form" id="forgotPassword">
           <div class="form-group" ng-click="appeal = 0;">
-            <label for="username" class="col-sm-3 control-label">用户名&nbsp;&nbsp;:</label>
+            <label for="username" class="col-sm-3 control-label">用户名</label>
             <div class="col-sm-7">
               <input type="text" id="username" class="col-sm-3 form-control" name="user[name]">
             </div>
           </div>
         	<div class="form-group" ng-click="appeal = 0;">
-        		<label for="problem" class="col-sm-3 control-label dropdown-toggle" data-toggle="dropdown">选择问题 <span class="caret"></span></label>
-            <ul class="dropdown-menu" role="menu">
-              <li>您最好的父亲的生日</li>
-              <li>您最好的母亲的生日</li>
-              <li>您最好的朋友的名字</li>
-              <li>您最好的朋友的生日</li>
-            </ul>
-            <div class="col-sm-7">
-              <input type="text" id="problem" class="form-control" name="user[problem]" value="">
+            <label for="problem" class="col-sm-3 control-label">选择问题</label>
+            <div class="col-sm-7" title="密保问题是你找回密码的保障!">
+              <select class="form-control" id="problem">
+                <option value="-1">请选择密保问题</option>
+                <option value="1">您母亲的姓名是？</option>
+                <option value="2">您母亲的生日是？</option>
+                <option value="3">您父亲的姓名是？</option>
+                <option value="4">您父亲的生日是？</option>
+                <option value="5">您配偶的姓名是？</option>
+                <option value="6">您配偶的生日是？</option>
+                <option value="7">您的学号(或工号)是？</option>
+                <option value="8">您最好朋友的名字是？</option>
+                <option value="9">您最好朋友的生日是？</option>
+                <option value="10">对您影响最大的人名字是？</option>
+              </select>
             </div>
         	</div>
         	<div class="form-group" ng-click="appeal = 0;">
-        		<label for="problemAnswer" class="col-sm-3 control-label">密保答案&nbsp;&nbsp;:</label>
+        		<label for="problemAnswer" class="col-sm-3 control-label">密保答案</label>
         		<div class="col-sm-7">
-        			<input type="text" id="problemAnswer" class="col-sm-3 form-control" name="user[problemAnswer]">
+        			<input type="text" id="problemAnswer" class="col-sm-3 form-control" name="user[problemAnswer]" title="密保问题是你找回密码的保障!" placeholder="请填写2至16个阿拉伯数字">
         		</div>
         	</div>
           <div class="form-group" ng-click="appeal = 0;">
-            <label for="newPassword" class="col-sm-3 control-label">新密码&nbsp;&nbsp;:</label>
+            <label for="newPassword" class="col-sm-3 control-label">新密码</label>
             <div class="col-sm-7">
               <input type="password" id="newPassword" class="col-sm-3 form-control" name="user[password]">
             </div>
           </div>
           <div class="form-group" ng-click="appeal = 0;">
-            <label for="confirmPass" class="col-sm-3 control-label">确认密码&nbsp;&nbsp;:</label>
+            <label for="confirmPass" class="col-sm-3 control-label">确认密码</label>
             <div class="col-sm-7">
               <input type="password" id="confirmPass" class="col-sm-3 form-control" name="user[confirmPass]">
             </div>
@@ -52,7 +58,7 @@
           </div>
           <div class="form-group">
             <div ng-click="appeal = 1;">
-              <a class="col-sm-3 control-label">&nbsp;&nbsp;&nbsp;申诉找回&nbsp;&nbsp;&nbsp;</a>
+              <a class="col-sm-3 control-label">申诉找回</a>
             </div>
             <div ng-if="appeal == 1">
               <label class="col-sm-5 control-label">申诉请联系: tianyiming26@gmail.com</label>
