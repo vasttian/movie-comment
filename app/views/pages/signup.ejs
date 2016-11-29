@@ -86,25 +86,26 @@
 		  		</div>
 		  		<div class="form-group" ng-click="appeal = 0;">
             <label for="problem" class="col-sm-3 control-label">选择问题&nbsp;&nbsp;:</label>
-            <div class="col-sm-9" title="密保问题是你找回密码的保障!">
-              <select class="form-control" id="problem">
-                <option>您母亲的姓名是？</option>
-                <option>您母亲的生日是？</option>
-                <option>您父亲的姓名是？</option>
-                <option>您父亲的生日是？</option>
-                <option>您配偶的姓名是？</option>
-                <option>您配偶的生日是？</option>
-                <option>您的学号(或工号)是？</option>
-                <option>您最好朋友的名字是？</option>
-                <option>您最好朋友的生日是？</option>
-                <option>对您影响最大的人名字是？</option>
+            <div class="col-sm-9" title="密保是你找回密码的保障!">
+              <select class="form-control" id="problem" name="user[problem]">
+                <option value="-1">请选择密保问题</option>
+                <option value="1">您母亲的姓名是？</option>
+                <option value="2">您母亲的生日是？</option>
+                <option value="3">您父亲的姓名是？</option>
+                <option value="4">您父亲的生日是？</option>
+                <option value="13">您配偶的姓名是？</option>
+                <option value="14">您配偶的生日是？</option>
+                <option value="15">您的学号(或工号)是？</option>
+                <option value="17">您最好朋友的名字是？</option>
+                <option value="47">您最好朋友的生日是？</option>
+                <option value="10">对您影响最大的人名字是？</option>
               </select>
             </div>
         	</div>
 		  		<div class="form-group">
 						<label for="problemAnswer" class="col-sm-3 control-label">密保答案</label>
 						<div class="col-sm-9">
-			  			<input type="text" id="problemAnswer" class="form-control" name="user[problemAnswer]" title="密保问题是你找回密码的保障!" placeholder="请填写2至16个阿拉伯数字">
+			  			<input type="text" id="problemAnswer" class="form-control" name="user[problemAnswer]" title="密保是你找回密码的保障!" placeholder="请填写2至16个阿拉伯数字">
 						</div>
 		  		</div>
 		  		<div class="form-group">

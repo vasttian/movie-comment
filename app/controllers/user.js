@@ -87,7 +87,7 @@ exports.signup = function(req, res) {
   if (req.avatar) {
     _user.avatar = req.avatar;
   }
-  console.log('---user:', _user);
+  // console.log('---user:', _user);
   if (_user.invitationCode == 'movieadmin') {
     _user.role = 20;
   } else if (_user.invitationCode == 'useradminmovieadmin') {
@@ -297,7 +297,7 @@ exports.sendForgotPage = function(req, res) {
 //找回密码
 exports.setNewPassword = function(req, res) {
   var userObj = req.body;
-  // console.log("找回密码：",userObj);
+  console.log("找回密码：",userObj);
   User.findOne({name: userObj.name}, function(err, user) {
     if (err) {
       console.log(err);
