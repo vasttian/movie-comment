@@ -251,6 +251,13 @@ exports.dateRanking = function(req, res) {
 	});
 };
 
+exports.categoriesCount = function(req, res) {
+	res.render("pages/active-view", {
+		title: "分类数量",
+		view: "categoriesCount"
+	});
+};
+
 //删除
 exports.del = function(req, res) {
 	console.log("删除电影!");

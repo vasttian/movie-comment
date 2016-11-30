@@ -68,5 +68,5 @@ module.exports = function (app) {
   //搜索
   app.get('/results', Index.search);
   //ECharts
-  
+  app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
 };
