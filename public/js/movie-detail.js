@@ -31,12 +31,12 @@ $(function() {
   $("#submitMovieGrade").click(function() {
     var grade = $("#movieGrade").val();
     $.ajax({
-      type: 'POST',
+      type: 'POST', 
       data: grade,
       url: "/movie/grade",
       async: true,
       success: function(data, status) {
-        
+        console.log('data from grade:',data);
       }
     });
   });
