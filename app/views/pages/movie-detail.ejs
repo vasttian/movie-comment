@@ -90,8 +90,13 @@
 			<dd><%= movie.movieTime %></dd>	
 			<dt>pv</dt>
 			<dd><%= movie.pv %></dd>
+			<dt>电影平均得分</dt>
+			<dd><%= movie.score %></dd>
 			<dt>简介</dt>
-			<dd><%= movie.summary %></dd>				
+			<dd><%= movie.summary %></dd>
+			<br>
+			<dt>评分</dt>
+			<dd><input type="text" id="movieGrade" class="form-control" placeholder= "对同一部电影只能评分一次，请慎重。"><br><button class="pull-right btn btn-primary" type="button">提交</button></dd>
 	  </dl>
 	</div>
   </div>
