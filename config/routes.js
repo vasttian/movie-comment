@@ -61,6 +61,8 @@ module.exports = function (app) {
 
   //评论
   app.post("/user/comment", User.signinRequired, Comment.save);
+  //评分
+  app.post("/movie/grade", User.signinRequired, Movie.grade);
 
   //找回密码
   app.get("/forgot/password", User.sendForgotPage);
