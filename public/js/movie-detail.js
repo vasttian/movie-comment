@@ -27,5 +27,17 @@ $(function() {
         value: commentId
       }).appendTo('#commentForm')
     }
-  })
+  });
+  $("#submitMovieGrade").click(function() {
+    var grade = $("#movieGrade").val();
+    $.ajax({
+      type: 'POST',
+      data: grade,
+      url: "/movie/grade",
+      async: true,
+      success: function(data, status) {
+        
+      }
+    });
+  });
 });
