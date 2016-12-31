@@ -252,7 +252,7 @@ exports.dateRanking = function(req, res) {
 };
 
 //暂时直接把评分放到电影里，然后更新电影得分
-//PS：后续建立user grade movie 対映关系
+//PS：后续建立user grade movie 对应关系
 exports.grade = function(req, res) {
 	console.log("当前评分："， req.body);
 };
