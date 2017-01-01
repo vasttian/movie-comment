@@ -82,7 +82,7 @@ exports.savePoster = function(req, res, next) {
   var posterData = req.files.uploadPoster;
 
   var filePath = posterData.path;//文件的路径
-  var originalFilename = posterData.originalFilename;//拿到文件的名字
+  var originalFilename = posterData.originalFilename;//文件名
   if (originalFilename) {
 		fs.readFile(filePath, function(err, data) {
 	  	var timestamp = Date.now();//时间戳
@@ -155,7 +155,6 @@ exports.save = function(req, res) {
 	  				console.log("err:",err);
 	  			};
 	  			console.log("categoriesValue:",categoriesValue);
-		  		//如果填写的分类名称，已经有了。这种情况会在豆瓣自动填充数据的时候出现
 	  			if (categoriesValue) {
   					categoriesValue.movies.push(movie._id);
   					categoriesValue.save(function(err, categoriesNewValue) {
