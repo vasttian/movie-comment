@@ -134,7 +134,7 @@ exports.save = function(req, res) {
 		var categoriesName = movieObj.categoriesName;
 		_movie.save(function(err, movie) {
 	 		if (err) {
-				console.log("新增电影失败",err);
+				console.log("新增电影失败", err);
 		  }
 	 		if (categoryId) {
 				Categories.findById(categoryId, function(err, categories) {
