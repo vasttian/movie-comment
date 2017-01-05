@@ -22,6 +22,7 @@ exports.detail = function(req, res) {
   		console.log(err);
   	};
   	//name avatar 指定要填充Comment的name avatar字段
+  	//评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
   	Comment
   	.find({movie: id})
   	.populate("from", "name avatar")
