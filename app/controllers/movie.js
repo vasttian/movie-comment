@@ -21,6 +21,7 @@ exports.detail = function(req, res) {
   	if (err) {
   		console.log(err);
   	};
+  	//name avatar 指定要填充Comment的name avatar字段
   	Comment
   	.find({movie: id})
   	.populate("from", "name avatar")
@@ -254,6 +255,24 @@ exports.dateRanking = function(req, res) {
 //PS：后续建立user grade movie 对应关系
 exports.grade = function(req, res) {
 	console.log("当前评分：", req.body);
+	console.log("新增评分");
+	var score = req.body.score;
+	var movieId = req.body.movieId;
+	var userId = req.body.userId;
+	Movie.findById(movieId, function(err, movie) {
+		if (err) {
+			console.log(err);
+		}
+		console.log('movie before',movie);
+		movie.scoreUsers.push({userId, score});
+		movie.save(function(err, movie) {
+			if (err) {
+				console.log(err);
+			}
+			console.log('评分成功');
+			console.log('movie after',movie);
+		});
+	});
 };
 
 exports.categoriesCount = function(req, res) {

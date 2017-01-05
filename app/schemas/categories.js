@@ -9,14 +9,14 @@ var CategoriesSchema = new mongoose.Schema({
   	}
   ],
   meta: {
-	createAt: {
-	  type: Date,
-	  default: Date.now()
-	},
-	updateAt: {
-	  type: Date,
-	  default: Date.now()
-	}
+		createAt: {
+		  type: Date,
+		  default: Date.now()
+		},
+		updateAt: {
+		  type: Date,
+		  default: Date.now()
+		}
   }
 });
 

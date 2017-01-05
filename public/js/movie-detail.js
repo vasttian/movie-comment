@@ -29,7 +29,12 @@ $(function() {
     }
   });
   $("#submitMovieGrade").click(function() {
-    var grade = $("#movieGrade").val();
+    var grade = {
+      movieId: $("#movieId").val(),
+      userId: $("#userId").val(),
+      score: $("#movieGrade").val()
+    }
+    // console.log('grade:',grade);
     $.ajax({
       type: 'POST', 
       data: grade,
