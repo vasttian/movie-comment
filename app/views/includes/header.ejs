@@ -70,11 +70,13 @@
 						</ul>
 					</li>
 					<span>
-						<% if (user.avatar.indexOf('default') > -1) { %>
-						<img class="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
-						<% } else { %>
-						<img class="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
-						<% } %>
+						<a href="/user/personal/info">
+							<% if (user.avatar.indexOf('default') > -1) { %>
+							<img class="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
+							<% } else { %>
+							<img class="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+							<% } %>
+						</a>
 					</span>
 					<% } else { %>
 					<li>
