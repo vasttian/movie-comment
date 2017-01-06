@@ -344,18 +344,18 @@ exports.signinRequired = function(req, res, next) {
 };
 
 //是否有对电影进行CRUD的权限
-exports.movieAdminRequired = function(req, res, next){
+exports.movieAdminRequired = function(req, res, next) {
   console.log("验证是否有对电影进行CRUD的权限");
   var user = req.session.user;
   if (user.role <= 10) {
-   console.log("对不起,你还没有获得对电影进行CRUD的权限!");
-   return res.redirect("/signin");
+    console.log("对不起,你还没有获得对电影进行CRUD的权限!");
+    return res.redirect("/signin");
   }
   next();
 };
 
 //是否有对用户进行CRUD的权限
-exports.user_movieAdminRequired = function(req, res, next){
+exports.user_movieAdminRequired = function(req, res, next) {
   console.log("验证是否有对用户进行CRUD的权限");
   var user = req.session.user;
   console.log("user:", user);

@@ -38,7 +38,7 @@ module.exports = function (app) {
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
   // app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
-  // app.delete('/admin/user/list', User.signinRequired, User.userAdminRequired,  User.del);
+  // app.delete('/admin/user/list', User.signinRequired, User.userAdminRequired, User.del);
   
   //电影
   app.get("/movie-pv/ranking", User.signinRequired, Movie.pvRanking);
@@ -61,14 +61,17 @@ module.exports = function (app) {
 
   //评论
   app.post("/user/comment", User.signinRequired, Comment.save);
+
   //评分
   app.post("/movie/grade", User.signinRequired, Movie.grade);
 
   //找回密码
   app.get("/forgot/password", User.sendForgotPage);
   app.post("/forgot/password", User.setNewPassword);
+
   //搜索
   app.get('/results', Index.search);
+  
   //ECharts
   app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
 };

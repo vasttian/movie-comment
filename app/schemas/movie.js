@@ -36,7 +36,7 @@ var MovieSchema = new mongoose.Schema({
   scoreUsers: [
     {
       userId: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: ObjectId, 
         ref: "User"
       },
       score: {

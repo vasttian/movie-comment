@@ -75,8 +75,6 @@ UserSchema.pre('save', function(next) {
 //实例方法
 UserSchema.methods = {
   comparePassword: function(pass, cb) {
-      console.log("pass:",pass);
-      console.log("this.password:",this.password);
     bcrypt.compare(pass, this.password, function(err, isMatch) {
 	    if (err) {
 		    return cb(err);

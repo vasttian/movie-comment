@@ -265,7 +265,11 @@ exports.grade = function(req, res) {
 			console.log(err);
 		}
 		console.log('movie before',movie);
-		movie.scoreUsers.push({userId, score});
+		var scoreUsers = {
+			userId: userId,
+			score: score
+		};
+		movie.scoreUsers.push(scoreUsers);
 		movie.save(function(err, movie) {
 			if (err) {
 				console.log(err);
