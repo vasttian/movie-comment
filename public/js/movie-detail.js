@@ -34,15 +34,23 @@ $(function() {
       userId: $("#userId").val(),
       score: $("#movieGrade").val()
     }
-    // console.log('grade:',grade);
-    $.ajax({
-      type: 'POST', 
-      data: grade,
-      url: "/movie/grade",
-      async: true,
-      success: function(data, status) {
-        console.log('data from grade:',data);
+    if (grade.score > 10 || grade.score < 3) {
+      console.log("这是一个恶意评分!");
+      document.getElementById("tips").style.display = "block";
+    } else {
+      if (document.getElementById("tips")) {
+        document.getElementById("tips").style.display = "none";
       }
-    });
+      // console.log('grade:',grade);
+      $.ajax({
+        type: 'POST', 
+        data: grade,
+        url: "/movie/grade",
+        async: true,
+        success: function(data, status) {
+          console.log('data from grade:',data);
+        }
+      });
+    }
   });
 });

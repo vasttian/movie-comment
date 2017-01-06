@@ -260,11 +260,15 @@ exports.grade = function(req, res) {
 	var score = req.body.score;
 	var movieId = req.body.movieId;
 	var userId = req.body.userId;
+	//暂改为提交时判断
+	// if (score > 10 || score < 3) {
+	// 	console.log("这是一个恶意评分,自动忽略!");
+	// }
 	Movie.findById(movieId, function(err, movie) {
 		if (err) {
 			console.log(err);
 		}
-		console.log('movie before',movie);
+		// console.log('movie before',movie);
 		var scoreUsers = {
 			userId: userId,
 			score: score
@@ -275,7 +279,31 @@ exports.grade = function(req, res) {
 				console.log(err);
 			}
 			console.log('评分成功');
-			console.log('movie after',movie);
+			// console.log('movie after',movie);
+			movie.score.sum += parseInt(score);
+			movie.score.count += 1;
+			//第一次初始化
+			if (movie.score.count == 1) {
+				movie.score.max = score;
+				movie.score.min = score;
+			}
+			if (score > movie.score.max) {
+				movie.score.max = score;
+			}
+			if (score < movie.score.min) {
+				movie.score.min = score;
+			}
+			//去除一个最低分和一最高分
+			if (movie.score.count > 2) {
+				movie.score.average = (movie.score.sum - movie.score.max - movie.score.min) / (movie.score.count - 2);
+			}
+			movie.save(function(err, movie) {
+				if (err) {
+					console.error("电影的score更新失败!");
+				} else {
+					console.log("电影的score已更新:", movie);
+				}
+			});
 		});
 	});
 };
