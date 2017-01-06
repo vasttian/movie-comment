@@ -46,6 +46,10 @@ var MovieSchema = new mongoose.Schema({
     }
   ],
   score: {
+    flag: {
+      type: Number,
+      default: 0
+    },
     min: {
       type: Number,
       default: 0

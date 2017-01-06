@@ -280,6 +280,7 @@ exports.grade = function(req, res) {
 			}
 			console.log('评分成功');
 			// console.log('movie after',movie);
+			movie.score.flag = 1;	//已评分
 			movie.score.sum += parseInt(score);
 			movie.score.count += 1;
 			//第一次初始化
@@ -303,6 +304,7 @@ exports.grade = function(req, res) {
 				} else {
 					console.log("电影的score已更新:", movie);
 				}
+				res.json({success: 1})
 			});
 		});
 	});

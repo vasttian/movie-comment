@@ -1,4 +1,5 @@
 $(function() {
+  if ()
   $('.comment').click(function(e) {
     var target = $(this)
     var toId = target.data('tid')
@@ -48,7 +49,11 @@ $(function() {
         url: "/movie/grade",
         async: true,
         success: function(data, status) {
-          console.log('data from grade:',data);
+          // console.log('data from grade:',data);
+          if (status) {
+            $("#movieGrade").attr("readOnly", "readOnly");
+            $("#submitMovieGrade").css({"display": "none"});
+          }
         }
       });
     }

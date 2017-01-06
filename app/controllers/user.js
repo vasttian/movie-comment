@@ -297,7 +297,7 @@ exports.sendForgotPage = function(req, res) {
 //找回密码
 exports.setNewPassword = function(req, res) {
   var userObj = req.body;
-  console.log("找回密码：",userObj);
+  console.log("找回密码：", userObj);
   User.findOne({name: userObj.name}, function(err, user) {
     if (err) {
       console.log(err);
