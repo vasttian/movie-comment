@@ -14,13 +14,13 @@ exports.detail = function(req, res) {
   Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
   	if (err) {
   		console.log(err);
-  	};
+  	}
   });
   
   Movie.findById(id, function(err, movie) {
   	if (err) {
   		console.log(err);
-  	};
+  	}
   	//name avatar 指定要填充Comment的name avatar字段
   	//评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
   	Comment
@@ -30,7 +30,7 @@ exports.detail = function(req, res) {
   	.exec(function(err, comment) {
   		if (err) {
   			console.log(err);
-  		};
+  		}
   	  // console.log('movie_movie',movie);
   	  // console.log('comment_comment',comment);
   	  res.render("pages/movie-detail", {
@@ -74,7 +74,7 @@ exports.update = function(req, res) {
 				});
 	  	});
 		});
-  };
+  }
 };
 
 //上传海报
@@ -142,12 +142,12 @@ exports.save = function(req, res) {
 				Categories.findById(categoryId, function(err, categories) {
 		  		if (err) {
 						console.log(err);
-		  		};
+		  		}
 		  		categories.movies.push(movie._id);
 		  		categories.save(function(err, categories) {
 						if (err) {
 			  			console.log(err);
-						};
+						}
 						res.redirect("/movie/"+ movie._id);
 		  		});
 				});
@@ -155,7 +155,7 @@ exports.save = function(req, res) {
 	  		Categories.findByName(categoriesName, function(err, categoriesValue) {
 	  			if (err) {
 	  				console.log("err:",err);
-	  			};
+	  			}
 	  			console.log("categoriesValue:",categoriesValue);
 	  			if (categoriesValue) {
   					categoriesValue.movies.push(movie._id);
@@ -164,7 +164,7 @@ exports.save = function(req, res) {
 	  					movie.save(function(err, movie) {
 	  						if (err) {
 	  							console.log(err);
-	  						};
+	  						}
 	  						res.redirect("/movie/"+ movie._id);
 	  					});
   					});
@@ -176,12 +176,12 @@ exports.save = function(req, res) {
 	  				category.save(function(err, category) {
 	  					if (err) {
 	  						console.log(err);
-	  					};
+	  					}
 	  					movie.categories = category._id;
 	  					movie.save(function(err, movie) {
 	  						if (err) {
 	  							console.log(err);
-	  						};
+	  						}
 	  						res.redirect("/movie/"+ movie._id);
 	  					});
 	  				});

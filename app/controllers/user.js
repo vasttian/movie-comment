@@ -44,7 +44,7 @@ exports.checkUserName = function(req, res) {
   User.findOne({name: _user.name}, function(err, name) {
     if (err) {
       console.log('err');
-    };
+    }
     if (name) {
       console.log('用户名已存在!');
       return res.json({"valid":false});
@@ -64,11 +64,11 @@ exports.checkOriginPassword = function(req, res) {
   User.findById(_user._id, function(err, user) {
     if (err) {
       console.log("检验原密码时查找用户错误:",err);
-    };
+    }
     user.comparePassword(password, function (err, isMatch) {
       if (err) {
         console.log('err');
-      };
+      }
       if (!isMatch) {
         console.log('原密码错误!');
         return res.json({"valid": false});
@@ -104,7 +104,7 @@ exports.signup = function(req, res) {
   User.findOne({name:_user.name}, function(err, name) {
     if (err) {
       console.log('err');
-    };
+    }
     if (name) {
       console.log('用户名已存在!');
 	    // return res.json({"status":"error"});
@@ -120,7 +120,7 @@ exports.signup = function(req, res) {
 		    // return res.json({"status":"ok"});
 		    res.redirect('/');
       });
-    };
+    }
   });
 };
 
@@ -140,23 +140,23 @@ exports.signin = function(req, res) {
   User.findOne({name: name}, function(err, user) {
     if (err) {
       console.log(err);
-    };
+    }
     if (!user) {
       console.log('用户名不存在!');
       // return res.redirect("/signup");
       return res.json({"status":"error"});
-    };
+    }
     console.log('user', user);
   	user.comparePassword(pass, function (err, isMatch) {
   		if (err) {
   		  console.log(err);
-  		};
+  		}
   		if (isMatch) {
   		  console.log('登录成功!');
   		  req.session.user = user;
         return res.json({"status":"ok"});
   		  // return res.redirect("/");
-  		}else {
+  		} else {
   		  console.log('密码错误!');
   		  // return res.redirect("/signin");
         return res.json({"status":"error"});
@@ -174,23 +174,23 @@ exports.simpleSignin = function(req, res) {
   User.findOne({name: name}, function(err, user) {
     if (err) {
       console.log(err);
-    };
+    }
     if (!user) {
       console.log('用户名不存在!');
       return res.redirect("/signin");
       // return res.json({"status":"error"});
-    };
+    }
     // console.log('user', user);
     user.comparePassword(pass, function (err, isMatch) {
       if (err) {
         console.log(err);
-      };
+      }
       if (isMatch) {
         console.log('登录成功!');
         req.session.user = user;
         // return res.json({"status":"ok"});
         return res.redirect("/");
-      }else {
+      } else {
         console.log('密码错误!');
         return res.redirect("/signin");
         // return res.json({"status":"error"});
@@ -202,8 +202,8 @@ exports.simpleSignin = function(req, res) {
 //管理员页面
 exports.showAdmin = function(req, res) {
   res.render("pages/admin-manage", {
-   title: '管理页面'
- });
+    title: '管理页面'
+  });
 };
 
 //发送用户信息
@@ -350,8 +350,8 @@ exports.movieAdminRequired = function(req, res, next){
   if (user.role <= 10) {
    console.log("对不起,你还没有获得对电影进行CRUD的权限!");
    return res.redirect("/signin");
- }
- next();
+  }
+  next();
 };
 
 //是否有对用户进行CRUD的权限
@@ -360,22 +360,22 @@ exports.user_movieAdminRequired = function(req, res, next){
   var user = req.session.user;
   console.log("user:", user);
   if (user.role <= 20) {
-   console.log("对不起,你还没有获得对用户进行CRUD的权限!");
-   return res.redirect("/signin");
- }
- next();
+    console.log("对不起,你还没有获得对用户进行CRUD的权限!");
+    return res.redirect("/signin");
+  }
+  next();
 };
 
 //是否有超级管理员的权限
-exports.superAdminRequired = function(req, res, next){
+exports.superAdminRequired = function(req, res, next) {
   console.log("验证是否有超级管理员的权限");
   var user = req.session.user;
   console.log("user:", ser);
   if(user.role <= 30) {
-   console.log("对不起,你还没有获得超级管理员的权限!");
-   return res.redirect("/signin");
- }
- next();
+    console.log("对不起,你还没有获得超级管理员的权限!");
+    return res.redirect("/signin");
+  }
+  next();
 };
 
 //登出
