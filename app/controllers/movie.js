@@ -330,6 +330,20 @@ exports.categoriesCount = function(req, res) {
 	});
 };
 
+exports.categoriesClick = function(req, res) {
+	res.render("pages/active-view", {
+		title: "分类点击量",
+		view: "categoriesClick"
+	});
+};
+
+exports.categoriesAverageScore = function(req, res) {
+	res.render("pages/active-view", {
+		title: "分类平均分",
+		view: "categoriesAverageSource"
+	});
+};
+
 //删除
 exports.del = function(req, res) {
 	console.log("删除电影!");

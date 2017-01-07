@@ -74,5 +74,9 @@ module.exports = function (app) {
   
   //ECharts
   app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
-  app.get('/active/view/categories/data', User.signinRequired, Category.categoriesData);
+  app.get('/active/view/categories/count/data', User.signinRequired, Category.categoriesCountData);
+  app.get('/active/view/categories/click', User.signinRequired, Movie.categoriesClick);
+  app.get('/active/view/categories/click/data', User.signinRequired, Category.categoriesClickData);
+  app.get('/active/view/categories/averagescore', User.signinRequired, Movie.categoriesAverageScore);
+  // app.get('/active/view/categories/averagescore/data', User.signinRequired, Category.categoriesAverageScoreData);
 };
