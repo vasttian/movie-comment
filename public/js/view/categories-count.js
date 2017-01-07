@@ -95,7 +95,7 @@ $(function() {
     console.log("请求分类平均分");
     $.ajax({
       type: 'GET',
-      url: '/active/view/categories/click/data',
+      url: '/active/view/categories/averagescore/data',
       success: function(data) {
         console.log('data:', data);
         if (data.status == 1) {
@@ -105,7 +105,7 @@ $(function() {
           for (var i = 0; i < len; ++i) {
             var tname = tdata[i].name;
             xAxisData.push(tname);
-            seriesData.push(tdata[i].countPv);
+            seriesData.push(tdata[i].sumScore);
           };
           option = {
             title: {
@@ -128,7 +128,7 @@ $(function() {
               data: seriesData,
               itemStyle: {
                 normal: {
-                  color: "#87CEEB"
+                  color: "#A020F0"
                 }
               }
             }]

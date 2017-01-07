@@ -92,7 +92,34 @@ exports.categoriesClickData = function(req, res) {
   	};
   	// console.log(clickNum);
   	res.json({"data": clickNum, "status": 1});
-  })
+  });
+};
+
+//分类平均分
+exports.categoriesAverageScoreData = function(req, res) {
+	Categories.find({})
+  .populate({path:"movies"})
+  .exec(function(err, categories) {
+  	var lenCat = categories.length;
+  	var catAveScore = [];
+  	for (var i = 0; i < lenCat; ++i) { 
+	  	// console.log('categories.movies:', categories[i].movies);
+	  	var lenMovie = categories[i].movies.length;
+	  	var singleCat = {};
+			singleCat.name = categories[i].name;
+	  	var sumScore = 0;
+	  	for (var j = 0; j < lenMovie; ++j) {
+	  		var movie = categories[i].movies[j];
+	  		if (movie.score.average) {
+	  			sumScore += movie.score.average;
+	  		}
+	  	}
+	  	singleCat.sumScore = sumScore;
+	  	catAveScore.push(singleCat);
+	  }
+	  // console.log(catAveScore);
+  	res.json({"data": catAveScore, "status": 1});
+  });
 };
 
 //删除分类
