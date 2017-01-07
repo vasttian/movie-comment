@@ -35,19 +35,23 @@ angular.module("adminApp", ["ngRoute"])
   });
 }])
 .controller('moviesCtrl', function($scope, $route) {
-
+  // $("#add-movie").trigger("click");
+  $scope.libState = 0;
+  $.get('/admin/movie/add', function(data, status) {
+    $("#move-windows").html(data);
+  });
 })
 .controller('usersCtrl', function($scope, $route) {
-
+  $scope.libState = 0;
 })
 .controller('activeCtrl', function($scope, $route) {
-
+  $scope.libState = 0;
 })
 .controller('accountCtrl', function($scope, $route) {
-
+  $scope.libState = 0;
 })
 .controller('adminCtrl', function($scope, $route) {
-
+  $scope.libState = 0;
 })
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
