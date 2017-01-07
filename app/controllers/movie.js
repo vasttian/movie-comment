@@ -317,7 +317,7 @@ exports.grade = function(req, res) {
 				} else {
 					console.log("电影的score已更新:", movie);
 				}
-				res.json({"success": 1})
+				res.json({"status": 1})
 			});
 		});
 	});

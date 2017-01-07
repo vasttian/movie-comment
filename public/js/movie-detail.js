@@ -47,10 +47,10 @@ $(function() {
         data: grade,
         url: "/movie/grade",
         async: true,
-        success: function(data, status) {
+        success: function(data) {
           // console.log('data from grade:', data);
           // console.log('status from grade:', status);
-          if (status == 1) {
+          if (data.status == 1) {
             $("#movieGrade").attr("readOnly", "readOnly");
             $("#submitMovieGrade").css({"display": "none"});
           } else {

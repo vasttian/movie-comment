@@ -102,7 +102,7 @@ exports.categoriesAverageScoreData = function(req, res) {
   .exec(function(err, categories) {
   	var lenCat = categories.length;
   	var catAveScore = [];
-  	for (var i = 0; i < lenCat; ++i) { 
+  	for (var i = 0; i < lenCat; ++i) {
 	  	// console.log('categories.movies:', categories[i].movies);
 	  	var lenMovie = categories[i].movies.length;
 	  	var singleCat = {};
