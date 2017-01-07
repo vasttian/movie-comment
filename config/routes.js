@@ -74,4 +74,5 @@ module.exports = function (app) {
   
   //ECharts
   app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
+  app.get('/active/view/categories/data', User.signinRequired, Category.categoriesData);
 };

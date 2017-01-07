@@ -317,7 +317,7 @@ exports.grade = function(req, res) {
 				} else {
 					console.log("电影的score已更新:", movie);
 				}
-				res.json({success: 1})
+				res.json({"success": 1})
 			});
 		});
 	});
@@ -339,7 +339,7 @@ exports.del = function(req, res) {
 			if (err) {
 				console.log(err);
 			} else {
-				res.json({success: 1});
+				res.json({"success": 1});
 			}
 		});
 	}

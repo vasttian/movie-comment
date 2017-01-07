@@ -43,7 +43,7 @@ exports.save = function(req, res) {
 };
 
 //分类列表
-exports.list = function(req,res) {
+exports.list = function(req, res) {
   Categories.fetch(function(err, categories) {
 		if (err) {
 		  console.log(err);
@@ -52,6 +52,18 @@ exports.list = function(req,res) {
 		  title: "电影分类",
 		  categories: categories
 		});
+  });	
+};
+
+//分类数据
+exports.categoriesData = function(req, res) {
+	// console.log("req.body:", req.body);
+	Categories.fetch(function(err, categories) {
+		if (err) {
+		  console.log(err);
+		}
+		// console.log("categories:", categories);
+		res.json({"data": categories, "status": 1});
   });	
 };
 
