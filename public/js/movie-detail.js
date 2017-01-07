@@ -49,7 +49,6 @@ $(function() {
         async: true,
         success: function(data) {
           // console.log('data from grade:', data);
-          // console.log('status from grade:', status);
           if (data.status == 1) {
             $("#movieGrade").attr("readOnly", "readOnly");
             $("#submitMovieGrade").css({"display": "none"});
