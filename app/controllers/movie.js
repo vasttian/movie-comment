@@ -41,6 +41,7 @@ exports.detail = function(req, res) {
 	  	  for (var i = 0; i < len; ++i) {
 	  	  	if (movie.scoreUsers[i].userId == user._id) {
 	  	  		score = movie.scoreUsers[i].score;
+	  	  		break;
 	  	  	}
 	  	  };
   	  }
