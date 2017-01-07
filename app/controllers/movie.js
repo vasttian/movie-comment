@@ -9,7 +9,9 @@ var path = require("path");
 exports.detail = function(req, res) {
 	console.log('电影详情!');
 	var id = req.params.id;
-
+	var user = req.session.user;
+	console.log("req::",req.body);
+	console.log("user::",req.session.user);
   //加入统计量
   Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
   	if (err) {
@@ -33,10 +35,20 @@ exports.detail = function(req, res) {
   		}
   	  // console.log('movie_movie',movie);
   	  // console.log('comment_comment',comment);
+  	  var len = movie.scoreUsers.length;
+  	 	var score = '';
+  	  if (user) {
+	  	  for (var i = 0; i < len; ++i) {
+	  	  	if (movie.scoreUsers[i].userId == user._id) {
+	  	  		score = movie.scoreUsers[i].score;
+	  	  	}
+	  	  };
+  	  }
   	  res.render("pages/movie-detail", {
   	  	title:"电影详情",
   	  	movie: movie,
-  	  	comment: comment
+  	  	comment: comment,
+  	  	score: score
   	  });
   	});	
   });

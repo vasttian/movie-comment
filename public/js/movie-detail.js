@@ -1,5 +1,4 @@
 $(function() {
-  if ()
   $('.comment').click(function(e) {
     var target = $(this)
     var toId = target.data('tid')
@@ -42,18 +41,24 @@ $(function() {
       if (document.getElementById("tips")) {
         document.getElementById("tips").style.display = "none";
       }
-      // console.log('grade:',grade);
+      console.log('grade:',grade);
       $.ajax({
         type: 'POST', 
         data: grade,
         url: "/movie/grade",
         async: true,
         success: function(data, status) {
-          // console.log('data from grade:',data);
-          if (status) {
+          // console.log('data from grade:', data);
+          // console.log('status from grade:', status);
+          if (status == 1) {
             $("#movieGrade").attr("readOnly", "readOnly");
             $("#submitMovieGrade").css({"display": "none"});
+          } else {
+            window.location.href = '/signin';
           }
+        },
+        error: function() {
+          console.log('请求出错!')
         }
       });
     }

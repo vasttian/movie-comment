@@ -95,12 +95,13 @@
 			<dt>简介</dt>
 			<dd><%= movie.summary %></dd>
 			<br>
-			<dt>评分</dt>
+			<dt style="padding-top: 7px;">评分</dt>
 			<dd>
-				<% if (movie.score.flag) { %>
-					<input type="text" id="movieGrade" class="form-control" placeholder= "对同一部电影只能评分一次，请慎重。" value="" readOnly>
+				<% if (user && score) { %>
+					<input type="text" id="movieGrade" class="form-control" placeholder= "对同一部电影只能评分一次，请慎重。" value="<%= score%>" readOnly>
 				<% } else { %>
 					<input type="text" id="movieGrade" class="form-control" placeholder= "对同一部电影只能评分一次，请慎重。">
+					<br>
 					<button type="button" id="submitMovieGrade" class="pull-right btn btn-primary">提交</button></dd>
 				<% } %>
 				<br>

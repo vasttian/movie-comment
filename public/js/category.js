@@ -14,7 +14,7 @@ $(function() {
 				}
 			},
 			error: function() {
-				alert("出错");
+				console.log('请求出错!')
 			}
 		});
 	});
