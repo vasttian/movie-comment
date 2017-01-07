@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var SALT_STRNGTH = 10;
+var SALT_STRNGTH = 10;//加密计算强度(1 - 10)
 
 var UserSchema = new mongoose.Schema({
   name: {
@@ -34,6 +34,8 @@ var UserSchema = new mongoose.Schema({
     // type: Date,
     // default: Date.now()
   },
+  problem: String,
+  problemAnswer: String,
   meta: {
     createdAt: {
   	type: Date,
@@ -46,7 +48,7 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
-UserSchema.pre('save', function(next){
+UserSchema.pre('save', function(next) {
   var user = this;
   if (this.isNew) {
     this.meta.createdAt = this.meta.updateAt = Date.now();
@@ -55,7 +57,7 @@ UserSchema.pre('save', function(next){
   }
 
   //随机salt及密码加密
-  bcrypt.genSalt(SALT_STRNGTH, function(err, salt){
+  bcrypt.genSalt(SALT_STRNGTH, function(err, salt) {
     if (err) {
       return next(err);
     }
@@ -73,7 +75,7 @@ UserSchema.pre('save', function(next){
 //实例方法
 UserSchema.methods = {
   comparePassword: function(pass, cb) {
-	  bcrypt.compare(pass, this.password, function(err, isMatch) {
+    bcrypt.compare(pass, this.password, function(err, isMatch) {
 	    if (err) {
 		    return cb(err);
 	    }
@@ -85,13 +87,13 @@ UserSchema.methods = {
 //静态方法
 UserSchema.statics = {
   fetch : function(cb) {
-	return this
-	.find({})
-	.sort('meta.updateAt')
-	.exec(cb);
+  	return this
+  	.find({})
+  	.sort('meta.updateAt')
+  	.exec(cb);
   },
   findById: function(id, cb){	
-	return this.findOne({_id:id}).exec(cb);
+	  return this.findOne({_id:id}).exec(cb);
   }
 };
 

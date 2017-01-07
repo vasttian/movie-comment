@@ -34,10 +34,10 @@ angular.module("adminApp", ["ngRoute"])
   	fillUser(); 
   });
 }])
-.controller('movieCtrl', function($scope, $route) {
+.controller('moviesCtrl', function($scope, $route) {
 
 })
-.controller('userCtrl', function($scope, $route) {
+.controller('usersCtrl', function($scope, $route) {
 
 })
 .controller('activeCtrl', function($scope, $route) {
@@ -57,14 +57,18 @@ angular.module("adminApp", ["ngRoute"])
   })
   .when('/movie-manage', {
     // templateUrl: 'public/admin/movie-index.html',
-    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="add-movie">添加电影</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="add-category">添加分类</a></li><li ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)" id="show-movie">查看电影</a></li><li ng-click="libState=3;" ng-class="{active:libState==3}" role="presentation"><a href="javascript:void(0)" id="show-category">查看分类</a></li></ul></div></div><div id="move-windows"></div><script src="/js/admin.js"></script>',
-    controller: 'movieCtrl'
+    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="add-movie">添加电影</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="add-category">添加分类</a></li><li ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)" id="show-movie">查看电影</a></li><li ng-click="libState=3;" ng-class="{active:libState==3}" role="presentation"><a href="javascript:void(0)" id="show-category">查看分类</a></li></ul></div></div><div id="move-windows"></div><script src="/js/move-windows.js"></script>',
+    controller: 'moviesCtrl'
   })
   .when('/user-manage', {
   	// tempalteUrl: 
+    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="all-users">所有用户</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="general-users">普通用户</a></li><li ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)" id="admin-users">管理员</a></li></ul></div></div><div id="users-windows"></div><script src="/js/users-windows.js"></script>',
+    controller: 'usersCtrl'
   })
   .when('/view-active', {
-
+    // tempalteUrl: 
+    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="all-users-age">用户年龄段</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="all-users-sex">用户性别</a></li><li ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)" id="all-categories">电影分类</a></li><li ng-click="libState=3;" ng-class="{active:libState==3}" role="presentation"><a href="javascript:void(0)" id="categories-average-source">分类平均评分</a></li><li ng-click="libState=4;" ng-class="{active:libState==4}" role="presentation"><a href="javascript:void(0)" id="categories-average-click">分类平均点击量</a></li><li ng-click="libState=5;" ng-class="{active:libState==5}" role="presentation"><a href="javascript:void(0)" id="categories-comment-count">分类评论量</a></li></ul></div></div><div id="users-windows"></div><script src="/js/active-windows.js"></script>',
+    controller: 'activeCtrl'
   })
   .when('/account-set', {
 

@@ -32,6 +32,47 @@ var MovieSchema = new mongoose.Schema({
 	    type: Date,
 	    default: Date.now()
   	}
+  },
+  scoreUsers: [
+    {
+      userId: {
+        type: ObjectId, 
+        ref: "User"
+      },
+      score: {
+        type: Number,
+        default: 0
+      }
+    }
+  ],
+  score: {
+    flag: {
+      type: Number,
+      default: 0
+    },
+    min: {
+      type: Number,
+      default: 0
+    },
+    max: {
+      type: Number,
+      default: 0
+    },
+    sum: {
+      type: Number,
+      default: 0
+    },
+    count: {
+      type: Number,
+      default: 0
+    },
+    average: {
+      type: Number,
+      default: 0
+    }
+  },
+  others: {
+    type: String
   }
 });
 

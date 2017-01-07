@@ -9,19 +9,22 @@ var path = require("path");
 exports.detail = function(req, res) {
 	console.log('电影详情!');
 	var id = req.params.id;
-
+	var user = req.session.user;
+	console.log("req::",req.body);
+	console.log("user::",req.session.user);
   //加入统计量
   Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
   	if (err) {
   		console.log(err);
-  	};
+  	}
   });
   
   Movie.findById(id, function(err, movie) {
   	if (err) {
   		console.log(err);
-  	};
-
+  	}
+  	//name avatar 指定要填充Comment的name avatar字段
+  	//评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
   	Comment
   	.find({movie: id})
   	.populate("from", "name avatar")
@@ -29,13 +32,23 @@ exports.detail = function(req, res) {
   	.exec(function(err, comment) {
   		if (err) {
   			console.log(err);
-  		};
+  		}
   	  // console.log('movie_movie',movie);
   	  // console.log('comment_comment',comment);
+  	  var len = movie.scoreUsers.length;
+  	 	var score = '';
+  	  if (user) {
+	  	  for (var i = 0; i < len; ++i) {
+	  	  	if (movie.scoreUsers[i].userId == user._id) {
+	  	  		score = movie.scoreUsers[i].score;
+	  	  	}
+	  	  };
+  	  }
   	  res.render("pages/movie-detail", {
   	  	title:"电影详情",
   	  	movie: movie,
-  	  	comment: comment
+  	  	comment: comment,
+  	  	score: score
   	  });
   	});	
   });
@@ -73,7 +86,7 @@ exports.update = function(req, res) {
 				});
 	  	});
 		});
-  };
+  }
 };
 
 //上传海报
@@ -83,7 +96,7 @@ exports.savePoster = function(req, res, next) {
   var posterData = req.files.uploadPoster;
 
   var filePath = posterData.path;//文件的路径
-  var originalFilename = posterData.originalFilename;//拿到文件的名字
+  var originalFilename = posterData.originalFilename;//文件名
   if (originalFilename) {
 		fs.readFile(filePath, function(err, data) {
 	  	var timestamp = Date.now();//时间戳
@@ -117,13 +130,13 @@ exports.save = function(req, res) {
 		  if(err) {
 				console.log(err);
 	 		}
-	  	Categories.update({_id:movie.categories}, {$pullAll:{"movies":[id]}}, function(err) {
+	  	Categories.update({_id: movie.categories}, {$pullAll: {"movies": [id]}}, function(err) {
 				_movie = _.extend(movie, movieObj);
 				_movie.save(function(err, movie) {
 				  if(err) {
 						console.log(err);
 				  }
-				  Categories.update({_id:categoryId}, {$addToSet:{"movies":id}}, function(err) {
+				  Categories.update({_id: categoryId}, {$addToSet:{"movies": id}}, function(err) {
 			 		 	res.redirect("/movie/"+movie._id);
 			 		});
 				});
@@ -135,18 +148,18 @@ exports.save = function(req, res) {
 		var categoriesName = movieObj.categoriesName;
 		_movie.save(function(err, movie) {
 	 		if (err) {
-				console.log("新增电影失败",err);
+				console.log("新增电影失败", err);
 		  }
 	 		if (categoryId) {
-				Categories.findById(categoryId,function(err, categories) {
+				Categories.findById(categoryId, function(err, categories) {
 		  		if (err) {
 						console.log(err);
-		  		};
+		  		}
 		  		categories.movies.push(movie._id);
 		  		categories.save(function(err, categories) {
 						if (err) {
 			  			console.log(err);
-						};
+						}
 						res.redirect("/movie/"+ movie._id);
 		  		});
 				});
@@ -154,9 +167,8 @@ exports.save = function(req, res) {
 	  		Categories.findByName(categoriesName, function(err, categoriesValue) {
 	  			if (err) {
 	  				console.log("err:",err);
-	  			};
+	  			}
 	  			console.log("categoriesValue:",categoriesValue);
-		  		//如果填写的分类名称，已经有了。这种情况会在豆瓣自动填充数据的时候出现
 	  			if (categoriesValue) {
   					categoriesValue.movies.push(movie._id);
   					categoriesValue.save(function(err, categoriesNewValue) {
@@ -164,7 +176,7 @@ exports.save = function(req, res) {
 	  					movie.save(function(err, movie) {
 	  						if (err) {
 	  							console.log(err);
-	  						};
+	  						}
 	  						res.redirect("/movie/"+ movie._id);
 	  					});
   					});
@@ -176,12 +188,12 @@ exports.save = function(req, res) {
 	  				category.save(function(err, category) {
 	  					if (err) {
 	  						console.log(err);
-	  					};
+	  					}
 	  					movie.categories = category._id;
 	  					movie.save(function(err, movie) {
 	  						if (err) {
 	  							console.log(err);
-	  						};
+	  						}
 	  						res.redirect("/movie/"+ movie._id);
 	  					});
 	  				});
@@ -249,6 +261,71 @@ exports.dateRanking = function(req, res) {
 			movies: movies,
 			ranking: "dateRanking"
 		});
+	});
+};
+
+//暂时直接把评分放到电影里，然后更新电影得分
+//PS：后续建立user grade movie 对应关系
+exports.grade = function(req, res) {
+	console.log("当前评分：", req.body);
+	console.log("新增评分");
+	var score = req.body.score;
+	var movieId = req.body.movieId;
+	var userId = req.body.userId;
+	//暂改为提交时判断
+	// if (score > 10 || score < 3) {
+	// 	console.log("这是一个恶意评分,自动忽略!");
+	// }
+	Movie.findById(movieId, function(err, movie) {
+		if (err) {
+			console.log(err);
+		}
+		// console.log('movie before',movie);
+		var scoreUsers = {
+			userId: userId,
+			score: score
+		};
+		movie.scoreUsers.push(scoreUsers);
+		movie.save(function(err, movie) {
+			if (err) {
+				console.log(err);
+			}
+			console.log('评分成功');
+			// console.log('movie after',movie);
+			movie.score.flag = 1;	//已评分
+			movie.score.sum += parseInt(score);
+			movie.score.count += 1;
+			//第一次初始化
+			if (movie.score.count == 1) {
+				movie.score.max = score;
+				movie.score.min = score;
+			}
+			if (score > movie.score.max) {
+				movie.score.max = score;
+			}
+			if (score < movie.score.min) {
+				movie.score.min = score;
+			}
+			//去除一个最低分和一最高分
+			if (movie.score.count > 2) {
+				movie.score.average = (movie.score.sum - movie.score.max - movie.score.min) / (movie.score.count - 2);
+			}
+			movie.save(function(err, movie) {
+				if (err) {
+					console.error("电影的score更新失败!");
+				} else {
+					console.log("电影的score已更新:", movie);
+				}
+				res.json({success: 1})
+			});
+		});
+	});
+};
+
+exports.categoriesCount = function(req, res) {
+	res.render("pages/active-view", {
+		title: "分类数量",
+		view: "categoriesCount"
 	});
 };
 
