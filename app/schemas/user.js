@@ -45,7 +45,12 @@ var UserSchema = new mongoose.Schema({
   	type: Date,
   	default: Date.now()
     }
-  }
+  },
+  flag: {
+    type: Number,
+    default: 1
+  },
+  others: {}
 });
 
 UserSchema.pre('save', function(next) {

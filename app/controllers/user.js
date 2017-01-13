@@ -327,7 +327,7 @@ exports.setNewPassword = function(req, res) {
 
 //用户列表
 exports.list = function(req, res) {
-  User.find({}, function(err, users) {
+  User.find({"flag": 1}, function(err, users) {
     console.log("users:",users);
     if (err) {
       console.log(err);
@@ -336,6 +336,18 @@ exports.list = function(req, res) {
       title: "用户列表",
       users: users
     });
+  });
+};
+
+//删除用户,标记flag = 0
+exports.del = function (req, res) {
+  var id = req.body.id;
+  // console.log("del_id:", id);
+  User.update({"_id": id}, {"$set": {"flag": 0}}, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    res.json({"status": 1});
   });
 };
 

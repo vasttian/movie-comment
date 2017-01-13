@@ -12,6 +12,7 @@ exports.detail = function(req, res) {
 	var user = req.session.user;
 	console.log("req::",req.body);
 	console.log("user::",req.session.user);
+	
   //加入统计量
   Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
   	if (err) {

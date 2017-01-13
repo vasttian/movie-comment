@@ -38,6 +38,7 @@ module.exports = function (app) {
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
   app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
+  app.post('/admin/del/user', User.signinRequired, User.userAdminRequired, User.del);
   // app.delete('/admin/user/list', User.signinRequired, User.userAdminRequired, User.del);
   
   //电影
