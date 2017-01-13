@@ -3,6 +3,7 @@ $(function() {
   var option = {};
   var seriesData = [];
   var xAxisData = [];
+  var lengthData = [];
   if ($("#categoriesCount").hasClass('active')) {
     console.log("请求分类数据");
     $.ajax({
@@ -57,8 +58,8 @@ $(function() {
           var len = tdata.length;
           for (var i = 0; i < len; ++i) {
             var tname = tdata[i].name;
-            xAxisData.push(tname);
-            seriesData.push(tdata[i].countPv);
+            lengthData.push(tname);
+            seriesData.push({value: tdata[i].countPv, name: tdata[i].name});
           };
           option = {
             title: {
@@ -68,22 +69,16 @@ $(function() {
             tooltip: {},
             legend: {
               zlevel: 1,
-              data: ['点击量'],
+              data: lengthData,
               x: 'left'
             },
-            xAxis: {
-              data: xAxisData
-            },
-            yAxis: {},
+            calculable : true,
             series: [{
               name: '点击量',
-              type: 'bar',
+              type: 'pie',
+              radius : '55%',
+              center: ['50%', '60%'],
               data: seriesData,
-              itemStyle: {
-                normal: {
-                  color: "#87CEEB"
-                }
-              }
             }]
           };
           myChart.setOption(option);
@@ -128,7 +123,7 @@ $(function() {
               data: seriesData,
               itemStyle: {
                 normal: {
-                  color: "#A020F0"
+                  color: "#87CEEB"
                 }
               }
             }]
