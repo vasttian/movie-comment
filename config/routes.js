@@ -37,7 +37,7 @@ module.exports = function (app) {
   //管理员
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
-  // app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
+  app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
   // app.delete('/admin/user/list', User.signinRequired, User.userAdminRequired, User.del);
   
   //电影

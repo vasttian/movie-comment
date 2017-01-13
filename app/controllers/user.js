@@ -327,13 +327,20 @@ exports.setNewPassword = function(req, res) {
 
 //用户列表
 exports.list = function(req, res) {
-  User.find({role: 2}, function(err, user) {
-  // console.log("user:",user);
+  User.find({}, function(err, users) {
+    console.log("users:",users);
+    if (err) {
+      console.log(err);
+    }
+    res.render("pages/user-list", {
+      title: "用户列表",
+      users: users
+    });
   });
 };
 
 //是否登录
-exports.signinRequired = function(req, res, next) {
+exports.signinRequired = function (req, res, next) {
   console.log("验证是否登录");
   var user = req.session.user;
   if (!user) {
@@ -355,7 +362,7 @@ exports.movieAdminRequired = function(req, res, next) {
 };
 
 //是否有对用户进行CRUD的权限
-exports.user_movieAdminRequired = function(req, res, next) {
+exports.userAdminRequired = function(req, res, next) {
   console.log("验证是否有对用户进行CRUD的权限");
   var user = req.session.user;
   console.log("user:", user);
