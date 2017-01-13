@@ -328,7 +328,7 @@ exports.setNewPassword = function(req, res) {
 //用户列表
 exports.list = function(req, res) {
   User.find({"flag": 1}, function(err, users) {
-    console.log("users:",users);
+    // console.log("users:",users);
     if (err) {
       console.log(err);
     }
@@ -355,8 +355,8 @@ exports.del = function (req, res) {
 exports.updateRole = function (req, res) {
   var id = req.body.id;
   var roleNum = req.body.role;
-  console.log("id:",id);
-  console.log("roleNum:", roleNum);
+  // console.log("id:",id);
+  // console.log("roleNum:", roleNum);
   User.update({"_id": id}, {"$set": {"role": roleNum}}, function(err) {
     if (err) {
       console.log(err);

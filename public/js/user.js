@@ -3,7 +3,6 @@ $(function() {
 	$(".del").click(function(e) {
 		var target = $(e.target);
 		var id = target.data("id");
-		console.log('id', id);
 		var tr = $(".item-id-" + id);;
 		var data = {
 			id: id
@@ -33,7 +32,6 @@ $(function() {
 			id: id,
 			role: num
 		};
-		console.log("data:",data);
 		$.ajax({
 			type: "POST",
 			data: data,
@@ -54,6 +52,5 @@ $(function() {
 		var target = $(e.target);
 		var id = target.data("id");
 		$("#userId").val(id);
-		// console.log("$#userId.val()",$("#userId").val());
 	});
 });
