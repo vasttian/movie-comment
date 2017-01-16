@@ -12,6 +12,7 @@ exports.detail = function(req, res) {
 	var user = req.session.user;
 	console.log("req::",req.body);
 	console.log("user::",req.session.user);
+	
   //加入统计量
   Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
   	if (err) {
@@ -41,6 +42,7 @@ exports.detail = function(req, res) {
 	  	  for (var i = 0; i < len; ++i) {
 	  	  	if (movie.scoreUsers[i].userId == user._id) {
 	  	  		score = movie.scoreUsers[i].score;
+	  	  		break;
 	  	  	}
 	  	  };
   	  }
@@ -264,8 +266,7 @@ exports.dateRanking = function(req, res) {
 	});
 };
 
-//暂时直接把评分放到电影里，然后更新电影得分
-//PS：后续建立user grade movie 对应关系
+//电影评分
 exports.grade = function(req, res) {
 	console.log("当前评分：", req.body);
 	console.log("新增评分");
@@ -316,7 +317,7 @@ exports.grade = function(req, res) {
 				} else {
 					console.log("电影的score已更新:", movie);
 				}
-				res.json({success: 1})
+				res.json({"status": 1})
 			});
 		});
 	});
@@ -329,6 +330,20 @@ exports.categoriesCount = function(req, res) {
 	});
 };
 
+exports.categoriesClick = function(req, res) {
+	res.render("pages/active-view", {
+		title: "分类点击量",
+		view: "categoriesClick"
+	});
+};
+
+exports.categoriesAverageScore = function(req, res) {
+	res.render("pages/active-view", {
+		title: "分类平均分",
+		view: "categoriesAverageSource"
+	});
+};
+
 //删除
 exports.del = function(req, res) {
 	console.log("删除电影!");
@@ -338,7 +353,7 @@ exports.del = function(req, res) {
 			if (err) {
 				console.log(err);
 			} else {
-				res.json({success: 1});
+				res.json({"success": 1});
 			}
 		});
 	}

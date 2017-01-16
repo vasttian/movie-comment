@@ -6,19 +6,19 @@
   		<div class="panel-heading">
 	  	  <ul class="nav nav-tabs" role="tablist">
 	  	  	<% if (view == 'categoriesCount') { %>
-	  				<li role="presentation" class="active"><a href="/active/view/categories/count">分类数量</a></li>
+	  				<li role="presentation" id="categoriesCount" class="active"><a href="/active/view/categories/count">分类数量</a></li>
 	  			<% } else { %>
-	  				<li role="presentation"><a href="/active/view/categories/count">分类数量</a></li>
+	  				<li role="presentation" id="categoriesCount"><a href="/active/view/categories/count">分类数量</a></li>
 	  			<% } %>
 	  	  	<% if (view == 'categoriesClick') { %>
-		  			<li role="presentation" class="active"><a href="/active/view/categories/click">分类点击量</a></li>
+		  			<li role="presentation" id="categoriesClick" class="active"><a href="/active/view/categories/click">分类点击量</a></li>
 	  			<% } else { %>
-		  			<li role="presentation"><a href="/active/view/categories/click">分类点击量</a></li>
+		  			<li role="presentation" id="categoriesClick"><a href="/active/view/categories/click">分类点击量</a></li>
 	  			<% } %>
 	  	  	<% if (view == 'categoriesAverageSource') { %>
-	  				<li role="presentation" class="active"><a href="/active/view/categories/source">类别平均评分</a></li>
+	  				<li role="presentation" id="categoriesAverageSource" class="active"><a href="/active/view/categories/averagescore">类别平均评分</a></li>
 	  			<% } else { %>
-	  				<li role="presentation"><a href="/active/view/categories">类别平均评分</a></li>
+	  				<li role="presentation" id="categoriesAverageSource"><a href="/active/view/categories/averagescore">类别平均评分</a></li>
 	  			<% } %>
 		  	</ul>
 		  </div>	

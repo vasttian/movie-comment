@@ -1,0 +1,77 @@
+
+<div class="container container-style">
+  <div class="row">
+		<table class="table table-hover table-bordered">
+		  <thead>
+			<tr class="tr-style">
+			  <th class="th-style th-width200 ">头像</th>
+			  <th class="th-style">用户名</th>
+			  <th class="th-style">昵称</th>
+			  <th class="th-style">注册时间</th>
+			  <%- /*<th class="th-style">角色</th>*/ %>
+			  <th class="th-style">更新权限</th>
+			  <th class="th-style">删除账户</th>
+			</tr>
+		  </thead>
+		  <tbody>
+		  	<% users.forEach(function (item, index) { %>
+		  	<tr class="item-id-<%= item._id %>">
+			  	<td class="td-style">
+			  		<div class="text-center nav_user">
+			  			<a href="javascript:void(0)">
+                <% if (item.avatar.indexOf('default') > -1) { %>
+                <img class="img-circle" src="<%= item.avatar %>" alt="头像君不见啦!">
+                <% } else { %>
+                <img class="img-circle" src="/images/avatar/<%= item.avatar %>" alt="头像君不见啦!">
+                <% } %>
+              </a>
+            </div>
+          </td>
+			  	<td class="td-style"><%= item.name %></td>
+			  	<td class="td-style"><%= item.nickname %></td>
+			  	<td class="td-style"><%= moment(item.meta.createdAt).format("YYYY/MM/DD") %></td>
+			  	<td class="td-style">
+			  		<button class="btn btn-info update" type="button" data-toggle="modal" data-target="#updateUserPower" data-id="<%= item._id %>">更新</button>
+			  	</td>
+			  	<td class="td-style">
+						<button class="btn btn-danger del" type="button" data-id="<%= item._id %>">删除</button>
+			  	</td>
+				</tr>
+				<% }) %>
+		  </tbody>
+		</table>
+  </div>
+</div>
+<div class="modal fade" id="updateUserPower">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">修改用户权限</h4>
+			</div>
+			<div class="modal-body" style="height: 150px;">
+				<div><input type="hidden" id="userId"></div>
+				<div class="row">
+					<div class="form-group" ng-click="appeal = 0;">
+	          <label for="problem" class="col-sm-3 control-label" style="padding-top: 8px;">选择问题&nbsp;&nbsp;:</label>
+	          <div class="col-sm-6" title="请谨慎修改!">
+	            <select class="form-control" id="role" name="user[role]">
+	              <option value="-1">请选择相应权限</option>
+	              <option value="0">普通用户</option>
+	              <option value="11">电影管理员</option>
+	              <option value="21">电影和用户管理员</option>
+	              <option value="31">超级管理员</option>
+	            </select>
+	          </div>
+	      	</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+				<button type="buttion" class="btn btn-primary updatePower">确认修改</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/js/user.js"></script>

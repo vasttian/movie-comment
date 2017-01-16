@@ -37,9 +37,12 @@ module.exports = function (app) {
   //管理员
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
-  // app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
-  // app.delete('/admin/user/list', User.signinRequired, User.userAdminRequired, User.del);
-  
+  app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
+  app.get('/admin/ordinary/user/list', User.signinRequired, User.userAdminRequired, User.ordinaryUserList);
+  app.get('/admin/admin/user/list', User.signinRequired, User.userAdminRequired, User.adminUserList);
+  app.post('/admin/del/user', User.signinRequired, User.userAdminRequired, User.del);
+  app.post('/admin/update/role', User.signinRequired, User.userAdminRequired, User.updateRole);
+    
   //电影
   app.get("/movie-pv/ranking", User.signinRequired, Movie.pvRanking);
   app.get("/movie-time/ranking", User.signinRequired, Movie.movieTimeRanking);
@@ -74,4 +77,9 @@ module.exports = function (app) {
   
   //ECharts
   app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
+  app.get('/active/view/categories/count/data', User.signinRequired, Category.categoriesCountData);
+  app.get('/active/view/categories/click', User.signinRequired, Movie.categoriesClick);
+  app.get('/active/view/categories/click/data', User.signinRequired, Category.categoriesClickData);
+  app.get('/active/view/categories/averagescore', User.signinRequired, Movie.categoriesAverageScore);
+  app.get('/active/view/categories/averagescore/data', User.signinRequired, Category.categoriesAverageScoreData);
 };
