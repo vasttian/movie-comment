@@ -333,7 +333,36 @@ exports.list = function(req, res) {
       console.log(err);
     }
     res.render("pages/user-list", {
-      title: "用户列表",
+      title: "所有用户列表",
+      users: users
+    });
+  });
+};
+
+//普通用户
+//PS:这样会额外增加一个请求，可以直接在前端显示用户时过滤，待优化
+exports.ordinaryUserList = function(req, res) {
+  User.find({"flag": 1, "role":{"$gte": 0, "$lte": 10}}, function(err, users) {
+    // console.log("users:",users);
+    if (err) {
+      console.log(err);
+    }
+    res.render("pages/user-list", {
+      title: "普通用户用户列表",
+      users: users
+    });
+  });
+};
+
+//管理员
+exports.adminUserList = function(req, res) {
+  User.find({"flag": 1, "role":{"$gt": 10}}, function(err, users) {
+    // console.log("users:",users);
+    if (err) {
+      console.log(err);
+    }
+    res.render("pages/user-list", {
+      title: "管理员用户列表",
       users: users
     });
   });

@@ -4,13 +4,13 @@ $(function() {
 	  	$("#users-windows").html(data);
 		});
   });
-  $("#general-users").click(function () {
-		$.get('/admin/user/general/list', function(data, status) {
+  $("#ordinary-users").click(function () {
+		$.get('/admin/ordinary/user/list', function(data, status) {
 	  	$("#users-windows").html(data);
 		});
   });
   $("#admin-users").click(function () {
-		$.get('/admin/user/admin/list', function(data, status) {
+		$.get('/admin/admin/user/list', function(data, status) {
 	  	$("#users-windows").html(data);
 		});
   });
