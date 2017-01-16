@@ -355,6 +355,7 @@ exports.ordinaryUserList = function(req, res) {
 };
 
 //管理员
+//PS:同上
 exports.adminUserList = function(req, res) {
   User.find({"flag": 1, "role":{"$gt": 10}}, function(err, users) {
     // console.log("users:",users);
