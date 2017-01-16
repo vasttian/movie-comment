@@ -27,7 +27,7 @@ angular.module("adminApp", ["ngRoute"])
   	.then(function(data) {
 	    $scope.user.nickName = data.user.nickname;
   	}, function(error) {
-	    console.log('adminWelcomeFactory.callUser:',error);
+	    console.log('adminWelcomeFactory.callUser:', error);
   	});
   };
   $scope.$watch('$viewContentLoaded',function(event) {
@@ -43,6 +43,9 @@ angular.module("adminApp", ["ngRoute"])
 })
 .controller('usersCtrl', function($scope, $route) {
   $scope.libState = 0;
+  $.get('/admin/user/list', function(data, status) {
+    $("#users-windows").html(data);
+  });
 })
 .controller('activeCtrl', function($scope, $route) {
   $scope.libState = 0;
