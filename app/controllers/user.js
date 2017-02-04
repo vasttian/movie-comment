@@ -395,6 +395,14 @@ exports.updateRole = function (req, res) {
   });
 };
 
+//获取用户年龄段
+exports.allUserAge = function (req, res) {
+  User.find({}, function(err, users) {
+    // console.log("allUserAge", users);
+    res.json({"status": 1, "data": users});
+  });
+};
+
 //是否登录
 exports.signinRequired = function (req, res, next) {
   console.log("验证是否登录");

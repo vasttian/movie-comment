@@ -82,4 +82,7 @@ module.exports = function (app) {
   app.get('/active/view/categories/click/data', User.signinRequired, Category.categoriesClickData);
   app.get('/active/view/categories/averagescore', User.signinRequired, Movie.categoriesAverageScore);
   app.get('/active/view/categories/averagescore/data', User.signinRequired, Category.categoriesAverageScoreData);
+
+  // app.get('/active/admin/view/age/', User.signinRequired, User.allUserAge);
+  app.get('/active/admin/view/age/data', User.signinRequired, User.allUserAge);
 };
