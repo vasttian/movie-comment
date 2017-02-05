@@ -10,10 +10,10 @@ $(function() {
 			type: 'GET',
 			url: '/active/admin/view/age/data',
 			success: function(data) {
-				console.log('data:', data);
+				// console.log('data:', data);
 				if (data.status == 1) {
 					var tdata = data.data;
-					console.log("请求数据成功");
+					// console.log("请求数据成功");
 					var len = tdata.length;
 					var nowData = moment(moment().format("YYYY-MM-DD"));
 					var ageSegment = [];
@@ -61,7 +61,7 @@ $(function() {
 			        data: seriesData,
 			      }]
 			    };
-			    console.log("option", option);
+			    // console.log("option", option);
 			    myChart.setOption(option);
 				}
 			}
