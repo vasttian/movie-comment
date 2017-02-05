@@ -44,12 +44,12 @@ $(function() {
 					}
 					option = {
 			      title: {
-			        text: '用户年龄段',
+			        text: '用户年龄分布',
 			        x: 'center'
 			      },
 			      tooltip: {},
 			      legend: {
-			        zlevel: 1000,
+			        // zlevel: 1000,
 			        data: legend_data,
 			        x: 'left'
 			      },
