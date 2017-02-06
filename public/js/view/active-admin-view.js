@@ -167,6 +167,7 @@ $(function() {
 			      xAxis: {
               data: xAxisData,
             },
+            yAxis: {},
 			      series: [{
 			        name: '电影分类',
 			        type: 'bar',
