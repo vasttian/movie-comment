@@ -1,10 +1,9 @@
 $(function() {
 	var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
 	var option = {};
-  var seriesData = [];
-  var xAxisData = [];
-  var lengthData = [];
+
 	if ($("#all-users-age").hasClass('active')) {
+		var seriesData = [];
 		console.log('查看用户年龄段');
 		$.ajax({
 			type: 'GET',
@@ -71,4 +70,60 @@ $(function() {
 			}
 		});
 	}
+
+	$("#all-users-sex").click(function() {
+		var seriesData = [];
+		console.log('查看用户性别');
+		$.ajax({
+			type: 'GET',
+			url: '/active/admin/view/sex/data',
+			success: function(data) {
+				// console.log('data:', data);
+				if (data.status == 1) {
+					var tdata = data.data;
+					// console.log("请求数据成功");
+					var len = tdata.length;
+
+					var legend_data = ['男', '女'];
+					for (var i = 0; i < legend_data.length; ++i) {
+						seriesData[i] = {
+							name: legend_data[i],
+							value: 0,
+						}
+					}
+
+					for (var i = 0; i < len; ++i) {
+						if (tdata[i].sex) {
+							seriesData[0].value += 1;
+						} else {
+							seriesData[1].value += 1;
+						}
+					}
+
+					option = {
+			      title: {
+			        text: '用户性别分布',
+			        x: 'center',
+			      },
+			      tooltip: {},
+			      legend: {
+			        // zlevel: 1000,
+			        data: legend_data,
+			        x: 'left',
+			      },
+			      series: [{
+			        name: '性别',
+			        type: 'pie',
+			        radius : '55%',
+			        center: ['50%', '60%'],
+			        data: seriesData,
+			      }],
+			    };
+
+			    // console.log("option", option);
+			    myChart.setOption(option);
+				}
+			}
+		});
+	});
 });

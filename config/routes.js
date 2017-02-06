@@ -85,4 +85,5 @@ module.exports = function (app) {
 
   // app.get('/active/admin/view/age/', User.signinRequired, User.allUserAge);
   app.get('/active/admin/view/age/data', User.signinRequired, User.allUserAge);
+  app.get('/active/admin/view/sex/data', User.signinRequired, User.allUserSex);
 };

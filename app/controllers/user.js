@@ -403,6 +403,14 @@ exports.allUserAge = function (req, res) {
   });
 };
 
+//获取用户性别
+exports.allUserSex = function(req, res) {
+  User.find({}, function(err, users) {
+    res.json({"status": 1, "data": users});
+  });
+};
+
+
 //是否登录
 exports.signinRequired = function (req, res, next) {
   console.log("验证是否登录");
