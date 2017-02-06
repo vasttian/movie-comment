@@ -2,7 +2,7 @@ $(function() {
 	var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
 	var option = {};
 
-	if ($("#all-users-age").hasClass('active')) {
+	var showAge = function() {
 		var seriesData = [];
 		console.log('查看用户年龄段');
 		$.ajax({
@@ -69,7 +69,15 @@ $(function() {
 				}
 			}
 		});
-	}
+	};
+
+	if ($("#all-users-age").hasClass('active')) {
+		showAge();
+	};
+
+	$("#all-users-age").click(function() {
+		showAge();
+	});
 
 	$("#all-users-sex").click(function() {
 		var seriesData = [];
