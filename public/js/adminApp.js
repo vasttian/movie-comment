@@ -5,7 +5,7 @@ angular.module("adminApp", ["ngRoute"])
   	var defered = $q.defer();
   	var config = {
   	  method: 'GET',
-  	  url: '/admin/user'
+  	  url: '/admin/user',
   	};
 
   	$http(config).success(function(data) {
@@ -20,8 +20,9 @@ angular.module("adminApp", ["ngRoute"])
 }])
 .controller('adminHomeCtrl', ['$scope', '$route', 'adminWelcomeFactory', function($scope, $route, adminWelcomeFactory) {
   $scope.user = {
-  	nickName: ''
+  	nickName: '',
   };
+
   var fillUser = function() {
   	adminWelcomeFactory.callUser()
   	.then(function(data) {
@@ -30,6 +31,7 @@ angular.module("adminApp", ["ngRoute"])
 	    console.log('adminWelcomeFactory.callUser:', error);
   	});
   };
+
   $scope.$watch('$viewContentLoaded',function(event) {
   	fillUser(); 
   });

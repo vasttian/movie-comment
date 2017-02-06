@@ -22,13 +22,15 @@ $(function() {
 						var age = nowData.diff(born, 'years');
 						ageSegment[i] = age;
 					}
+
 					var legend_data = ['< 20', '[20-30)', '[30-40)', '[40-60)', '>= 60'];
 					for (var i = 0; i < legend_data.length; ++i) {
 						seriesData[i] = {
 							name: legend_data[i],
-							value: 0
+							value: 0,
 						}
 					}
+
 					for (var i = 0; i < len; ++i) {
 						if (ageSegment[i] < 20) {
 							seriesData[0].value += 1;
@@ -42,16 +44,17 @@ $(function() {
 							seriesData[4].value += 1;
 						}
 					}
+
 					option = {
 			      title: {
 			        text: '用户年龄分布',
-			        x: 'center'
+			        x: 'center',
 			      },
 			      tooltip: {},
 			      legend: {
 			        // zlevel: 1000,
 			        data: legend_data,
-			        x: 'left'
+			        x: 'left',
 			      },
 			      series: [{
 			        name: '年龄段',
@@ -59,8 +62,9 @@ $(function() {
 			        radius : '55%',
 			        center: ['50%', '60%'],
 			        data: seriesData,
-			      }]
+			      }],
 			    };
+
 			    // console.log("option", option);
 			    myChart.setOption(option);
 				}
