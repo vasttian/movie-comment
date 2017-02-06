@@ -134,4 +134,50 @@ $(function() {
 			}
 		});
 	});
+
+	$("#all-movie-categories").click(function() {
+		var seriesData = [];
+		var xAxisData = [];
+		console.log('查看电影分类');
+		$.ajax({
+			type: 'GET',
+			url: '/active/admin/view/movie/categories/data',
+			success: function(data) {
+				console.log('data:', data);
+				if (data.status == 1) {
+					var tdata = data.data;
+					// console.log("请求数据成功");
+					var len = tdata.length;
+					for (var i = 0; i < len; ++i) {
+						xAxisData.push(tdata[i].name);
+						seriesData.push(tdata[i].movies.length);
+					}
+
+					option = {
+			      title: {
+			        text: '电影分类',
+			        x: 'center',
+			      },
+			      tooltip: {},
+			      legend: {
+			        // zlevel: 1000,
+			        data: ['分类数量'],
+			        x: 'left',
+			      },
+			      xAxis: {
+              data: xAxisData,
+            },
+			      series: [{
+			        name: '电影分类',
+			        type: 'bar',
+			        data: seriesData,
+			      }],
+			    };
+
+			    // console.log("option", option);
+			    myChart.setOption(option);
+				}
+			}
+		});
+	});
 });

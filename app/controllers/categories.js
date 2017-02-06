@@ -156,3 +156,10 @@ exports.update = function(req, res) {
 	  });
   };
 };
+
+//电影分类
+exports.allCategories = function(req, res) {
+	Categories.find({}, function(err, categories) {
+		res.json({"status": 1, "data": categories});
+	});
+};
