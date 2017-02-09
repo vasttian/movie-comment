@@ -191,7 +191,72 @@ $(function() {
 			        }
 			      }],
 			    };
+				
+			    // console.log("option", option);
+			    myChart.setOption(option);
+				}
+			}
+		});
+	});
 
+	$("#categories-average-source").click(function() {
+		var seriesData = [];
+		var xAxisData = [];
+		console.log('查看电影分类平均分');
+		$.ajax({
+			type: 'GET',
+			url: '/active/admin/view/movie/categories/avgsourece/data',
+			success: function(data) {
+				console.log('data:', data);
+				if (data.status == 1) {
+					var tdata = data.data;
+					// console.log("请求数据成功");
+					var len = tdata.length;
+          for (var i = 0; i < len; ++i) {
+            var tname = tdata[i].name;
+            xAxisData.push(tname);
+            seriesData.push(tdata[i].sumScore);
+          }
+
+					option = {
+			      title: {
+			        text: '分类平均分',
+			        x: 'center',
+			      },
+			      tooltip: {},
+			      legend: {
+			        // zlevel: 1000,
+			        data: ['平均分'],
+			        x: 'left',
+			      },
+			      xAxis: {
+              data: xAxisData,
+            },
+            yAxis: {},
+			      series: [{
+			        name: '平均分',
+			        type: 'bar',
+			        data: seriesData,
+			        itemStyle: {
+			        	normal: {
+			        		color: function(params) {
+                      var colorList = [
+                        '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                         '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                         '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                      ];
+                      return colorList[params.dataIndex]
+                  },
+                  label: {
+                      show: true,
+                      position: 'top',
+                      formatter: '{b}\n{c}'
+                  }
+			        	}
+			        }
+			      }],
+			    };
+				
 			    // console.log("option", option);
 			    myChart.setOption(option);
 				}
