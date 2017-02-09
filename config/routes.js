@@ -88,4 +88,5 @@ module.exports = function (app) {
   app.get('/active/admin/view/sex/data', User.signinRequired, User.allUserSex);
   app.get('/active/admin/view/movie/categories/data', User.signinRequired, Category.allCategories);
   app.get('/active/admin/view/movie/categories/avgsourece/data', User.signinRequired, Category.categoriesAverageScoreData);
+  app.get('/active/admin/view/movie/categories/click/data', User.signinRequired, Category.categoriesClickData);
 };

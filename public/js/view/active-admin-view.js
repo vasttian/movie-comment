@@ -263,4 +263,64 @@ $(function() {
 			}
 		});
 	});
+
+	$("#categories-average-click").click(function() {
+		var seriesData = [];
+		var lengthData = [];
+		var xAxisData = [];
+		console.log('查看电影分类点击量');
+		$.ajax({
+			type: 'GET',
+			url: '/active/admin/view/movie/categories/click/data',
+			success: function(data) {
+				console.log('data:', data);
+				if (data.status == 1) {
+					var tdata = data.data;
+					// console.log("请求数据成功");
+					var len = tdata.length;
+          for (var i = 0; i < len; ++i) {
+            var tname = tdata[i].name;
+            lengthData.push(tname);
+            seriesData.push({value: tdata[i].countPv, name: tdata[i].name});
+          }
+
+					option = {
+			      title: {
+			        text: '分类平均分',
+			        x: 'center',
+			      },
+			      tooltip: {},
+			      legend: {
+              zlevel: 1,
+              data: lengthData,
+              x: 'left',
+            },
+			      calculable : true,
+			      series: [{
+			        name: '点击量',
+              type: 'pie',
+              radius : '55%',
+              center: ['50%', '60%'],
+              data: seriesData,
+			        itemStyle: {
+			        	normal: {
+			        		color: function(params) {
+                      var colorList = [
+                        '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                         '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                         '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                      ];
+                      return colorList[params.dataIndex]
+                  },
+			        	}
+			        }
+			      }],
+			    };
+				
+			    // console.log("option", option);
+			    myChart.setOption(option);
+				}
+			}
+		});
+	});
 });
