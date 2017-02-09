@@ -182,13 +182,13 @@ $(function() {
                       ];
                       return colorList[params.dataIndex]
                   },
-                  label: {
-                      show: true,
-                      position: 'top',
-                      formatter: '{b}\n{c}'
-                  }
 			        	}
-			        }
+			        },
+              label: {
+                show: true,
+                position: 'top',
+                formatter: '{b}\n{c}',
+              },
 			      }],
 			    };
 				
@@ -247,13 +247,13 @@ $(function() {
                       ];
                       return colorList[params.dataIndex]
                   },
-                  label: {
-                      show: true,
-                      position: 'top',
-                      formatter: '{b}\n{c}'
-                  }
 			        	}
-			        }
+			        },
+			        label: {
+                show: true,
+                position: 'top',
+                formatter: '{b}\n{c}',
+              },
 			      }],
 			    };
 				
