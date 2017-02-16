@@ -147,7 +147,6 @@ exports.categoriesCommentCountData = function(req, res) {
 		  			console.log(err);
 		  		}
 
-		  			console.log("j",j);
 		  		if (comment[0]) {
 		  			console.log("comment[0].reply",comment[0].reply);
 		  			console.log("comment[0].reply.length",comment[0].reply.length);
