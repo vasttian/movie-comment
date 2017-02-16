@@ -30,8 +30,8 @@ exports.detail = function(req, res) {
   	//评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
   	Comment
   	.find({movie: id})
-  	.populate("from", "name avatar")
-  	.populate("reply.from reply.to", "name avatar")
+  	.populate({path:"from", select: "name avatar"})
+  	.populate({path:"reply.from reply.to", select: "name avatar"})
   	.exec(function(err, comment) {
   		if (err) {
   			console.log(err);
