@@ -1,7 +1,11 @@
 $(function() {
 	// var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
 	// var option = {};
-
+	var colorListArray = [
+		'#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+    '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+    '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+  ];
 	var showAge = function() {
 		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
 		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
@@ -184,12 +188,7 @@ $(function() {
 			        itemStyle: {
 			        	normal: {
 			        		color: function(params) {
-                      var colorList = [
-                        '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
-                         '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-                         '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
-                      ];
-                      return colorList[params.dataIndex]
+                      return colorListArray[params.dataIndex]
                   },
 			        	}
 			        },
@@ -252,12 +251,7 @@ $(function() {
 			        itemStyle: {
 			        	normal: {
 			        		color: function(params) {
-                      var colorList = [
-                        '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
-                         '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-                         '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
-                      ];
-                      return colorList[params.dataIndex]
+                      return colorListArray[params.dataIndex]
                   },
 			        	}
 			        },
@@ -320,12 +314,7 @@ $(function() {
 			        itemStyle: {
 			        	normal: {
 			        		color: function(params) {
-                      var colorList = [
-                        '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
-                         '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
-                         '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
-                      ];
-                      return colorList[params.dataIndex]
+                      return colorListArray[params.dataIndex]
                   },
 			        	}
 			        }
