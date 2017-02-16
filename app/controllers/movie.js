@@ -24,8 +24,9 @@ exports.detail = function(req, res) {
   	if (err) {
   		console.log(err);
   	}
-  	//from、reply.from、reply.to 指定要填充的关联字段
-  	//name avatar 指定要填充Comment.from、Comment.reply.from、Comment.reply.to的name avatar字段
+  	//from、reply.from、reply.to 指定要填充的关联字段 (schemas中ref)
+  	//name avatar 指定要填充（新增Comment.from.name Comment.from.avatar Comment.reply.to.name 
+  	//Comment.reply.to.avatar）Comment.from、Comment.reply.from、Comment.reply.to的name avatar字段
   	//评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
   	Comment
   	.find({movie: id})
@@ -47,8 +48,8 @@ exports.detail = function(req, res) {
 	  	  	}
 	  	  };
   	  }
-  	  console.log("comment",comment);
-  	  console.log("comment[0].reply",comment[0].reply);
+  	  // console.log("comment",comment);
+  	  // console.log("comment[0].reply",comment[0].reply);
   	  res.render("pages/movie-detail", {
   	  	title:"电影详情",
   	  	movie: movie,
