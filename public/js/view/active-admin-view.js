@@ -301,7 +301,7 @@ $(function() {
 
 					option = {
 			      title: {
-			        text: '分类平均分',
+			        text: '分类点击量',
 			        x: 'center',
 			      },
 			      tooltip: {},
