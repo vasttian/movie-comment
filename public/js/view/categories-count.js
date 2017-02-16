@@ -139,4 +139,5 @@ $(function() {
       }
     });
   }
+  // myChart.setOption('shine')
 });

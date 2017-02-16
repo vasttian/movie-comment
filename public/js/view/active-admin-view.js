@@ -1,8 +1,11 @@
 $(function() {
-	var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
-	var option = {};
+	// var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
+	// var option = {};
 
 	var showAge = function() {
+		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
+		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
+		var option = {};
 		var seriesData = [];
 		console.log('查看用户年龄段');
 		$.ajax({
@@ -80,6 +83,9 @@ $(function() {
 	});
 
 	$("#all-users-sex").click(function() {
+		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
+		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
+		var option = {};
 		var seriesData = [];
 		console.log('查看用户性别');
 		$.ajax({
@@ -136,6 +142,9 @@ $(function() {
 	});
 
 	$("#all-movie-categories").click(function() {
+		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
+		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
+		var option = {};
 		var seriesData = [];
 		var xAxisData = [];
 		console.log('查看电影分类');
@@ -200,6 +209,9 @@ $(function() {
 	});
 
 	$("#categories-average-source").click(function() {
+		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
+		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
+		var option = {};
 		var seriesData = [];
 		var xAxisData = [];
 		console.log('查看电影分类平均分');
@@ -265,6 +277,9 @@ $(function() {
 	});
 
 	$("#categories-average-click").click(function() {
+		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
+		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
+		var option = {};
 		var seriesData = [];
 		var lengthData = [];
 		var xAxisData = [];
