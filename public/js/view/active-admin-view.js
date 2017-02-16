@@ -327,4 +327,62 @@ $(function() {
 			}
 		});
 	});
+
+	$("#categories-comment-count").click(function() {
+		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
+		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
+		var option = {};
+		var seriesData = [];
+		var lengthData = [];
+		var xAxisData = [];
+		console.log('查看电影分类评论量');
+		$.ajax({
+			type: 'GET',
+			url: '/active/admin/view/movie/categories/comment/count/data',
+			success: function(data) {
+				console.log('data:', data);
+				if (data.status == 1) {
+					var tdata = data.data;
+					// console.log("请求数据成功");
+					var len = tdata.length;
+          for (var i = 0; i < len; ++i) {
+            var tname = tdata[i].name;
+            lengthData.push(tname);
+            seriesData.push({value: tdata[i].countPv, name: tdata[i].name});
+          }
+
+					option = {
+			      title: {
+			        text: '分类评论量',
+			        x: 'center',
+			      },
+			      tooltip: {},
+			      legend: {
+              zlevel: 1,
+              data: lengthData,
+              x: 'left',
+            },
+			      calculable : true,
+			      series: [{
+			        name: '评论量',
+              type: 'pie',
+              radius : '55%',
+              center: ['50%', '60%'],
+              data: seriesData,
+			        itemStyle: {
+			        	normal: {
+			        		color: function(params) {
+                      return colorListArray[params.dataIndex]
+                  },
+			        	}
+			        }
+			      }],
+			    };
+				
+			    // console.log("option", option);
+			    myChart.setOption(option);
+				}
+			}
+		});
+	});
 });

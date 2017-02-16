@@ -1,4 +1,5 @@
 var Categories = require("../models/categories");
+var Comment = require("../models/comment");
 var Movie = require("../models/movie");
 var _ = require("underscore");
 
@@ -119,6 +120,50 @@ exports.categoriesAverageScoreData = function(req, res) {
 	  }
 	  // console.log(catAveScore);
   	res.json({"data": catAveScore, "status": 1});
+  });
+};
+
+//分类评论量
+exports.categoriesCommentCountData = function(req, res) {
+	Categories.find({})
+  .populate({path:"movies"})
+  .exec(function(err, categories) {
+  	var lenCat = categories.length;
+  	var catCommentCount = [];
+  	for (var i = 0; i < lenCat; ++i) {
+	  	// console.log('categories.movies:', categories[i].movies);
+	  	var lenMovie = categories[i].movies.length;
+	  	var singleCat = {};
+			singleCat.name = categories[i].name;
+	  	var commentCount = 0;
+	  	console.log("lenMovie",lenMovie)
+	  	for (var j = 0; j < lenMovie; ++j) {
+	  		var movie = categories[i].movies[j];
+	  		Comment
+		  	.find({movie: movie.id})
+		  	.exec(function(err, comment) {
+		  		console.log("comment",comment);
+		  		if (err) {
+		  			console.log(err);
+		  		}
+
+		  			console.log("j",j);
+		  		if (comment[0]) {
+		  			console.log("comment[0].reply",comment[0].reply);
+		  			console.log("comment[0].reply.length",comment[0].reply.length);
+			  		var num = comment[0].reply.length;
+		  		}
+
+		  		commentCount += num;
+		  	});
+	  	}
+
+	  	singleCat.commentCount = commentCount;
+	  	catCommentCount.push(singleCat);
+	  }
+
+	  // console.log(catAveScore);
+  	res.json({"data": catCommentCount, "status": 1});
   });
 };
 
