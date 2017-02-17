@@ -169,7 +169,7 @@ exports.categoriesCommentCountData = function(req, res) {
 
 		  	singleCat.commentCount = maxx;
 		  	catCommentCount.push(singleCat);
-		  	console.log("catCommentCount", results);
+		  	// console.log("catCommentCount", results);
 		  	callback(null, catCommentCount);
   		});
   		
