@@ -348,7 +348,7 @@ $(function() {
           for (var i = 0; i < len; ++i) {
             var tname = tdata[i].name;
             lengthData.push(tname);
-            seriesData.push({value: tdata[i].countPv, name: tdata[i].name});
+            seriesData.push({value: tdata[i].commentCount, name: tdata[i].name});
           }
 
 					option = {

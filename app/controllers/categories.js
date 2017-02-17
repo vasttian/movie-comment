@@ -2,6 +2,7 @@ var Categories = require("../models/categories");
 var Comment = require("../models/comment");
 var Movie = require("../models/movie");
 var _ = require("underscore");
+var async = require('async');
 
 //添加分类页
 exports.add = function(req, res) {
@@ -130,15 +131,16 @@ exports.categoriesCommentCountData = function(req, res) {
   .exec(function(err, categories) {
   	var lenCat = categories.length;
   	var catCommentCount = [];
-  	for (var i = 0; i < lenCat; ++i) {
-	  	// console.log('categories.movies:', categories[i].movies);
-	  	var lenMovie = categories[i].movies.length;
-	  	var singleCat = {};
-			singleCat.name = categories[i].name;
-	  	var commentCount = 0;
+  	// console.log(categories);
+  	async.mapSeries(categories, function(item, callback) {
+  		if (item.name == '战争')
+	  	// console.log('categories.movies:', item);
+	  	var lenMovie = item.movies.length;
 	  	console.log("lenMovie",lenMovie)
-	  	for (var j = 0; j < lenMovie; ++j) {
-	  		var movie = categories[i].movies[j];
+	  	var singleCat = {};
+			singleCat.name = item.name;
+	  	var commentCount = 0;
+	  	async.mapSeries(item.movies, function(movie, callback) {
 	  		Comment
 		  	.find({movie: movie.id})
 		  	.exec(function(err, comment) {
@@ -147,22 +149,39 @@ exports.categoriesCommentCountData = function(req, res) {
 		  			console.log(err);
 		  		}
 
-		  		if (comment[0]) {
-		  			console.log("comment[0].reply",comment[0].reply);
-		  			console.log("comment[0].reply.length",comment[0].reply.length);
-			  		var num = comment[0].reply.length;
+		  		if (comment.length) {
+		  			commentCount++;
 		  		}
 
-		  		commentCount += num;
+			  	callback(null, commentCount);
 		  	});
-	  	}
+	  	}, function(err, results) {
+	  		// console.log('results', results);
+	  		if (err) {
+		  		console.log('movie', err);
+	  		}
+	  		var maxx = 0;
+	  		for (var i = 0; i < results.length; ++i) {
+	  			if (results[i] > maxx) {
+	  				maxx = results[i];
+	  			}
+	  		}
 
-	  	singleCat.commentCount = commentCount;
-	  	catCommentCount.push(singleCat);
-	  }
-
-	  // console.log(catAveScore);
-  	res.json({"data": catCommentCount, "status": 1});
+		  	singleCat.commentCount = maxx;
+		  	catCommentCount.push(singleCat);
+		  	console.log("catCommentCount", results);
+		  	callback(null, catCommentCount);
+  		});
+  		
+	  }, function(err, results) {
+	  	if (err) {
+	  		console.log('item', err);
+  		}
+  		var categoriesCount = [];
+  		var len = results.length
+  		// console.log("results",results[len-1]);
+	  	res.json({"data": results[len-1], "status": 1});
+	  });
   });
 };
 
