@@ -5,7 +5,7 @@ angular.module("adminApp", ["ngRoute"])
   	var defered = $q.defer();
   	var config = {
   	  method: 'GET',
-  	  url: '/admin/user'
+  	  url: '/admin/user',
   	};
 
   	$http(config).success(function(data) {
@@ -20,8 +20,9 @@ angular.module("adminApp", ["ngRoute"])
 }])
 .controller('adminHomeCtrl', ['$scope', '$route', 'adminWelcomeFactory', function($scope, $route, adminWelcomeFactory) {
   $scope.user = {
-  	nickName: ''
+  	nickName: '',
   };
+
   var fillUser = function() {
   	adminWelcomeFactory.callUser()
   	.then(function(data) {
@@ -30,6 +31,7 @@ angular.module("adminApp", ["ngRoute"])
 	    console.log('adminWelcomeFactory.callUser:', error);
   	});
   };
+
   $scope.$watch('$viewContentLoaded',function(event) {
   	fillUser(); 
   });
@@ -74,7 +76,7 @@ angular.module("adminApp", ["ngRoute"])
   })
   .when('/view-active', {
     // tempalteUrl: 
-    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)" id="all-users-age">用户年龄段</a></li><li ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)" id="all-users-sex">用户性别</a></li><li ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)" id="all-categories">电影分类</a></li><li ng-click="libState=3;" ng-class="{active:libState==3}" role="presentation"><a href="javascript:void(0)" id="categories-average-source">分类平均评分</a></li><li ng-click="libState=4;" ng-class="{active:libState==4}" role="presentation"><a href="javascript:void(0)" id="categories-average-click">分类平均点击量</a></li><li ng-click="libState=5;" ng-class="{active:libState==5}" role="presentation"><a href="javascript:void(0)" id="categories-comment-count">分类评论量</a></li></ul></div></div><div id="users-windows"></div><script src="/js/active-windows.js"></script>',
+    template: '<div class="row library_title"><div class="col-md-12 col-md-offset-1"><ul class="nav nav-tabs"><li id="all-users-age" ng-click="libState=0;" ng-class="{active:libState==0}" role="presentation"><a href="javascript:void(0)">用户年龄段</a></li><li id="all-users-sex" ng-click="libState=1;" ng-class="{active:libState==1}" role="presentation"><a href="javascript:void(0)">用户性别</a></li><li id="all-movie-categories" ng-click="libState=2;" ng-class="{active:libState==2}" role="presentation"><a href="javascript:void(0)">电影分类</a></li><li id="categories-average-source" ng-click="libState=3;" ng-class="{active:libState==3}" role="presentation"><a href="javascript:void(0)">分类平均评分</a></li><li id="categories-average-click" ng-click="libState=4;" ng-class="{active:libState==4}" role="presentation"><a href="javascript:void(0)">分类平均点击量</a></li><li id="categories-comment-count" ng-click="libState=5;" ng-class="{active:libState==5}" role="presentation"><a href="javascript:void(0)">分类评论量</a></li></ul></div></div><div id="users-windows" class="admin-view"></div><script src="/js/view/active-admin-view.js"></script>',
     controller: 'activeCtrl'
   })
   .when('/account-set', {

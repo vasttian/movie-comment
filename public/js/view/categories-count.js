@@ -19,28 +19,30 @@ $(function() {
             var tname = tdata[i].name;
             xAxisData.push(tname);
             seriesData.push(tdata[i].movies.length);
-          };
+          }
+
           option = {
             title: {
               text: '分类电影数量',
-              x: 'center'
+              x: 'center',
             },
             tooltip: {},
             legend: {
               zlevel: 1,
               data: ['分类数量'],
-              x: 'left'
+              x: 'left',
             },
             xAxis: {
-              data: xAxisData
+              data: xAxisData,
             },
             yAxis: {},
             series: [{
               name: '分类数量',
               type: 'bar',
-              data: seriesData
-            }]
+              data: seriesData,
+            }],
           };
+
           myChart.setOption(option);
         }
       }
@@ -60,17 +62,18 @@ $(function() {
             var tname = tdata[i].name;
             lengthData.push(tname);
             seriesData.push({value: tdata[i].countPv, name: tdata[i].name});
-          };
+          }
+
           option = {
             title: {
               text: '分类点击量',
-              x: 'center'
+              x: 'center',
             },
             tooltip: {},
             legend: {
               zlevel: 1,
               data: lengthData,
-              x: 'left'
+              x: 'left',
             },
             calculable : true,
             series: [{
@@ -79,8 +82,9 @@ $(function() {
               radius : '55%',
               center: ['50%', '60%'],
               data: seriesData,
-            }]
+            }],
           };
+
           myChart.setOption(option);
         }
       }
@@ -101,11 +105,12 @@ $(function() {
             var tname = tdata[i].name;
             xAxisData.push(tname);
             seriesData.push(tdata[i].sumScore);
-          };
+          }
+
           option = {
             title: {
               text: '分类平均分',
-              x: 'center'
+              x: 'center',
             },
             tooltip: {},
             legend: {
@@ -114,7 +119,7 @@ $(function() {
               x: 'left'
             },
             xAxis: {
-              data: xAxisData
+              data: xAxisData,
             },
             yAxis: {},
             series: [{
@@ -123,14 +128,16 @@ $(function() {
               data: seriesData,
               itemStyle: {
                 normal: {
-                  color: "#87CEEB"
+                  color: "#87CEEB",
                 }
-              }
-            }]
+              },
+            }],
           };
+
           myChart.setOption(option);
         }
       }
     });
   }
+  // myChart.setOption('shine')
 });

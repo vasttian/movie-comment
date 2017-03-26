@@ -1,6 +1,8 @@
 var Categories = require("../models/categories");
+var Comment = require("../models/comment");
 var Movie = require("../models/movie");
 var _ = require("underscore");
+var async = require('async');
 
 //添加分类页
 exports.add = function(req, res) {
@@ -122,6 +124,67 @@ exports.categoriesAverageScoreData = function(req, res) {
   });
 };
 
+//分类评论量
+exports.categoriesCommentCountData = function(req, res) {
+	Categories.find({})
+  .populate({path:"movies"})
+  .exec(function(err, categories) {
+  	var lenCat = categories.length;
+  	var catCommentCount = [];
+  	// console.log(categories);
+  	async.mapSeries(categories, function(item, callback) {
+  		if (item.name == '战争')
+	  	// console.log('categories.movies:', item);
+	  	var lenMovie = item.movies.length;
+	  	console.log("lenMovie",lenMovie)
+	  	var singleCat = {};
+			singleCat.name = item.name;
+	  	var commentCount = 0;
+	  	async.mapSeries(item.movies, function(movie, callback) {
+	  		Comment
+		  	.find({movie: movie.id})
+		  	.exec(function(err, comment) {
+		  		console.log("comment",comment);
+		  		if (err) {
+		  			console.log(err);
+		  		}
+
+		  		if (comment.length) {
+		  			commentCount++;
+		  		}
+
+			  	callback(null, commentCount);
+		  	});
+	  	}, function(err, results) {
+	  		// console.log('results', results);
+	  		if (err) {
+		  		console.log('movie', err);
+	  		}
+	  		var maxx = 0;
+	  		for (var i = 0; i < results.length; ++i) {
+	  			if (results[i] > maxx) {
+	  				maxx = results[i];
+	  			}
+	  		}
+
+		  	singleCat.commentCount = maxx;
+		  	catCommentCount.push(singleCat);
+		  	// console.log("catCommentCount", results);
+		  	callback(null, catCommentCount);
+  		});
+  		
+	  }, function(err, results) {
+	  	if (err) {
+	  		console.log('item', err);
+  		}
+  		var categoriesCount = [];
+  		var len = results.length
+  		// console.log("results",results[len-1]);
+	  	res.json({"data": results[len-1], "status": 1});
+	  });
+  });
+};
+
 //删除分类
 exports.del = function(req, res) {
   var id = req.query.id;
@@ -155,4 +218,11 @@ exports.update = function(req, res) {
 			});
 	  });
   };
+};
+
+//电影分类
+exports.allCategories = function(req, res) {
+	Categories.find({}, function(err, categories) {
+		res.json({"status": 1, "data": categories});
+	});
 };

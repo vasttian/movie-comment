@@ -355,6 +355,7 @@ exports.ordinaryUserList = function(req, res) {
 };
 
 //管理员
+//PS:同上
 exports.adminUserList = function(req, res) {
   User.find({"flag": 1, "role":{"$gt": 10}}, function(err, users) {
     // console.log("users:",users);
@@ -393,6 +394,22 @@ exports.updateRole = function (req, res) {
     res.json({"status": 1});
   });
 };
+
+//获取用户年龄段
+exports.allUserAge = function (req, res) {
+  User.find({}, function(err, users) {
+    // console.log("allUserAge", users);
+    res.json({"status": 1, "data": users});
+  });
+};
+
+//获取用户性别
+exports.allUserSex = function(req, res) {
+  User.find({}, function(err, users) {
+    res.json({"status": 1, "data": users});
+  });
+};
+
 
 //是否登录
 exports.signinRequired = function (req, res, next) {
