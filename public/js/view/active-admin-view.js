@@ -11,6 +11,7 @@ $(function() {
 		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
 		var option = {};
 		var seriesData = [];
+
 		console.log('查看用户年龄段');
 		$.ajax({
 			type: 'GET',
@@ -23,13 +24,16 @@ $(function() {
 					var len = tdata.length;
 					var nowData = moment(moment().format("YYYY-MM-DD"));
 					var ageSegment = [];
+
 					for (var i = 0; i < len; ++i) {
 						var born = moment(tdata[i].born);
 						var age = nowData.diff(born, 'years');
+
 						ageSegment[i] = age;
 					}
 
 					var legend_data = ['< 20', '[20-30)', '[30-40)', '[40-60)', '>= 60'];
+
 					for (var i = 0; i < legend_data.length; ++i) {
 						seriesData[i] = {
 							name: legend_data[i],
@@ -55,6 +59,7 @@ $(function() {
 			      title: {
 			        text: '用户年龄分布',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -66,7 +71,7 @@ $(function() {
 			        name: '年龄段',
 			        type: 'pie',
 			        radius : '55%',
-			        center: ['50%', '60%'],
+			        center: ['50%', '50%'],
 			        data: seriesData,
 			      }],
 			    };
@@ -91,6 +96,7 @@ $(function() {
 		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
 		var option = {};
 		var seriesData = [];
+
 		console.log('查看用户性别');
 		$.ajax({
 			type: 'GET',
@@ -100,9 +106,8 @@ $(function() {
 				if (data.status == 1) {
 					var tdata = data.data;
 					// console.log("请求数据成功");
-					var len = tdata.length;
-
 					var legend_data = ['男', '女'];
+
 					for (var i = 0; i < legend_data.length; ++i) {
 						seriesData[i] = {
 							name: legend_data[i],
@@ -110,7 +115,7 @@ $(function() {
 						}
 					}
 
-					for (var i = 0; i < len; ++i) {
+					for (var i = 0, len = tdata.length; i < len; ++i) {
 						if (tdata[i].sex) {
 							seriesData[0].value += 1;
 						} else {
@@ -122,6 +127,7 @@ $(function() {
 			      title: {
 			        text: '用户性别分布',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -133,7 +139,7 @@ $(function() {
 			        name: '性别',
 			        type: 'pie',
 			        radius : '55%',
-			        center: ['50%', '60%'],
+			        center: ['50%', '50%'],
 			        data: seriesData,
 			      }],
 			    };
@@ -160,8 +166,8 @@ $(function() {
 				if (data.status == 1) {
 					var tdata = data.data;
 					// console.log("请求数据成功");
-					var len = tdata.length;
-					for (var i = 0; i < len; ++i) {
+					
+					for (var i = 0, len = tdata.length; i < len; ++i) {
 						xAxisData.push(tdata[i].name);
 						seriesData.push(tdata[i].movies.length);
 					}
@@ -170,6 +176,7 @@ $(function() {
 			      title: {
 			        text: '电影分类',
 			        x: 'center',
+			        // y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -188,9 +195,9 @@ $(function() {
 			        itemStyle: {
 			        	normal: {
 			        		color: function(params) {
-                      return colorListArray[params.dataIndex]
+                    return colorListArray[params.dataIndex]
                   },
-			        	}
+			        	},
 			        },
               label: {
                 show: true,
@@ -213,6 +220,7 @@ $(function() {
 		var option = {};
 		var seriesData = [];
 		var xAxisData = [];
+
 		console.log('查看电影分类平均分');
 		$.ajax({
 			type: 'GET',
@@ -222,9 +230,10 @@ $(function() {
 				if (data.status == 1) {
 					var tdata = data.data;
 					// console.log("请求数据成功");
-					var len = tdata.length;
-          for (var i = 0; i < len; ++i) {
+
+          for (var i = 0, len = tdata.length; i < len; ++i) {
             var tname = tdata[i].name;
+
             xAxisData.push(tname);
             seriesData.push(tdata[i].sumScore);
           }
@@ -233,6 +242,7 @@ $(function() {
 			      title: {
 			        text: '分类平均分',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -253,7 +263,7 @@ $(function() {
 			        		color: function(params) {
                       return colorListArray[params.dataIndex]
                   },
-			        	}
+			        	},
 			        },
 			        label: {
                 show: true,
@@ -277,6 +287,7 @@ $(function() {
 		var seriesData = [];
 		var lengthData = [];
 		var xAxisData = [];
+
 		console.log('查看电影分类点击量');
 		$.ajax({
 			type: 'GET',
@@ -286,9 +297,10 @@ $(function() {
 				if (data.status == 1) {
 					var tdata = data.data;
 					// console.log("请求数据成功");
-					var len = tdata.length;
-          for (var i = 0; i < len; ++i) {
+
+          for (var i = 0, len = tdata.length; i < len; ++i) {
             var tname = tdata[i].name;
+
             lengthData.push(tname);
             seriesData.push({value: tdata[i].countPv, name: tdata[i].name});
           }
@@ -297,6 +309,7 @@ $(function() {
 			      title: {
 			        text: '分类点击量',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -309,15 +322,15 @@ $(function() {
 			        name: '点击量',
               type: 'pie',
               radius : '55%',
-              center: ['50%', '60%'],
+              center: ['50%', '50%'],
               data: seriesData,
 			        itemStyle: {
 			        	normal: {
 			        		color: function(params) {
                       return colorListArray[params.dataIndex]
                   },
-			        	}
-			        }
+			        	},
+			        },
 			      }],
 			    };
 				
@@ -328,6 +341,7 @@ $(function() {
 		});
 	});
 
+
 	$("#categories-comment-count").click(function() {
 		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
 		var myChart = echarts.init(document.getElementById('users-windows'), 'macarons');
@@ -335,6 +349,7 @@ $(function() {
 		var seriesData = [];
 		var lengthData = [];
 		var xAxisData = [];
+
 		console.log('查看电影分类评论量');
 		$.ajax({
 			type: 'GET',
@@ -344,9 +359,10 @@ $(function() {
 				if (data.status == 1) {
 					var tdata = data.data;
 					// console.log("请求数据成功");
-					var len = tdata.length;
-          for (var i = 0; i < len; ++i) {
+
+          for (var i = 0, len = tdata.length; i < len; ++i) {
             var tname = tdata[i].name;
+
             lengthData.push(tname);
             seriesData.push({value: tdata[i].commentCount, name: tdata[i].name});
           }
@@ -355,27 +371,29 @@ $(function() {
 			      title: {
 			        text: '分类评论量',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
               zlevel: 1,
               data: lengthData,
               x: 'left',
+              // y: 'bottom'
             },
 			      calculable : true,
 			      series: [{
 			        name: '评论量',
               type: 'pie',
-              radius : '55%',
-              center: ['50%', '60%'],
+              radius : '45%',
+              center: ['50%', '50%'],
               data: seriesData,
 			        itemStyle: {
 			        	normal: {
 			        		color: function(params) {
                       return colorListArray[params.dataIndex]
                   },
-			        	}
-			        }
+			        	},
+			        },
 			      }],
 			    };
 				
