@@ -43,7 +43,7 @@ exports.save = function(req, res) {
 };
 
 //分类列表
-exports.list = function(req,res) {
+exports.list = function(req, res) {
   Categories.fetch(function(err, categories) {
 		if (err) {
 		  console.log(err);
@@ -53,6 +53,73 @@ exports.list = function(req,res) {
 		  categories: categories
 		});
   });	
+};
+
+//分类数据
+exports.categoriesCountData = function(req, res) {
+	// console.log("req.body:", req.body);
+	Categories.fetch(function(err, categories) {
+		if (err) {
+		  console.log(err);
+		}
+		// console.log("categories:", categories);
+		res.json({"data": categories, "status": 1});
+  });	
+};
+
+//分类点击量
+exports.categoriesClickData = function(req, res) {
+	// console.log("req.body:", req.body);
+  Categories.find({})
+  .populate({path:"movies"})
+  .exec(function(err, categories) {
+  	var lenCat = categories.length;
+  	var clickNum = [];
+  	for (var i = 0; i < lenCat; ++i) {
+	  	// console.log('categories.movies:', categories[i].movies);
+	  	var lenMovie = categories[i].movies.length;
+	  	var singleCat = {};
+			singleCat.name = categories[i].name;
+			var countPv = 0;
+	  	for (var j = 0; j < lenMovie; ++j) {
+	  		var movie = categories[i].movies[j];
+	  		if (movie && movie.pv) {
+					countPv += movie.pv;
+				}
+	  	}
+	  	singleCat.countPv = countPv;
+	  	clickNum.push(singleCat);
+  	};
+  	// console.log(clickNum);
+  	res.json({"data": clickNum, "status": 1});
+  });
+};
+
+//分类平均分
+exports.categoriesAverageScoreData = function(req, res) {
+	Categories.find({})
+  .populate({path:"movies"})
+  .exec(function(err, categories) {
+  	var lenCat = categories.length;
+  	var catAveScore = [];
+  	for (var i = 0; i < lenCat; ++i) {
+	  	// console.log('categories.movies:', categories[i].movies);
+	  	var lenMovie = categories[i].movies.length;
+	  	var singleCat = {};
+			singleCat.name = categories[i].name;
+	  	var sumScore = 0;
+	  	for (var j = 0; j < lenMovie; ++j) {
+	  		var movie = categories[i].movies[j];
+	  		if (movie.score.average) {
+	  			sumScore += movie.score.average;
+	  		}
+	  	}
+	  	singleCat.sumScore = sumScore;
+	  	catAveScore.push(singleCat);
+	  }
+	  // console.log(catAveScore);
+  	res.json({"data": catAveScore, "status": 1});
+  });
 };
 
 //删除分类

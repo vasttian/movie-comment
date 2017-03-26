@@ -32,13 +32,17 @@ module.exports = function (app) {
   app.post('/invitation-code/checkinvitationcode', InvitationCode.checkInvitationCode);
   app.post('/user/signup', multipartMiddleware, User.saveAvatar, User.signup);
   app.post('/user/signin', User.signin);
+  app.post('/user/simple/signin', User.simpleSignin);
 
   //管理员
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
-  // app.delete('/admin/user/list', User.signinRequired, User.userAdminRequired,  User.del);
-  // app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
-  
+  app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
+  app.get('/admin/ordinary/user/list', User.signinRequired, User.userAdminRequired, User.ordinaryUserList);
+  app.get('/admin/admin/user/list', User.signinRequired, User.userAdminRequired, User.adminUserList);
+  app.post('/admin/del/user', User.signinRequired, User.userAdminRequired, User.del);
+  app.post('/admin/update/role', User.signinRequired, User.userAdminRequired, User.updateRole);
+    
   //电影
   app.get("/movie-pv/ranking", User.signinRequired, Movie.pvRanking);
   app.get("/movie-time/ranking", User.signinRequired, Movie.movieTimeRanking);
@@ -47,9 +51,9 @@ module.exports = function (app) {
   app.get("/admin/movie-manage", User.signinRequired, User.movieAdminRequired, Movie.movieManage);
   app.get("/admin/movie/add", User.signinRequired, User.movieAdminRequired, Movie.addMovie);
   app.get("/admin/movie/update/:id", User.signinRequired, User.movieAdminRequired,  Movie.update);
-  app.get("/admin/movie/list",User.signinRequired, User.movieAdminRequired, Movie.list);
-  app.post("/admin/movie",multipartMiddleware, User.signinRequired, User.movieAdminRequired, Movie.savePoster, Movie.save);
-  app.delete("/admin/movie/list",User.signinRequired, User.movieAdminRequired, Movie.del);
+  app.get("/admin/movie/list", User.signinRequired, User.movieAdminRequired, Movie.list);
+  app.post("/admin/movie", multipartMiddleware, User.signinRequired, User.movieAdminRequired, Movie.savePoster, Movie.save);
+  app.delete("/admin/movie/list", User.signinRequired, User.movieAdminRequired, Movie.del);
 
   //电影类别
   app.get("/admin/movie/category/add", User.signinRequired, User.movieAdminRequired, Category.add);
@@ -61,7 +65,21 @@ module.exports = function (app) {
   //评论
   app.post("/user/comment", User.signinRequired, Comment.save);
 
+  //评分
+  app.post("/movie/grade", User.signinRequired, Movie.grade);
+
+  //找回密码
+  app.get("/forgot/password", User.sendForgotPage);
+  app.post("/forgot/password", User.setNewPassword);
+
   //搜索
   app.get('/results', Index.search);
-
+  
+  //ECharts
+  app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
+  app.get('/active/view/categories/count/data', User.signinRequired, Category.categoriesCountData);
+  app.get('/active/view/categories/click', User.signinRequired, Movie.categoriesClick);
+  app.get('/active/view/categories/click/data', User.signinRequired, Category.categoriesClickData);
+  app.get('/active/view/categories/averagescore', User.signinRequired, Movie.categoriesAverageScore);
+  app.get('/active/view/categories/averagescore/data', User.signinRequired, Category.categoriesAverageScoreData);
 };

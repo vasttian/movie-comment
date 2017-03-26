@@ -25,7 +25,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="/movie-pv/ranking" title="默认按照点击数排名">电影排名</a></li>
-					<li><a href="javascript:void(0)">Link</a></li>
+					<li><a href="/active/view/categories/count">图表查看</a></li>
 					<li class="dropdown">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">友情链接 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -70,18 +70,20 @@
 						</ul>
 					</li>
 					<span>
-						<% if (user.avatar.indexOf('default') > -1) { %>
-						<img class="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
-						<% } else { %>
-						<img class="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
-						<% } %>
+						<a href="/user/personal/info">
+							<% if (user.avatar.indexOf('default') > -1) { %>
+							<img class="login-avatar" src="<%= user.avatar %>" alt="头像君不见啦!">
+							<% } else { %>
+							<img class="login-avatar" src="/images/avatar/<%= user.avatar %>" alt="头像君不见啦!">
+							<% } %>
+						</a>
 					</span>
 					<% } else { %>
 					<li>
 						<a href="/signup" class="navbar-link">注册</a>
 					</li>
 					<li>
-						<a href="javascript:void(0)" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
+						<a href="" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录</a>
 					</li>
 					<% } %>
 				</ul>
@@ -89,34 +91,10 @@
 		</div><!-- /.container-fluid -->
 	</nav>
 
-	<div id="signupModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form action="/user/signup" method="POST">
-					<div class="modal-header">注册</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="signupName">用户名</label>
-							<input type="text" id="signupName" class="form-control" name="user[name]">
-						</div>
-						<div class="form-group">
-							<label for="signupPassword">密码</label>
-							<input type="password" id="signupPassword" class="form-control" name="user[password]">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-default" type="button" data-dismiss="modal">关闭</button>
-						<button class="btn btn-success" type="submit">提交</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
 	<div id="signinModal" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="/user/signin" method="POST">
+				<form action="/user/simple/signin" method="POST">
 					<div class="modal-header">登录</div>
 					<div class="modal-body">
 						<div class="form-group">
@@ -129,8 +107,11 @@
 						</div>
 						<div class="form-group">
 							<div class="checkbox">
+								<div class="pull-right">
+									<a href="/forgot/password" id="forgot_passwd"> 忘记密码？</a>
+								</div>	
 								<label>
-									<input type="checkbox">记住密码
+									<input type="checkbox" name="savePassword">记住密码
 								</label>
 							</div>
 						</div>

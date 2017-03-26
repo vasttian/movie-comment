@@ -42,4 +42,4 @@ app.use(session({
 //引入路由模块
 require('./config/routes')(app);
 app.listen(port);
-console.log('服务成功启动，端口：',port);
+console.log('服务已成功启动，端口：',port);

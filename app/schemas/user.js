@@ -34,6 +34,8 @@ var UserSchema = new mongoose.Schema({
     // type: Date,
     // default: Date.now()
   },
+  problem: String,
+  problemAnswer: String,
   meta: {
     createdAt: {
   	type: Date,
@@ -43,7 +45,12 @@ var UserSchema = new mongoose.Schema({
   	type: Date,
   	default: Date.now()
     }
-  }
+  },
+  flag: {
+    type: Number,
+    default: 1
+  },
+  others: {}
 });
 
 UserSchema.pre('save', function(next) {
@@ -73,8 +80,6 @@ UserSchema.pre('save', function(next) {
 //实例方法
 UserSchema.methods = {
   comparePassword: function(pass, cb) {
-      console.log("pass:",pass);
-      console.log("this.password:",this.password);
     bcrypt.compare(pass, this.password, function(err, isMatch) {
 	    if (err) {
 		    return cb(err);
@@ -87,13 +92,13 @@ UserSchema.methods = {
 //静态方法
 UserSchema.statics = {
   fetch : function(cb) {
-	return this
-	.find({})
-	.sort('meta.updateAt')
-	.exec(cb);
+  	return this
+  	.find({})
+  	.sort('meta.updateAt')
+  	.exec(cb);
   },
   findById: function(id, cb){	
-	return this.findOne({_id:id}).exec(cb);
+	  return this.findOne({_id:id}).exec(cb);
   }
 };
 

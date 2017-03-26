@@ -88,7 +88,7 @@ $(function() {
 	  		  stringLength: {
 						min: 6,
 						max: 16,
-						message: '密码长度在6至16之间'
+						message: '密码长度在6至16个字符'
 	  		  },
 	  		  identical: {
 						field: 'user[password]',

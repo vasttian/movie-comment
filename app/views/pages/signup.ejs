@@ -1,107 +1,131 @@
 <%- include ../includes/header %>
 <div class="container container-style">
   <div class="col-md-5 col-md-offset-3">
-	<div class="row">
-	  <form id="signupForm" class="form-horizontal" action="/user/signup", method="post", enctype="multipart/form-data">
-		<div class="modal-header">
-		  <h2 style="color:#1170e4">欢迎加入一萌</h2>
-		</div>
-		<div class="modal-body">
-		  <div class="form-group">
-			<label for="signupName" class="col-sm-3 control-label">用户名</label>
-			<div class="col-sm-9">
-			  <input type="text" id="signupName" class="form-control" name="user[name]" placeholder="只能由数字下划线或字母组成">
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="txtEmail" class="col-sm-3 control-label">昵称</label>
-			<div class="col-sm-9">
-			  <input type="text" id="txtEmail" class="form-control" name="user[nickname]"	placeholder="只能由数字下划线或字母组成">
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="nickName" class="col-sm-3 control-label">邮箱</label>
-			<div class="col-sm-9">
-			  <input type="text" id="nickName" class="form-control" name="user[email]">
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="headPortrait" class="col-sm-3 control-label">选择头像</label>
-			<div class="col-sm-9">
-			  <input type="file" id="headPortrait" name="avatar">
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label class="col-sm-3 control-label">性别</label>
-			<div class="col-sm-9">
-      	  	  <div class="checkbox">
-        		<label>
-          	  	  <input type="radio" name="user[sex]" value="1" checked>男
-        		</label>
-        		&nbsp;&nbsp;&nbsp;
-        		<label>
-        		  <input type="radio" name="user[sex]" value="0">女
-        		</label>
-      		  </div>
-    		</div>
-		  </div>
-		  <div class="form-group">
-			<label class="col-sm-3 control-label">选择类型</label>
-			<div class="col-sm-9">
-      	  	  <div class="checkbox">
-        		<label ng-click="roleStatus='normal';">
-        		  <input type="radio" name="user[role]" checked>普通用户
-        		</label>
-        		&nbsp;&nbsp;&nbsp;
-        		<label ng-click="roleStatus='admin';">
-          		  <input type="radio" name="user[role]">管理员
-        		</label>
-      		  </div>
-    		</div>
-		  </div>
-		  <% /*<div class="form-group" ng-if="roleStatus=='admin'"> */ %>
-		  <div class="form-group" ng-show="roleStatus=='admin'">
-			<label for="invitationCode" class="col-sm-3 control-label">邀请码</label>
-				<div class="col-sm-9">
-			  	<input type="text" id="invitationCode" class="form-control" name="user[invitationCode]" placeholder="如果您还没有邀请码,请联系tianyiming26@gmail.com">
+		<div class="row">
+	  	<form id="signupForm" class="form-horizontal" action="/user/signup", method="post", enctype="multipart/form-data">
+				<div class="modal-header">
+		  		<h2 style="color:#1170e4">欢迎加入一萌</h2>
 				</div>
-		  </div>
-		  <div class="form-group">
-			<label for="signupPassword" class="col-sm-3 control-label">密码</label>
-			<div class="col-sm-9">
-			  <input type="password" id="signupPassword" class="form-control" name="user[password]" value="">
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="confirmPass" class="col-sm-3 control-label">确认密码</label>
-			<div class="col-sm-9">
-			  <input type="password" id="confirmPass" class="form-control" name="user[confirmPass]">
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="phoneNumber" class="col-sm-3 control-label">电话号码</label>
-			<div class="col-sm-9">
-			  <input type="text" id="phoneNumber" class="form-control" name="user[tel]">
-			</div>
-		  </div>
-		  <div class="form-group">
-			<label for="bornDate" class="col-sm-3 control-label">出生日期</label>
-			<div class="col-sm-9">
-			  <div class = "input-group" id='datetimepicker'>
-				<input type="text" id="bornDate" class="form-control" name="user[born]">
-				<span class="input-group-addon">
-            	  <span class="glyphicon glyphicon-calendar"></span>  
+				<div class="modal-body">
+		  		<div class="form-group">
+						<label for="signupName" class="col-sm-3 control-label">用户名</label>
+						<div class="col-sm-9">
+			  			<input type="text" id="signupName" class="form-control" name="user[name]" placeholder="只能由数字下划线或字母组成">
+						</div>
+		  		</div>
+		 			<div class="form-group">
+						<label for="txtEmail" class="col-sm-3 control-label">昵称</label>
+						<div class="col-sm-9">
+			  			<input type="text" id="txtEmail" class="form-control" name="user[nickname]"	placeholder="只能由数字下划线或字母组成">
+						</div>
+		  		</div>
+		  		<div class="form-group">
+						<label for="nickName" class="col-sm-3 control-label">邮箱</label>
+						<div class="col-sm-9">
+			  			<input type="text" id="nickName" class="form-control" name="user[email]">
+						</div>
+		  		</div>
+		  		<div class="form-group">
+						<label for="headPortrait" class="col-sm-3 control-label">选择头像</label>
+						<div class="col-sm-9">
+			  			<input type="file" id="headPortrait" name="avatar">
+						</div>
+		  		</div>
+		  		<div class="form-group">
+						<label class="col-sm-3 control-label">性别</label>
+						<div class="col-sm-9">
+      	  	  <div class="checkbox">
+        				<label>
+          	  	  <input type="radio" name="user[sex]" value="1" checked>男
+        				</label>
+        				&nbsp;&nbsp;&nbsp;
+        				<label>
+        		  		<input type="radio" name="user[sex]" value="0">女
+        				</label>
+      		  	</div>
+    				</div>
+		  		</div>
+		  		<div class="form-group">
+						<label class="col-sm-3 control-label">选择类型</label>
+						<div class="col-sm-9">
+      	  	  <div class="checkbox">
+        				<label ng-click="roleStatus='normal';">
+        		  		<input type="radio" name="user[role]" checked>普通用户
+        				</label>
+        				&nbsp;&nbsp;&nbsp;
+        				<label ng-click="roleStatus='admin';">
+          			  <input type="radio" name="user[role]">管理员
+        				</label>
+      		  	</div>
+    				</div>
+		  		</div>
+		  		<% /*<div class="form-group" ng-if="roleStatus=='admin'"> */ %>
+		  		<div class="form-group" ng-show="roleStatus=='admin'">
+						<label for="invitationCode" class="col-sm-3 control-label">邀请码</label>
+						<div class="col-sm-9">
+			  			<input type="text" id="invitationCode" class="form-control" name="user[invitationCode]" placeholder="如果您还没有邀请码,请联系tianyiming26@gmail.com">
+						</div>
+		  		</div>
+		  		<div class="form-group">
+						<label for="signupPassword" class="col-sm-3 control-label">密码</label>
+						<div class="col-sm-9">
+			  			<input type="password" id="signupPassword" class="form-control" name="user[password]" value="">
+						</div>
+		  		</div>
+		  		<div class="form-group">
+						<label for="confirmPass" class="col-sm-3 control-label">确认密码</label>
+						<div class="col-sm-9">
+			  			<input type="password" id="confirmPass" class="form-control" name="user[confirmPass]">
+						</div>
+		  		</div>
+		  		<div class="form-group">
+						<label for="phoneNumber" class="col-sm-3 control-label">电话号码</label>
+						<div class="col-sm-9">
+			  			<input type="text" id="phoneNumber" class="form-control" name="user[tel]">
+						</div>
+		  		</div>
+		  		<div class="form-group" ng-click="appeal = 0;">
+            <label for="problem" class="col-sm-3 control-label">选择问题&nbsp;&nbsp;:</label>
+            <div class="col-sm-9" title="密保是你找回密码的保障!">
+              <select class="form-control" id="problem" name="user[problem]">
+                <option value="-1">请选择密保问题</option>
+                <option value="1">您母亲的姓名是？</option>
+                <option value="2">您母亲的生日是？</option>
+                <option value="3">您父亲的姓名是？</option>
+                <option value="4">您父亲的生日是？</option>
+                <option value="13">您配偶的姓名是？</option>
+                <option value="14">您配偶的生日是？</option>
+                <option value="15">您的学号(或工号)是？</option>
+                <option value="17">您最好朋友的名字是？</option>
+                <option value="47">您最好朋友的生日是？</option>
+                <option value="10">对您影响最大的人名字是？</option>
+              </select>
+            </div>
+        	</div>
+		  		<div class="form-group">
+						<label for="problemAnswer" class="col-sm-3 control-label">密保答案</label>
+						<div class="col-sm-9">
+			  			<input type="text" id="problemAnswer" class="form-control" name="user[problemAnswer]" title="密保是你找回密码的保障!" placeholder="请填写2至16个阿拉伯数字">
+						</div>
+		  		</div>
+		  		<div class="form-group">
+						<label for="bornDate" class="col-sm-3 control-label">出生日期</label>
+						<div class="col-sm-9">
+			  			<div class = "input-group" id='datetimepicker'>
+								<input type="text" id="bornDate" class="form-control" name="user[born]">
+								<span class="input-group-addon">
+            	  	<span class="glyphicon glyphicon-calendar"></span>  
               	</span>
               </div>
             </div>
-		  </div>
+		  		</div>
+				</div>
+				<div class="modal-footer">
+		  		<button class="btn btn-default" type="reset" data-dismiss="modal">重置</button>
+		  		<button class="btn btn-success" type="submit">提交</button>
+				</div>
+	  	</form>
 		</div>
-		<div class="modal-footer">
-		  <button class="btn btn-default" type="reset" data-dismiss="modal">重置</button>
-		  <button class="btn btn-success" type="submit">提交</button>
-		</div>
-	  </form>
-	</div>
   </div>
 </div>
 <script src="/js/signup.js"></script>

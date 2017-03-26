@@ -6,7 +6,7 @@ exports.index = function(req, res) {
 	Categories
 	.find({})
 	.populate({path:"movies"})
-	.exec(function(err,categories) {
+	.exec(function(err, categories) {
 		if (err) {
 			console.log(err);
 		}
@@ -26,7 +26,7 @@ exports.search = function(req, res) {
 	var count = 4;	//每页展示数量
 	var skipNum = (page-1) * count; //跳过数量
 	var totalMovies;
-
+	console.log("page::",page);
 	//分类
 	if (categoryId) {
 		Categories
@@ -34,7 +34,6 @@ exports.search = function(req, res) {
 		.exec(function(err, categories) {
 			totalMovies = categories.movies;
 		});
-		console.log("totalMovies",totalMovies);
 		Categories
 		.findOne({_id: categoryId})
 		.populate({
@@ -63,29 +62,29 @@ exports.search = function(req, res) {
 		});
 	} else {	//搜索
 		Movie
-		.find({title: new RegExp(searchWord + ".*","i")})
+		.find({title: new RegExp(searchWord + ".*", "i")})
 		.exec(function(err, movies) {
 			totalMovies = movies;
-		});
-		Movie
-		.find({title: new RegExp(searchWord + ".*","i")})
-		.limit(count)
-		.skip(skipNum)
-		.exec(function(err, movies) {
-			if (err) {
-				console.log(err);
-			}
-			console.log(movies)
 
-			res.render("pages/movie-results", {
-				title: "搜索结果",
-				keyword: searchWord,//搜索关键字
-				currentPage: page,	//当前页
-				query: "searchWord = " + searchWord,
-				totalPage: Math.ceil(totalMovies.length / count),//共有多少页
-				movies: movies
+			Movie
+			.find({title: new RegExp(searchWord + ".*", "ig")})
+			.limit(count)
+			.skip(skipNum)
+			.exec(function(err, movies) {
+				if (err) {
+					console.log(err);
+				}
+				var moviesLength = totalMovies ? totalMovies.length : count;
+
+				res.render("pages/movie-results", {
+					title: "搜索结果",
+					keyword: searchWord ? searchWord: "全部电影",//搜索关键字
+					currentPage: page,	//当前页
+					query: "searchWord=" + searchWord,
+					totalPage: Math.ceil(moviesLength / count),//共有多少页
+					movies: movies
+				});
 			});
-
 		});
 	}	
 };
