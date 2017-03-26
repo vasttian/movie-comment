@@ -8,10 +8,13 @@ var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
 module.exports = function (app) {
+
   //在所有请求之前把当前登录用户设置为本地变量。
   app.use(function (req, res, next) {
 	  var _user = req.session.user;
-	  app.locals.user = _user; //本地变量
+
+    //本地变量
+	  app.locals.user = _user;
   	next();
   });
 
