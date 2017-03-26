@@ -55,6 +55,7 @@ $(function() {
 			      title: {
 			        text: '用户年龄分布',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -66,7 +67,7 @@ $(function() {
 			        name: '年龄段',
 			        type: 'pie',
 			        radius : '55%',
-			        center: ['50%', '60%'],
+			        center: ['50%', '50%'],
 			        data: seriesData,
 			      }],
 			    };
@@ -122,6 +123,7 @@ $(function() {
 			      title: {
 			        text: '用户性别分布',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -133,7 +135,7 @@ $(function() {
 			        name: '性别',
 			        type: 'pie',
 			        radius : '55%',
-			        center: ['50%', '60%'],
+			        center: ['50%', '50%'],
 			        data: seriesData,
 			      }],
 			    };
@@ -170,6 +172,7 @@ $(function() {
 			      title: {
 			        text: '电影分类',
 			        x: 'center',
+			        // y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -233,6 +236,7 @@ $(function() {
 			      title: {
 			        text: '分类平均分',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -297,6 +301,7 @@ $(function() {
 			      title: {
 			        text: '分类点击量',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
@@ -309,7 +314,7 @@ $(function() {
 			        name: '点击量',
               type: 'pie',
               radius : '55%',
-              center: ['50%', '60%'],
+              center: ['50%', '50%'],
               data: seriesData,
 			        itemStyle: {
 			        	normal: {
@@ -327,6 +332,7 @@ $(function() {
 			}
 		});
 	});
+
 
 	$("#categories-comment-count").click(function() {
 		echarts.dispose(echarts.getInstanceByDom(document.getElementById('users-windows')));
@@ -355,19 +361,21 @@ $(function() {
 			      title: {
 			        text: '分类评论量',
 			        x: 'center',
+			        y: '25px',
 			      },
 			      tooltip: {},
 			      legend: {
               zlevel: 1,
               data: lengthData,
               x: 'left',
+              // y: 'bottom'
             },
 			      calculable : true,
 			      series: [{
 			        name: '评论量',
               type: 'pie',
-              radius : '55%',
-              center: ['50%', '60%'],
+              radius : '45%',
+              center: ['50%', '50%'],
               data: seriesData,
 			        itemStyle: {
 			        	normal: {
