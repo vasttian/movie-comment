@@ -138,6 +138,82 @@ $(function() {
         }
       }
     });
+  } else if ($("#movieAverageSourceTop10").hasClass('active')) {
+    console.log("电影得分Top10");
+    $.ajax({
+      type: 'GET',
+      url: '/active/view/movie/averagescore/top10/data',
+      success: function(data) {
+        console.log('data:', data);
+        if (data.status == 1) {
+          var tdata = data.data;
+          console.log("电影得分Top10成功!");
+          var len = tdata.length;
+          for (var i = 0; i < len; ++i) {
+            var tname = tdata[i].title;
+            xAxisData.push(tname);
+            seriesData.push(tdata[i].score.average+5);
+          }
+
+          option = {
+            title: {
+              text: '电影得分Top10',
+              x: 'center',
+            },
+            tooltip: {},
+            legend: {
+              zlevel: 1,
+              data: ['电影得分'],
+              x: 'left',
+            },
+            grid: {
+              y2: 100,
+            },
+            xAxis: {
+              data: xAxisData,
+              axisLabel : {
+                show:true,
+                interval: 0,
+                rotate: 45,
+                // margin: 18,
+                // formatter: '{value} ml',    // Template formatter!
+                textStyle: {
+                  // color: '#1e90ff',
+                  fontFamily: 'verdana',
+                  // fontSize: 10,
+                  fontStyle: 'normal',
+                  // fontWeight: 'bold'
+                }
+              },
+            },
+            yAxis: {},
+            series: [{
+              name: '电影得分',
+              type: 'bar',
+              data: seriesData,
+              itemStyle: {
+                normal: {
+                  color: "#00CED1",
+                  label: {
+                    show: true,
+                    position: 'top',
+                    formatter: function (params) {
+                      return parseFloat(params.value.toFixed(2));
+                    },
+                    textStyle: {
+                      color: 'Blue',
+                      fontSize: 15,
+                    }
+                  }
+                }
+              },
+            }],
+          };
+
+          myChart.setOption(option);
+        }
+      }
+    });
   }
   // myChart.setOption('shine')
 });

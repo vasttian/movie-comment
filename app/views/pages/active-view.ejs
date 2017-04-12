@@ -16,12 +16,17 @@
 		  			<li role="presentation" id="categoriesClick"><a href="/active/view/categories/click">分类点击量</a></li>
 	  			<% } %>
 	  	  	<% if (view == 'categoriesAverageSource') { %>
-	  				<li role="presentation" id="categoriesAverageSource" class="active"><a href="/active/view/categories/averagescore">类别平均评分</a></li>
+	  				<li role="presentation" id="categoriesAverageSource" class="active"><a href="/active/view/categories/averagescore">分类平均评分</a></li>
 	  			<% } else { %>
-	  				<li role="presentation" id="categoriesAverageSource"><a href="/active/view/categories/averagescore">类别平均评分</a></li>
+	  				<li role="presentation" id="categoriesAverageSource"><a href="/active/view/categories/averagescore">分类平均评分</a></li>
+	  			<% } %>
+	  			<% if (view == 'movieAverageSourceTop10') { %>
+	  				<li role="presentation" id="movieAverageSourceTop10" class="active"><a href="/active/view/movie/averagescore/top10">电影得分Top10</a></li>
+	  			<% } else { %>
+	  				<li role="presentation" id="movieAverageSourceTop10"><a href="/active/view/movie/averagescore/top10">电影得分Top10</a></li>
 	  			<% } %>
 		  	</ul>
-		  </div>	
+		  </div>
  			<div class="panel-body">
 				<div id="active-view" class="view-windows"></div>
 			</div>

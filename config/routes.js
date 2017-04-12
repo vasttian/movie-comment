@@ -20,7 +20,7 @@ module.exports = function (app) {
 
   //首页
   app.get('/', Index.index);
-	
+
   //用户
   app.get('/signup', User.showSignup);
   app.get('/signin', User.showSignin);
@@ -45,7 +45,7 @@ module.exports = function (app) {
   app.get('/admin/admin/user/list', User.signinRequired, User.userAdminRequired, User.adminUserList);
   app.post('/admin/del/user', User.signinRequired, User.userAdminRequired, User.del);
   app.post('/admin/update/role', User.signinRequired, User.userAdminRequired, User.updateRole);
-    
+
   //电影
   app.get("/movie-pv/ranking", User.signinRequired, Movie.pvRanking);
   app.get("/movie-time/ranking", User.signinRequired, Movie.movieTimeRanking);
@@ -77,7 +77,7 @@ module.exports = function (app) {
 
   //搜索
   app.get('/results', Index.search);
-  
+
   //ECharts
   app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
   app.get('/active/view/categories/count/data', User.signinRequired, Category.categoriesCountData);
@@ -85,6 +85,8 @@ module.exports = function (app) {
   app.get('/active/view/categories/click/data', User.signinRequired, Category.categoriesClickData);
   app.get('/active/view/categories/averagescore', User.signinRequired, Movie.categoriesAverageScore);
   app.get('/active/view/categories/averagescore/data', User.signinRequired, Category.categoriesAverageScoreData);
+  app.get('/active/view/movie/averagescore/top10', User.signinRequired, Movie.movieAverageScoreTop10);
+  app.get('/active/view/movie/averagescore/top10/data', User.signinRequired, Movie.movieAverageScoreTop10Data);
 
   // app.get('/active/admin/view/age/', User.signinRequired, User.allUserAge);
   app.get('/active/admin/view/age/data', User.signinRequired, User.allUserAge);
