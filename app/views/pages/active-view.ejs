@@ -20,8 +20,13 @@
 	  			<% } else { %>
 	  				<li role="presentation" id="categoriesAverageSource"><a href="/active/view/categories/averagescore">类别平均评分</a></li>
 	  			<% } %>
+	  			<% if (view == 'movieAverageSourceByAge') { %>
+	  				<li role="presentation" id="movieAverageSourceByAge" class="active"><a href="/active/view/movie/averagescore/top10">电影得分Top10</a></li>
+	  			<% } else { %>
+	  				<li role="presentation" id="movieAverageSourceByAge"><a href="/active/view/movie/averagescore/top10">电影得分Top10</a></li>
+	  			<% } %>
 		  	</ul>
-		  </div>	
+		  </div>
  			<div class="panel-body">
 				<div id="active-view" class="view-windows"></div>
 			</div>

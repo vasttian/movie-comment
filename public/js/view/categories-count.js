@@ -138,6 +138,54 @@ $(function() {
         }
       }
     });
+  } else if ($("#movieAverageSourceByAge").hasClass('active')) {
+    console.log("电影得分Top10");
+    $.ajax({
+      type: 'GET',
+      url: '/active/view/movie/averagescore/top10/data',
+      success: function(data) {
+        console.log('data:', data);
+        if (data.status == 1) {
+          var tdata = data.data;
+          console.log("电影得分Top10成功!");
+          var len = tdata.length;
+          for (var i = 0; i < len; ++i) {
+            var tname = tdata[i].name;
+            xAxisData.push(tname);
+            seriesData.push(tdata[i].sumScore);
+          }
+
+          option = {
+            title: {
+              text: '分类平均分',
+              x: 'center',
+            },
+            tooltip: {},
+            legend: {
+              zlevel: 1,
+              data: ['平均分'],
+              x: 'left'
+            },
+            xAxis: {
+              data: xAxisData,
+            },
+            yAxis: {},
+            series: [{
+              name: '平均分',
+              type: 'bar',
+              data: seriesData,
+              itemStyle: {
+                normal: {
+                  color: "#87CEEB",
+                }
+              },
+            }],
+          };
+
+          myChart.setOption(option);
+        }
+      }
+    });
   }
   // myChart.setOption('shine')
 });
