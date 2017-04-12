@@ -5,33 +5,34 @@ var _ = require("underscore");
 var fs = require("fs");
 var path = require("path");
 
-//电影详情页
+// 电影详情页
 exports.detail = function(req, res) {
 	console.log('电影详情!');
 	var id = req.params.id;
 	var user = req.session.user;
-	console.log("req::",req.body);
-	console.log("user::",req.session.user);
-	
-  //加入统计量
-  Movie.update({_id:id}, {$inc:{pv:1}}, function(err) {
+	console.log('req::', req.body);
+	console.log('user::', req.session.user);
+
+  // 加入统计量
+  Movie.update({ _id: id, }, { $inc:{ pv: 1, } }, function(err) {
   	if (err) {
   		console.log(err);
   	}
   });
-  
+
   Movie.findById(id, function(err, movie) {
   	if (err) {
   		console.log(err);
   	}
-  	//from、reply.from、reply.to 指定要填充的关联字段 (schemas中ref)
-  	//name avatar 指定要填充（新增Comment.from.name Comment.from.avatar Comment.reply.to.name 
-  	//Comment.reply.to.avatar）Comment.from、Comment.reply.from、Comment.reply.to的name avatar字段
-  	//评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
+
+  	// from、reply.from、reply.to 指定要填充的关联字段 (schemas中ref)
+  	// name avatar 指定要填充（新增Comment.from.name Comment.from.avatar Comment.reply.to.name
+  	// Comment.reply.to.avatar）Comment.from、Comment.reply.from、Comment.reply.to的name avatar字段
+  	// 评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
   	Comment
-  	.find({movie: id})
-  	.populate({path:"from", select: "name avatar"})
-  	.populate({path:"reply.from reply.to", select: "name avatar"})
+  	.find({ movie: id, })
+  	.populate({ path: 'from', select: 'name avatar', })
+  	.populate({ path: 'reply.from reply.to', select: 'name avatar', })
   	.exec(function(err, comment) {
   		if (err) {
   			console.log(err);
@@ -56,19 +57,18 @@ exports.detail = function(req, res) {
   	  	comment: comment,
   	  	score: score
   	  });
-  	});	
+  	});
   });
 };
 
-//电影管理右侧操作栏
+// 电影管理右侧操作栏
 exports.movieManage = function (req, res) {
   console.log('runing movieManage');
   res.render("includes/movie-manage-right-nav", {
-
   });
 };
 
-//添加电影页
+// 添加电影页
 exports.addMovie = function (req, res) {
   Categories.find({}, function(err, categories) {
 		res.render("pages/add-movie", {
@@ -76,10 +76,10 @@ exports.addMovie = function (req, res) {
 	  	categories: categories,
 	  	movie: {}
 		});
-  });	
+  });
 };
 
-//更新操作
+// 更新操作
 exports.update = function(req, res) {
   var id = req.params.id;
   if (id) {
@@ -95,20 +95,27 @@ exports.update = function(req, res) {
   }
 };
 
-//上传海报
+// 上传海报
 exports.savePoster = function(req, res, next) {
-  // console.log('req.files:',req.files);//打印文件的信息
+	// 打印文件的信息
+  // console.log('req.files:',req.files);
   console.log('存储海报!');
   var posterData = req.files.uploadPoster;
 
-  var filePath = posterData.path;//文件的路径
-  var originalFilename = posterData.originalFilename;//文件名
+  // 文件的路径
+  var filePath = posterData.path;
+
+  // 文件名
+  var originalFilename = posterData.originalFilename;
   if (originalFilename) {
 		fs.readFile(filePath, function(err, data) {
-	  	var timestamp = Date.now();//时间戳
+			// 时间戳
+	  	var timestamp = Date.now();
 	  	var type = posterData.type.split("/")[1];
 		  var poster = timestamp+"."+type;
-		  var newPath = path.join(__dirname,"../../","public/images/poster/"+poster);//设置新的存储的路径。
+
+		  // 设置新的存储的路径。
+		  var newPath = path.join(__dirname,"../../","public/images/poster/"+poster);
 	 		fs.writeFile(newPath,data,function(err) {
 				req.poster = poster;
 				next();
@@ -116,10 +123,10 @@ exports.savePoster = function(req, res, next) {
 		});
   } else {
 		next();
-  }	
+  }
 };
 
-//后台录入存储
+// 后台录入存储
 exports.save = function(req, res) {
   var id = req.body.movie._id;
   var movieObj = req.body.movie;
@@ -127,7 +134,7 @@ exports.save = function(req, res) {
   var categoryId = movieObj.categories;
 
   if (req.poster) {
-		movieObj.poster = req.poster; 
+		movieObj.poster = req.poster;
   }
 
   if (id) {
@@ -211,7 +218,7 @@ exports.save = function(req, res) {
   };
 };
 
-//电影列表
+// 电影列表
 exports.list = function(req, res) {
 	console.log('获取电影列表!');
 	Movie.fetch(function(err, movies) {
@@ -222,10 +229,10 @@ exports.list = function(req, res) {
 			title: "查看电影",
 			movies: movies
 		});
-	});	
+	});
 };
 
-//电影点击率排行榜
+// 电影点击率排行榜
 exports.pvRanking = function(req, res) {
 	console.log('获取电影点击率排行榜!');
 	Movie.pvRanking(function(err, movies) {
@@ -240,7 +247,7 @@ exports.pvRanking = function(req, res) {
 	});
 };
 
-//电影片长排行榜
+// 电影片长排行榜
 exports.movieTimeRanking = function(req, res) {
 	console.log('获取电影片长排行榜!');
 	Movie.movieTimeRanking(function(err, movies) {
@@ -255,7 +262,7 @@ exports.movieTimeRanking = function(req, res) {
 	});
 };
 
-//电影上映日期排行榜
+// 电影上映日期排行榜
 exports.dateRanking = function(req, res) {
 	console.log('获取电影上映日期排行榜!');
 	Movie.dateRanking(function(err, movies) {
@@ -270,7 +277,7 @@ exports.dateRanking = function(req, res) {
 	});
 };
 
-//电影评分
+// 电影评分
 exports.grade = function(req, res) {
 	console.log("当前评分：", req.body);
 	console.log("新增评分");
@@ -348,7 +355,7 @@ exports.categoriesAverageScore = function(req, res) {
 	});
 };
 
-//删除
+// 删除
 exports.del = function(req, res) {
 	console.log("删除电影!");
 	var id = req.query.id;

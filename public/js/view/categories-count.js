@@ -138,7 +138,7 @@ $(function() {
         }
       }
     });
-  } else if ($("#movieAverageSourceByAge").hasClass('active')) {
+  } else if ($("#movieAverageSourceTop10").hasClass('active')) {
     console.log("电影得分Top10");
     $.ajax({
       type: 'GET',
