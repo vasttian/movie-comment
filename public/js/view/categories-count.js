@@ -150,33 +150,61 @@ $(function() {
           console.log("电影得分Top10成功!");
           var len = tdata.length;
           for (var i = 0; i < len; ++i) {
-            var tname = tdata[i].name;
+            var tname = tdata[i].title;
             xAxisData.push(tname);
-            seriesData.push(tdata[i].sumScore);
+            seriesData.push(tdata[i].score.average+5);
           }
 
           option = {
             title: {
-              text: '分类平均分',
+              text: '电影得分Top10',
               x: 'center',
             },
             tooltip: {},
             legend: {
               zlevel: 1,
-              data: ['平均分'],
-              x: 'left'
+              data: ['电影得分'],
+              x: 'left',
+            },
+            grid: {
+              y2: 100,
             },
             xAxis: {
               data: xAxisData,
+              axisLabel : {
+                show:true,
+                interval: 0,
+                rotate: 45,
+                // margin: 18,
+                // formatter: '{value} ml',    // Template formatter!
+                textStyle: {
+                  // color: '#1e90ff',
+                  fontFamily: 'verdana',
+                  // fontSize: 10,
+                  fontStyle: 'normal',
+                  // fontWeight: 'bold'
+                }
+              },
             },
             yAxis: {},
             series: [{
-              name: '平均分',
+              name: '电影得分',
               type: 'bar',
               data: seriesData,
               itemStyle: {
                 normal: {
-                  color: "#87CEEB",
+                  color: "#00CED1",
+                  label: {
+                    show: true,
+                    position: 'top',
+                    formatter: function (params) {
+                      return parseFloat(params.value.toFixed(2));
+                    },
+                    textStyle: {
+                      color: 'Blue',
+                      fontSize: 15,
+                    }
+                  }
                 }
               },
             }],

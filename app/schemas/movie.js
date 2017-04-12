@@ -36,7 +36,7 @@ var MovieSchema = new mongoose.Schema({
   scoreUsers: [
     {
       userId: {
-        type: ObjectId, 
+        type: ObjectId,
         ref: "User"
       },
       score: {
@@ -85,7 +85,7 @@ MovieSchema.pre("save",function (next) {	//中间件
   next();
 });
 
-MovieSchema.statics = {		//添加静态方法，静态方法在模型上调用 
+MovieSchema.statics = {		//添加静态方法，静态方法在模型上调用
   fetch: function(cb) {
 	  return this
 	  .find({})
@@ -102,7 +102,7 @@ MovieSchema.statics = {		//添加静态方法，静态方法在模型上调用
     .find({})
     .sort("-pv")
     .exec(cb)
-  }, 
+  },
   movieTimeRanking: function(cb) {
     return this
     .find({})
@@ -114,7 +114,14 @@ MovieSchema.statics = {		//添加静态方法，静态方法在模型上调用
     .find({})
     .sort("date")
     .exec(cb)
-  }
+  },
+  averageScoreTop10: function(cb) {
+    return this
+      .find({})
+      .sort('-score.average')
+      .exec(cb);
+  },
+
 }
 
 module.exports = MovieSchema;

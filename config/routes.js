@@ -85,8 +85,8 @@ module.exports = function (app) {
   app.get('/active/view/categories/click/data', User.signinRequired, Category.categoriesClickData);
   app.get('/active/view/categories/averagescore', User.signinRequired, Movie.categoriesAverageScore);
   app.get('/active/view/categories/averagescore/data', User.signinRequired, Category.categoriesAverageScoreData);
-  // app.get('/active/view/movie/averagescore/top10', User.signinRequired, Movie.movieAverageScoreTop10);
-  // app.get('/active/view/movie/averagescore/top10/data', User.signinRequired, Category.movieAverageScoreTop10Data);
+  app.get('/active/view/movie/averagescore/top10', User.signinRequired, Movie.movieAverageScoreTop10);
+  app.get('/active/view/movie/averagescore/top10/data', User.signinRequired, Movie.movieAverageScoreTop10Data);
 
   // app.get('/active/admin/view/age/', User.signinRequired, User.allUserAge);
   app.get('/active/admin/view/age/data', User.signinRequired, User.allUserAge);

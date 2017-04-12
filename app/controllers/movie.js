@@ -374,14 +374,29 @@ exports.categoriesAverageScore = function(req, res) {
 exports.movieAverageScoreTop10 = function(req, res) {
 	res.render('pages/active-view', {
 		title: '电影得分Top10',
-		view: 'movieAverageScoreTop10',
+		view: 'movieAverageSourceTop10',
 	});
 };
 
-// exports.movieAverageScoreTop10Data = function(req, res) {
-// 	console.log('获取电影得分Top10!')；
-// 	// Movie.
-// };
+exports.movieAverageScoreTop10Data = function(req, res) {
+	console.log('获取电影得分Top10!');
+	Movie.averageScoreTop10(function(err, movies) {
+
+		var top10 = [];
+		for (var i = 0, len = movies.length; i < len; i++) {
+			top10.push(movies[i]);
+			if (top10.length >= 10) {
+				break;
+			}
+		}
+
+		if (err) {
+			console.log('获取获取电影得分Top10失败:', err);
+		}
+
+		res.json({ "data": top10, "status": 1,});
+	});
+};
 
 // 删除
 exports.del = function(req, res) {
