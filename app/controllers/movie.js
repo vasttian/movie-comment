@@ -37,6 +37,7 @@ exports.detail = function(req, res) {
   		if (err) {
   			console.log(err);
   		}
+
   	  // console.log('movie_movie',movie);
   	  // console.log('comment_comment',comment);
   	  var len = movie.scoreUsers.length;
@@ -254,6 +255,7 @@ exports.movieTimeRanking = function(req, res) {
 		if (err) {
 			console.log('获取电影片长排行榜失败:', err);
 		}
+
 		res.render("pages/movie-ranking", {
 			title: "片长排行",
 			movies: movies,
@@ -292,20 +294,24 @@ exports.grade = function(req, res) {
 		if (err) {
 			console.log(err);
 		}
+
 		// console.log('movie before',movie);
 		var scoreUsers = {
 			userId: userId,
 			score: score,
 		};
+
 		movie.scoreUsers.push(scoreUsers);
 		movie.save(function(err, movie) {
 			if (err) {
 				console.log(err);
 			}
+
 			console.log('评分成功');
 			// console.log('movie after',movie);
 
 			score = parseFloat(score);
+
 			// 已评分
 			movie.score.flag = 1;
 			movie.score.sum += score;
@@ -316,25 +322,28 @@ exports.grade = function(req, res) {
 				movie.score.max = score;
 				movie.score.min = score;
 			}
+
 			if (score > movie.score.max) {
 				movie.score.max = score;
 			}
+
 			if (score < movie.score.min) {
 				movie.score.min = score;
 			}
+
 			//去除一个最低分和一最高分
 			if (movie.score.count > 2) {
 				movie.score.average = (movie.score.sum - movie.score.max - movie.score.min) / (movie.score.count - 2);
-				console.log(movie.score.average);
 				movie.score.average = parseFloat(movie.score.average.toFixed(2));
-				console.log(movie.score.average);
 			}
+
 			movie.save(function(err, movie) {
 				if (err) {
 					console.error("电影的score更新失败!");
 				} else {
 					console.log("电影的score已更新:", movie);
 				}
+
 				res.json({"status": 1})
 			});
 		});
