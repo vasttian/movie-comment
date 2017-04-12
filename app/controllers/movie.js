@@ -295,7 +295,7 @@ exports.grade = function(req, res) {
 		// console.log('movie before',movie);
 		var scoreUsers = {
 			userId: userId,
-			score: score
+			score: score,
 		};
 		movie.scoreUsers.push(scoreUsers);
 		movie.save(function(err, movie) {
@@ -304,9 +304,13 @@ exports.grade = function(req, res) {
 			}
 			console.log('评分成功');
 			// console.log('movie after',movie);
-			movie.score.flag = 1;	//已评分
-			movie.score.sum += parseInt(score);
+
+			score = parseFloat(score);
+			// 已评分
+			movie.score.flag = 1;
+			movie.score.sum += score;
 			movie.score.count += 1;
+
 			//第一次初始化
 			if (movie.score.count == 1) {
 				movie.score.max = score;
@@ -321,6 +325,9 @@ exports.grade = function(req, res) {
 			//去除一个最低分和一最高分
 			if (movie.score.count > 2) {
 				movie.score.average = (movie.score.sum - movie.score.max - movie.score.min) / (movie.score.count - 2);
+				console.log(movie.score.average);
+				movie.score.average = parseFloat(movie.score.average.toFixed(2));
+				console.log(movie.score.average);
 			}
 			movie.save(function(err, movie) {
 				if (err) {
@@ -354,6 +361,18 @@ exports.categoriesAverageScore = function(req, res) {
 		view: "categoriesAverageSource"
 	});
 };
+
+exports.movieAverageScoreTop10 = function(req, res) {
+	res.render('pages/active-view', {
+		title: '电影得分Top10',
+		view: 'movieAverageScoreTop10',
+	});
+};
+
+// exports.movieAverageScoreTop10Data = function(req, res) {
+// 	console.log('获取电影得分Top10!')；
+// 	// Movie.
+// };
 
 // 删除
 exports.del = function(req, res) {
