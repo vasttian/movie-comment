@@ -1,7 +1,7 @@
 $(function() {
-  $('#datetimepicker').datetimepicker({  
-		format: 'YYYY-MM-DD',  
-		locale: moment.locale('zh-cn')  
+  $('#datetimepicker').datetimepicker({
+		format: 'YYYY-MM-DD',
+		locale: moment.locale('zh-cn')
   });
 
   $('#signupForm').bootstrapValidator({
@@ -28,7 +28,7 @@ $(function() {
 			    	message: '用户名只能是3至16个字符'
 			  	},
 			  	threshold: 3, //3个字符以上才发送ajax请求
-	      	remote: {	// result:{"valid",true or false} 
+	      	remote: {	// result:{"valid",true or false}
 	        	url: '/user/checkname',
 	        	message: '用户名已存在，请重新输入',
 	        	delay:  2000,//2秒发送一次请求
@@ -112,6 +112,14 @@ $(function() {
         		message: '请输入正确的手机号码'
           }
 				}
+	  	},
+	  	'user[born]': {
+				message: '出生日期还没有验证',
+				validators: {
+				  notEmpty: {
+						message: '出生日期不能为空'
+		  		},
+				}
 	  	}
 		}
   });
@@ -136,5 +144,5 @@ $(function() {
 	// 	alert("未知错误");
 	//   }
 	// });
- //  });	
+ //  });
 });

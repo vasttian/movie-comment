@@ -4,6 +4,7 @@ var Categories = require("../models/categories");
 var _ = require("underscore");
 var fs = require("fs");
 var path = require("path");
+var moment = require('moment');
 
 // 电影详情页
 exports.detail = function(req, res) {
@@ -302,6 +303,15 @@ exports.grade = function(req, res) {
 	var score = req.body.score;
 	var movieId = req.body.movieId;
 	var userId = req.body.userId;
+	var user = req.session.user;
+
+	moment.locale('zh-cn', {
+		relativeTime: {
+			yy: '%d',
+		}
+	});
+	var userAge = parseInt(moment([moment(user.born).format('YYYY, MM, DD')]).fromNow(true), 10);
+	// console.log("userAge: ", userAge);
 
 	//暂改为提交时判断
 	// if (score > 10 || score < 3) {
@@ -316,9 +326,11 @@ exports.grade = function(req, res) {
 		var scoreUsers = {
 			userId: userId,
 			score: score,
+			age: userAge,
 		};
 
 		movie.scoreUsers.push(scoreUsers);
+		console.log("movie::", movie);
 		movie.save(function(err, movie) {
 			if (err) {
 				console.log(err);
