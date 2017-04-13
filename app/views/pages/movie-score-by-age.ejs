@@ -1,0 +1,21 @@
+<%- include ../includes/header %>
+<div class="container container-style">
+<div class="col-md-11 col-md-offset-1" style="max-height: 800px; padding-top: 50px">
+  <div class="row">
+  	<div class="panel panel-default">
+  		<div class="panel-heading">
+	  	  <ul class="nav nav-tabs" role="tablist">
+		  	</ul>
+		  </div>
+ 			<div class="panel-body">
+				<div id="active-view" class="view-windows"></div>
+			</div>
+  	</div>
+  </div>
+</div>
+<script>
+  var movie = '<%= movie %>';
+  console.log(movie)
+</script>
+<script src="/js/movie-score-by-age.js"></script>
+<%- include ../includes/footer %>
