@@ -55,6 +55,7 @@ module.exports = function (app) {
   app.get("/admin/movie/add", User.signinRequired, User.movieAdminRequired, Movie.addMovie);
   app.get("/admin/movie/update/:id", User.signinRequired, User.movieAdminRequired,  Movie.update);
   app.get("/admin/movie/list", User.signinRequired, User.movieAdminRequired, Movie.list);
+  app.get("/score/byage/:id", User.signinRequired, Movie.scoreByAge);
   app.post("/admin/movie", multipartMiddleware, User.signinRequired, User.movieAdminRequired, Movie.savePoster, Movie.save);
   app.delete("/admin/movie/list", User.signinRequired, User.movieAdminRequired, Movie.del);
 

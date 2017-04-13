@@ -96,6 +96,8 @@ exports.update = function(req, res) {
 				});
 	  	});
 		});
+  } else {
+  	res.redirect('/');
   }
 };
 
@@ -425,6 +427,27 @@ exports.movieAverageScoreTop10Data = function(req, res) {
 
 		res.json({ "data": top10, "status": 1, });
 	});
+};
+
+exports.scoreByAge = function(req, res) {
+	// console.log('req', req.params);
+	console.log('分年龄段展示评分!');
+	var movieId = req.params.id;
+	if (movieId) {
+		Movie.findById(movieId, function(err, movie) {
+			console.log(movie.title)
+			var thisMovie = {
+				title: movie.title,
+				scoreUsers: movie.scoreUsers,
+			};
+			res.render('pages/movie-score-by-age', {
+	  		title: '分年龄段展示评分',
+	  		movie: thisMovie,
+			});
+		});
+  } else {
+  	res.redirect('/');
+  }
 };
 
 // 删除
