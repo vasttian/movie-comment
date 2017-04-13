@@ -47,11 +47,11 @@
 						</div>
 					  </div>
 					<% }) %>
-				  <% } %>	
+				  <% } %>
 				</div>
 				<hr>
 			  </li>
-			<% }) %>					
+			<% }) %>
 		  </ul>
 		  <div id="comments">
 			<form id="commentForm" method="POST" action="/user/comment">
@@ -77,17 +77,17 @@
 			<dt>电影名字</dt>
 			<dd><%= movie.title %></dd>
 			<dt>导演</dt>
-			<dd><%= movie.doctor %></dd>	
+			<dd><%= movie.doctor %></dd>
 			<dt>主演</dt>
 			<dd><%= movie.protagonist %></dd>
 			<dt>制片国家/地区</dt>
-			<dd><%= movie.country %></dd>	
+			<dd><%= movie.country %></dd>
 			<dt>语言</dt>
-			<dd><%= movie.language %></dd>	
+			<dd><%= movie.language %></dd>
 			<dt>上映日期</dt>
-			<dd><%= movie.date %></dd>	
+			<dd><%= movie.date %></dd>
 			<dt>片长</dt>
-			<dd><%= movie.movieTime %></dd>	
+			<dd><%= movie.movieTime %></dd>
 			<dt>pv</dt>
 			<dd><%= movie.pv %></dd>
 			<dt>电影平均得分</dt>
@@ -102,13 +102,14 @@
 				<% } else { %>
 					<input type="text" id="movieGrade" class="form-control" placeholder= "对同一部电影只能评分一次，请慎重。">
 					<br>
-					<button type="button" id="submitMovieGrade" class="pull-right btn btn-primary">提交</button></dd>
+					<button type="button" id="submitMovieGrade" class="pull-right btn btn-primary">提交</button>
 				<% } %>
+			</dd>
 				<br>
 			<div id="tips" style="display: none">
 				<div class="alert alert-warning alert-dismissible" role="alert">
 				  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				  <strong>Warning!</strong> 评分不能低于 3 分 和 高于 10 分. 
+				  <strong>Warning!</strong> 评分不能低于 3 分 和 高于 10 分.
 				</div>
 			</div>
 	  </dl>
