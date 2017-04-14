@@ -51,9 +51,9 @@ $(function() {
     },
     tooltip: {},
     legend: {
-      zlevel: 1,
-      data: '各年龄段评分',
-      x: 'left',
+      // zlevel: 1,
+      data: ['各年龄段评分'],
+      left: 'left',
     },
     xAxis: {
       data: ['[0, 12]', '(12, 18]', '(18, 30]', '(30, 50]', '(50, 70]'],
@@ -70,13 +70,13 @@ $(function() {
       data: seriesData,
       markPoint : {
       	data : [
-      		{ type : 'max', name: '最大值', },
-      		{ type : 'min', name: '最小值', },
+      		{ type: 'max', name: '最大值', },
+      		{ type: 'min', name: '最小值', },
       	],
       },
       markLine : {
       	data : [
-      		{ type : 'average', name: '平均值', },
+      		{ type: 'average', name: '平均值', },
       	],
       },
     }],
