@@ -55,7 +55,7 @@ exports.detail = function(req, res) {
   	  // console.log("comment",comment);
   	  // console.log("comment[0].reply",comment[0].reply);
   	  res.render('pages/movie-detail', {
-  	  	title:'电影详情',
+  	  	title: '电影详情',
   	  	movie: movie,
   	  	comment: comment,
   	  	score: score,
@@ -435,14 +435,16 @@ exports.scoreByAge = function(req, res) {
 	var movieId = req.params.id;
 	if (movieId) {
 		Movie.findById(movieId, function(err, movie) {
-			console.log(movie.title)
-			var thisMovie = {
-				title: movie.title,
-				scoreUsers: movie.scoreUsers,
-			};
+			console.log(movie.title);
+			// var thisMovie = {
+			// 	title: movie.title,
+			// 	scoreUsers: movie.scoreUsers,
+			// };
+			var movieScore = movie.scoreUsers;
+			console.log("movieScore", movieScore);
 			res.render('pages/movie-score-by-age', {
-	  		title: '分年龄段展示评分',
-	  		movie: thisMovie,
+	  		title: movie.title,
+	  		movie: movieScore,
 			});
 		});
   } else {

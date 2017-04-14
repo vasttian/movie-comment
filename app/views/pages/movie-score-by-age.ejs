@@ -4,8 +4,7 @@
   <div class="row">
   	<div class="panel panel-default">
   		<div class="panel-heading">
-	  	  <ul class="nav nav-tabs" role="tablist">
-		  	</ul>
+	  	  <h1>分年龄段展示评分</h1>
 		  </div>
  			<div class="panel-body">
 				<div id="active-view" class="view-windows"></div>
@@ -14,8 +13,8 @@
   </div>
 </div>
 <script>
-  var movie = '<%= movie %>';
-  console.log(movie)
+  var movie = <%- JSON.stringify(movie) %>;
+  var movieTitle = '<%= title %>';
 </script>
 <script src="/js/movie-score-by-age.js"></script>
 <%- include ../includes/footer %>
