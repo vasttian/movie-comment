@@ -375,7 +375,7 @@ exports.grade = function(req, res) {
 					console.log("电影的score已更新:", movie);
 				}
 
-				res.json({"status": 1})
+				res.json({ "status": 1, })
 			});
 		});
 	});
@@ -456,8 +456,9 @@ exports.scoreByAge = function(req, res) {
 exports.del = function(req, res) {
 	console.log("删除电影!");
 	var id = req.query.id;
+
 	if (id) {
-		Movie.remove({_id:id}, function(err, movie) {
+		Movie.remove({ _id: id }, function(err, movie) {
 			if (err) {
 				console.log(err);
 			} else {
