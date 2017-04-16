@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(session({
   secret: 'vasttian',
   cookie:{
-    // maxAge: 1000 * 60 * 60 * 24 * 1, //默认1天
+    // maxAge: 1000 * 60 * 60 * 24 * 1, 默认1天
   	maxAge: 1000 * 60 * 60 * 7,
   },
   store: new mongoStore({
@@ -39,7 +39,7 @@ app.use(session({
 }));
 
 
-//引入路由模块
+// 引入路由模块
 require('./config/routes')(app);
 app.listen(port);
 console.log('服务已成功启动，端口：',port);
