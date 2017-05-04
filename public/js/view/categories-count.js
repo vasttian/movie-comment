@@ -4,6 +4,7 @@ $(function() {
   var seriesData = [];
   var xAxisData = [];
   var lengthData = [];
+
   if ($("#categoriesCount").hasClass('active')) {
     console.log("请求分类数据");
     $.ajax({
@@ -15,6 +16,7 @@ $(function() {
           var tdata = data.data;
           console.log("请求分类数据成功!");
           var len = tdata.length;
+
           for (var i = 0; i < len; ++i) {
             var tname = tdata[i].name;
             xAxisData.push(tname);
@@ -58,6 +60,7 @@ $(function() {
           var tdata = data.data;
           console.log("请求分类点击量成功!");
           var len = tdata.length;
+
           for (var i = 0; i < len; ++i) {
             var tname = tdata[i].name;
             lengthData.push(tname);
@@ -101,6 +104,7 @@ $(function() {
           var tdata = data.data;
           console.log("请求分类平均分成功!");
           var len = tdata.length;
+
           for (var i = 0; i < len; ++i) {
             var tname = tdata[i].name;
             xAxisData.push(tname);
@@ -149,10 +153,11 @@ $(function() {
           var tdata = data.data;
           console.log("电影得分Top10成功!");
           var len = tdata.length;
+
           for (var i = 0; i < len; ++i) {
             var tname = tdata[i].title;
             xAxisData.push(tname);
-            seriesData.push(tdata[i].score.average+5);
+            seriesData.push(tdata[i].score.average);
           }
 
           option = {

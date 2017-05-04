@@ -9,10 +9,10 @@
 		</div>
 		<div class="panel-body">
 		  <ul class="media-list">
-			<% comment.forEach(function(item, index){ %>
+			<% comment.forEach(function(item, index) { %>
 			  <li calss="media">
 				<div class="pull-left">
-				  <a class="comment" href="#comments" data-cid="<%=item._id%>" data-tid="<%=item.from._id%>">
+				  <a class="comment" href="#comments" data-cid="<%=item._id%>" data-tid="<%= item.from._id %>">
 				  	<% if (item.from.avatar.indexOf('default') > -1) { %>
 					  <img style="width:60px; height:60px;" src="<%= item.from.avatar %>" alt="头像君不见啦!" title="点击头像即可回复我!">
 				  	<% } else { %>
@@ -22,13 +22,13 @@
 				</div>
 				<div class="media-body" style="padding-left: 10px">
 				  <h4 class="media-heading"><%= item.from.name %></h4>
-				  <p><%=item.content%></p>
+				  <p><%= item.content %></p>
 				  <br>
-				  <% if(item.reply && item.reply.length > 0){%>
-					<% item.reply.forEach(function(reply, index){ %>
+				  <% if(item.reply && item.reply.length > 0) { %>
+					<% item.reply.forEach(function(reply, index) { %>
 					  <div calss="media">
 						<div class="pull-left">
-						  <a class="comment" href="#comments" data-cid="<%=item._id%>" data-tid="<%=reply.from._id%>">
+						  <a class="comment" href="#comments" data-cid="<%= item._id %>" data-tid="<%= reply.from._id %>">
 							<% if (reply.from.avatar.indexOf('default') > -1) { %>
 					  		  <img style="width:60px; height:60px;" src="<%= reply.from.avatar %>" alt="头像君不见啦!" title="点击头像即可回复我!">
 				  			<% } else { %>
@@ -42,27 +42,27 @@
 							  <span class="text-info">回复</span>
 							<%= reply.to.name %>
 						  </h4>
-						  <p><%=reply.content%></p>
+						  <p><%= reply.content %></p>
 						  <br>
 						</div>
 					  </div>
 					<% }) %>
-				  <% } %>	
+				  <% } %>
 				</div>
 				<hr>
 			  </li>
-			<% }) %>					
+			<% }) %>
 		  </ul>
 		  <div id="comments">
 			<form id="commentForm" method="POST" action="/user/comment">
 			  <input type="hidden" id="movieId" name="comment[movie]" value="<%= movie._id %>">
-			  <% if (user) {%>
+			  <% if (user) { %>
 				<input type="hidden" id="userId" name="comment[from]" value="<%= user._id %>">
 			  <% } %>
 			  <div class="form-group">
 				<textarea class="form-control" row="3" name="comment[content]"></textarea>
 			  </div>
-			  <% if (user) {%>
+			  <% if (user) { %>
 				<button class="btn btn-primary" type="submit">提交</button>
 			  <% } else { %>
 				<a href="#" class="navbar-link" data-toggle="modal" data-target="#signinModal">登录后评论</a>
@@ -77,17 +77,17 @@
 			<dt>电影名字</dt>
 			<dd><%= movie.title %></dd>
 			<dt>导演</dt>
-			<dd><%= movie.doctor %></dd>	
+			<dd><%= movie.doctor %></dd>
 			<dt>主演</dt>
 			<dd><%= movie.protagonist %></dd>
 			<dt>制片国家/地区</dt>
-			<dd><%= movie.country %></dd>	
+			<dd><%= movie.country %></dd>
 			<dt>语言</dt>
-			<dd><%= movie.language %></dd>	
+			<dd><%= movie.language %></dd>
 			<dt>上映日期</dt>
-			<dd><%= movie.date %></dd>	
+			<dd><%= movie.date %></dd>
 			<dt>片长</dt>
-			<dd><%= movie.movieTime %></dd>	
+			<dd><%= movie.movieTime %></dd>
 			<dt>pv</dt>
 			<dd><%= movie.pv %></dd>
 			<dt>电影平均得分</dt>
@@ -95,20 +95,27 @@
 			<dt>简介</dt>
 			<dd><%= movie.summary %></dd>
 			<br>
+			<dt title="分年龄段展示平均分">看看大家评分</dt>
+			<dd>
+				<a href="/score/byage/<%= movie._id %>">
+					<button type="button" id="movieScore" class="pull-left btn btn-info">查看</button></dd>
+				</a>
+			<br>
 			<dt style="padding-top: 7px;">评分</dt>
 			<dd>
 				<% if (user && score) { %>
 					<input type="text" id="movieGrade" class="form-control" value="<%= score%>" readOnly>
 				<% } else { %>
-					<input type="text" id="movieGrade" class="form-control" placeholder= "对同一部电影只能评分一次，请慎重。">
+					<input type="text" id="movieGrade" class="form-control" placeholder= "对同一部电影只能评分一次，请慎重!">
 					<br>
-					<button type="button" id="submitMovieGrade" class="pull-right btn btn-primary">提交</button></dd>
+					<button type="button" id="submitMovieGrade" class="pull-right btn btn-primary">提交</button>
 				<% } %>
+			</dd>
 				<br>
 			<div id="tips" style="display: none">
 				<div class="alert alert-warning alert-dismissible" role="alert">
 				  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				  <strong>Warning!</strong> 评分不能低于 3 分 和 高于 10 分. 
+				  <strong>Warning!</strong> 评分不能低于 3 分 和 高于 10 分.
 				</div>
 			</div>
 	  </dl>

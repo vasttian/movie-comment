@@ -7,7 +7,7 @@ var MovieSchema = new mongoose.Schema({
   protagonist: String,
   movieTime: {
     type: Number,
-    default: 0
+    default: 0,
   },
   language: String,
   country: String,
@@ -17,66 +17,71 @@ var MovieSchema = new mongoose.Schema({
   date: String,
   pv: {
 	  type: Number,
-	  default: 0
+	  default: 0,
   },
   categories: {
 	  type: ObjectId,
-	  ref: "Categories"
+	  ref: "Categories",
   },
   meta: {
 	  createAt: {
 	    type: Date,
-	    default: Date.now()
+	    default: Date.now(),
   	},
   	updateAt: {
 	    type: Date,
-	    default: Date.now()
-  	}
+	    default: Date.now(),
+  	},
   },
   scoreUsers: [
     {
       userId: {
         type: ObjectId,
-        ref: "User"
+        ref: 'User',
       },
       score: {
         type: Number,
-        default: 0
-      }
-    }
+        default: 0,
+      },
+      age: {
+        type: Number,
+        default: 0,
+      },
+    },
   ],
   score: {
     flag: {
       type: Number,
-      default: 0
+      default: 0,
     },
     min: {
       type: Number,
-      default: 0
+      default: 0,
     },
     max: {
       type: Number,
-      default: 0
+      default: 0,
     },
     sum: {
       type: Number,
-      default: 0
+      default: 0,
     },
     count: {
       type: Number,
-      default: 0
+      default: 0,
     },
     average: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   others: {
-    type: String
-  }
+    type: String,
+  },
 });
 
-MovieSchema.pre("save",function (next) {	//中间件
+// 中间件
+MovieSchema.pre("save",function (next) {
   if (this.isNew) {
 	  this.meta.createAt = this.meta.updateAt = Date.now();
   } else {
@@ -85,43 +90,48 @@ MovieSchema.pre("save",function (next) {	//中间件
   next();
 });
 
-MovieSchema.statics = {		//添加静态方法，静态方法在模型上调用
+// 添加静态方法，静态方法在模型上调用
+MovieSchema.statics = {
   fetch: function(cb) {
 	  return this
 	  .find({})
 	  .sort("meta.updateAt")
-	  .exec(cb)
+	  .exec(cb);
   },
+
   findById: function(id, cb) {
 	  return this
 	  .findOne({_id: id})
-	  .exec(cb)
+	  .exec(cb);
   },
+
   pvRanking: function(cb) {
     return this
     .find({})
     .sort("-pv")
-    .exec(cb)
+    .exec(cb);
   },
+
   movieTimeRanking: function(cb) {
     return this
     .find({})
     .sort("movieTime")
-    .exec(cb)
+    .exec(cb);
   },
+
   dateRanking: function(cb) {
     return this
     .find({})
     .sort("date")
-    .exec(cb)
+    .exec(cb);
   },
+
   averageScoreTop10: function(cb) {
     return this
       .find({})
       .sort('-score.average')
       .exec(cb);
   },
-
 }
 
 module.exports = MovieSchema;
