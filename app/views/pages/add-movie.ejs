@@ -1,4 +1,4 @@
-	<div class="col-md-7 col-md-offset-1" style="height: 420px; padding-top: 15px">
+	<div class="col-md-7 col-md-offset-1" style="height: 100%; padding-top: 15px">
   <div class="row">
 		<form id="addMovieForm" action="/admin/movie" method="post" class="form-horizontal" enctype='multipart/form-data'>
 
@@ -35,7 +35,7 @@
 		  				<% } else { %>
 				  		<input type="radio" name="movie[categories]" value="<%=cat._id%>">
 			  	  	<%=cat.name%>
-		  				<% } %>	
+		  				<% } %>
 			  		</label>
 	  				<% }) %>
 		  		</div>
