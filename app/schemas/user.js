@@ -59,6 +59,7 @@ var UserSchema = new mongoose.Schema({
 
 UserSchema.pre('save', function(next) {
   var user = this;
+
   if (this.isNew) {
     this.meta.createdAt = this.meta.updateAt = Date.now();
   } else {
@@ -84,6 +85,7 @@ UserSchema.pre('save', function(next) {
 
 
 // 实例方法
+// 密码验证
 UserSchema.methods = {
   comparePassword: function(pass, cb) {
     bcrypt.compare(pass, this.password, function(err, isMatch) {
