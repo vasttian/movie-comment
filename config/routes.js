@@ -9,19 +9,19 @@ var multipartMiddleware = multipart();
 
 module.exports = function (app) {
 
-  //在所有请求之前把当前登录用户设置为本地变量。
+  // 在所有请求之前把当前登录用户设置为本地变量。
   app.use(function (req, res, next) {
 	  var _user = req.session.user;
 
-    //本地变量
+    // 本地变量
 	  app.locals.user = _user;
   	next();
   });
 
-  //首页
+  // 首页
   app.get('/', Index.index);
 
-  //用户
+  // 用户
   app.get('/signup', User.showSignup);
   app.get('/signin', User.showSignin);
   app.get('/logout', User.logout);
@@ -37,7 +37,7 @@ module.exports = function (app) {
   app.post('/user/signin', User.signin);
   app.post('/user/simple/signin', User.simpleSignin);
 
-  //管理员
+  // 管理员
   app.get('/admin', User.signinRequired, User.movieAdminRequired, User.showAdmin);
   app.get('/admin/user', User.signinRequired, User.movieAdminRequired, User.sendUser);
   app.get('/admin/user/list', User.signinRequired, User.userAdminRequired, User.list);
@@ -46,7 +46,7 @@ module.exports = function (app) {
   app.post('/admin/del/user', User.signinRequired, User.userAdminRequired, User.del);
   app.post('/admin/update/role', User.signinRequired, User.userAdminRequired, User.updateRole);
 
-  //电影
+  // 电影
   app.get("/movie-pv/ranking", User.signinRequired, Movie.pvRanking);
   app.get("/movie-time/ranking", User.signinRequired, Movie.movieTimeRanking);
   app.get("/movie-date/ranking", User.signinRequired, Movie.dateRanking);
@@ -59,27 +59,27 @@ module.exports = function (app) {
   app.post("/admin/movie", multipartMiddleware, User.signinRequired, User.movieAdminRequired, Movie.savePoster, Movie.save);
   app.delete("/admin/movie/list", User.signinRequired, User.movieAdminRequired, Movie.del);
 
-  //电影类别
+  // 电影类别
   app.get("/admin/movie/category/add", User.signinRequired, User.movieAdminRequired, Category.add);
   app.get("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.list);
   app.get("/admin/category/update/:id", User.signinRequired, User.movieAdminRequired,  Category.update);
   app.post("/admin/movie/category", User.signinRequired, User.movieAdminRequired, Category.save);
   app.delete("/admin/movie/category/list", User.signinRequired, User.movieAdminRequired, Category.del);
 
-  //评论
+  // 评论
   app.post("/user/comment", User.signinRequired, Comment.save);
 
-  //评分
+  // 评分
   app.post("/movie/grade", User.signinRequired, Movie.grade);
 
-  //找回密码
+  // 找回密码
   app.get("/forgot/password", User.sendForgotPage);
   app.post("/forgot/password", User.setNewPassword);
 
-  //搜索
+  // 搜索
   app.get('/results', Index.search);
 
-  //ECharts
+  // ECharts
   app.get('/active/view/categories/count', User.signinRequired, Movie.categoriesCount);
   app.get('/active/view/categories/count/data', User.signinRequired, Category.categoriesCountData);
   app.get('/active/view/categories/click', User.signinRequired, Movie.categoriesClick);
