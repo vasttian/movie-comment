@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title> <%= title %> </title>
 	<%- include head %>
-	
+
 </head>
 
 <body>
@@ -29,7 +29,7 @@
 					<li class="dropdown">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">友情链接 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="https://www.douban.com/" target="_blank">豆瓣</a></li>
+							<li><a href="https://movie.douban.com/tag/" target="_blank">豆瓣</a></li>
 							<li><a href="http://www.youku.com/" target="_blank">优酷</a></li>
 							<li><a href="http://www.mtime.com/" target="_blank">时光网</a></li>
 							<li><a href="https://developers.douban.com/wiki/?title=book_v2" target="_blank">豆瓣开发者</a></li>
@@ -55,7 +55,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<% if (user) { %>
 					<li class = "dropdown">
-						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">欢迎您:<%= user.nickname %> 
+						<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">欢迎您:<%= user.nickname %>
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
@@ -109,7 +109,7 @@
 							<div class="checkbox">
 								<div class="pull-right">
 									<a href="/forgot/password" id="forgot_passwd"> 忘记密码？</a>
-								</div>	
+								</div>
 								<label>
 									<input type="checkbox" name="savePassword">记住密码
 								</label>
