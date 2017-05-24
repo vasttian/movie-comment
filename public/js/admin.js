@@ -1,5 +1,4 @@
 $(function() {
-
 	$('#addMovieForm').bootstrapValidator({
 		message: '这个值没有被验证',
 		feedbackIcons: {
@@ -60,16 +59,20 @@ $(function() {
 					if (data.languages) {
 						$("#inputLanguage").val(data.languages[0]);
 					}
+
 					$("#inputPoster").val(data.images.large);
 					if (data.trailer_urls) {
 						$("#inputFlash").val(data.trailer_urls[0]);
 					}
+
 					if (data.pubdates) {
 						$("#inputDate").val(data.pubdates[0]);
 					}
+
 					if (data.durations) {
 						$("#inputMovieTime").val(data.durations);
 					}
+
 					$("#inputSummary").val(data.summary);
 				}
 			});

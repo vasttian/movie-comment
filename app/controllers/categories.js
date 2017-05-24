@@ -103,7 +103,6 @@ exports.categoriesClickData = function(req, res) {
 	  	singleCat.countPv = countPv;
 	  	clickNum.push(singleCat);
   	};
-  	// console.log(clickNum);
   	res.json({ "data": clickNum, "status": 1, });
   });
 };
@@ -117,7 +116,6 @@ exports.categoriesAverageScoreData = function(req, res) {
   	var catAveScore = [];
 
   	for (var i = 0; i < lenCat; ++i) {
-	  	// console.log('categories.movies:', categories[i].movies);
 	  	var lenMovie = categories[i].movies.length;
 	  	var singleCat = {};
 	  	var sumScore = 0;
@@ -134,7 +132,6 @@ exports.categoriesAverageScoreData = function(req, res) {
 	  	singleCat.sumScore = sumScore;
 	  	catAveScore.push(singleCat);
 	  }
-	  // console.log(catAveScore);
   	res.json({ "data": catAveScore, "status": 1, });
   });
 };
@@ -146,10 +143,7 @@ exports.categoriesCommentCountData = function(req, res) {
   .exec(function(err, categories) {
   	var lenCat = categories.length;
   	var catCommentCount = [];
-  	// console.log(categories);
   	async.mapSeries(categories, function(item, callback) {
-  		// if (item.name == '战争')
-	  	// console.log('categories.movies:', item);
 	  	var lenMovie = item.movies.length;
 	  	console.log("lenMovie", lenMovie);
 	  	var singleCat = {};
@@ -172,7 +166,6 @@ exports.categoriesCommentCountData = function(req, res) {
 			  	callback(null, commentCount);
 		  	});
 	  	}, function(err, results) {
-	  		// console.log('results', results);
 	  		if (err) {
 		  		console.log('movie', err);
 	  		}
@@ -186,7 +179,6 @@ exports.categoriesCommentCountData = function(req, res) {
 
 		  	singleCat.commentCount = maxx;
 		  	catCommentCount.push(singleCat);
-		  	// console.log("catCommentCount", results);
 		  	callback(null, catCommentCount);
   		});
 
@@ -197,8 +189,7 @@ exports.categoriesCommentCountData = function(req, res) {
 
   		var categoriesCount = [];
   		var len = results.length
-  		// console.log("results",results[len-1]);
-	  	res.json({ "data": results[len-1], "status": 1, });
+	  	res.json({ "data": results[len - 1], "status": 1, });
 	  });
   });
 };

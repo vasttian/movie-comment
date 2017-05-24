@@ -8,7 +8,6 @@ $(function() {
 			url: "/admin/movie/category/list?id=" +id,
 			async: true,
 			success: function(data) {
-				//console.log(data);
 				if (tr.length > 0) {
 					tr.remove();
 				}
@@ -22,6 +21,7 @@ $(function() {
 	$(".updateCategory").click(function(e) {
 		var target = $(e.target);
 		var id = target.data("id");
+
     console.log('idididid:',id);
 		 $.ajax({
       type: 'GET',

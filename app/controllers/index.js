@@ -10,6 +10,7 @@ exports.index = function(req, res) {
 		if (err) {
 			console.log(err);
 		}
+
 		res.render('pages/index', {
 			title: '一萌电影',
 			categories: categories,
