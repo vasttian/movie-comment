@@ -348,7 +348,7 @@ exports.grade = function(req, res) {
 			movie.score.sum += score;
 			movie.score.count += 1;
 
-			//第一次初始化
+			// 第一次初始化
 			if (movie.score.count == 1) {
 				movie.score.max = score;
 				movie.score.min = score;
@@ -362,7 +362,7 @@ exports.grade = function(req, res) {
 				movie.score.min = score;
 			}
 
-			//去除一个最低分和一最高分
+			// 去除一个最低分和一最高分
 			if (movie.score.count > 2) {
 				movie.score.average = (movie.score.sum - movie.score.max - movie.score.min) / (movie.score.count - 2);
 				movie.score.average = parseFloat(movie.score.average.toFixed(2));

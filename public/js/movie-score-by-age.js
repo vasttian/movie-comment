@@ -20,6 +20,7 @@ $(function() {
   for (var i = 0, len = movie.length; i < len; ++i) {
     var userAge = movie[i].age;
     var score = movie[i].score;
+
     if (userAge >= 0 && userAge <= 12) {
     	statistics[0].cont++;
     	statistics[0].sum += score;
@@ -64,22 +65,24 @@ $(function() {
         formatter: '{value} 分',
       },
     },
-    series: [{
-      name: '各年龄段评分',
-      type: 'line',
-      data: seriesData,
-      markPoint : {
-      	data : [
-      		{ type: 'max', name: '最大值', },
-      		{ type: 'min', name: '最小值', },
-      	],
-      },
-      markLine : {
-      	data : [
-      		{ type: 'average', name: '平均值', },
-      	],
-      },
-    }],
+    series: [
+      {
+        name: '各年龄段评分',
+        type: 'line',
+        data: seriesData,
+        markPoint : {
+        	data : [
+        		{ type: 'max', name: '最大值', },
+        		{ type: 'min', name: '最小值', },
+        	],
+        },
+        markLine : {
+        	data : [
+        		{ type: 'average', name: '平均值', },
+        	],
+        },
+      }
+    ],
   };
 
   myChart.setOption(option);
