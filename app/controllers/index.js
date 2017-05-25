@@ -5,7 +5,7 @@ var Categories=require('../models/categories');
 exports.index = function(req, res) {
 	Categories
 	.find({})
-	.populate({path:"movies"})
+	.populate({ path: 'movies' })
 	.exec(function(err, categories) {
 		if (err) {
 			console.log(err);

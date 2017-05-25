@@ -13,8 +13,8 @@ exports.showSignup = function(req, res) {
 // 上传头像
 exports.saveAvatar = function(req, res, next) {
   // console.log('>>>>>req.body>>>>>>:',req.body);
-
-  // console.log('req.files::',req.files);//打印文件的信息
+  // 打印文件的信息
+  // console.log('req.files::',req.files);
   var postData = req.files.avatar;
   var filePath = postData.path;
   var fileName = postData.originalFilename;

@@ -25,8 +25,8 @@ exports.detail = function(req, res) {
   	}
 
   	// from、reply.from、reply.to 指定要填充的关联字段 (schemas中ref)
-  	// name avatar 指定要填充（新增Comment.from.name Comment.from.avatar Comment.reply.to.name
-  	// Comment.reply.to.avatar）Comment.from、Comment.reply.from、Comment.reply.to的name avatar字段
+  	// name avatar 指定要填充（新增Comment.from.name Comment.from.avatar Comment.reply.from.name Comment.reply.to.avatar）
+    // Comment.from、Comment.reply.from、Comment.reply.to的name avatar字段
   	// 评论和回复只有两层，避免层次嵌套。默认按照评论和回复时间排序
   	Comment
   	.find({ movie: id, })
@@ -37,8 +37,6 @@ exports.detail = function(req, res) {
   			console.log(err);
   		}
 
-  	  // console.log('movie_movie',movie);
-  	  // console.log('comment_comment',comment);
   	  var len = movie.scoreUsers.length;
   	 	var score = '';
 
@@ -50,8 +48,7 @@ exports.detail = function(req, res) {
 	  	  	}
 	  	  };
   	  }
-  	  // console.log("comment",comment);
-  	  // console.log("comment[0].reply",comment[0].reply);
+
   	  res.render('pages/movie-detail', {
   	  	title: '电影详情',
   	  	movie: movie,
@@ -311,7 +308,6 @@ exports.grade = function(req, res) {
 		}
 	});
 	var userAge = parseInt(moment([moment(user.born).format('YYYY, MM, DD')]).fromNow(true), 10);
-	// console.log("userAge: ", userAge);
 
 	//暂改为提交时判断
 	// if (score > 10 || score < 3) {
@@ -428,7 +424,6 @@ exports.movieAverageScoreTop10Data = function(req, res) {
 };
 
 exports.scoreByAge = function(req, res) {
-	// console.log('req', req.params);
 	console.log('分年龄段展示评分!');
 	var movieId = req.params.id;
 	if (movieId) {

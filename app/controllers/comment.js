@@ -32,7 +32,7 @@ exports.save = function (req, res) {
 	 			console.log('新评论存储失败',err);
 	 		}
 
-	 		res.redirect('/movie/'+movieId);
+	 		res.redirect('/movie/' + movieId);
 	 	});
   }
 };

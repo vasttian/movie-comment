@@ -86,7 +86,6 @@ exports.categoriesClickData = function(req, res) {
   	var clickNum = [];
 
   	for (var i = 0; i < lenCat; ++i) {
-	  	// console.log('categories.movies:', categories[i].movies);
 	  	var lenMovie = categories[i].movies.length;
 	  	var singleCat = {};
 			var countPv = 0;
@@ -143,6 +142,7 @@ exports.categoriesCommentCountData = function(req, res) {
   .exec(function(err, categories) {
   	var lenCat = categories.length;
   	var catCommentCount = [];
+
   	async.mapSeries(categories, function(item, callback) {
 	  	var lenMovie = item.movies.length;
 	  	console.log("lenMovie", lenMovie);
@@ -171,6 +171,7 @@ exports.categoriesCommentCountData = function(req, res) {
 	  		}
 
 	  		var maxx = 0;
+
 	  		for (var i = 0; i < results.length; ++i) {
 	  			if (results[i] > maxx) {
 	  				maxx = results[i];
@@ -189,6 +190,7 @@ exports.categoriesCommentCountData = function(req, res) {
 
   		var categoriesCount = [];
   		var len = results.length
+
 	  	res.json({ "data": results[len - 1], "status": 1, });
 	  });
   });
@@ -223,7 +225,6 @@ exports.update = function(req, res) {
 
   if (id) {
 		Categories.findById(id, function(err, categories) {
-			// console.log("categories",categories);
 			res.render('pages/add-category', {
 		  	title: '更新分类',
 		  	categories: categories,
